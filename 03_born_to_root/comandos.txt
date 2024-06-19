@@ -1,0 +1,203 @@
+
+	Born 2 be root -> comandos e apontamentos
+	
+hostname - nome da maquina na rede
+encrypted LVM - metodo de gestao do disco fisico. Permite criar novos discos virtuais, aumentar o tamanho, mudar de sitio, snapshots, sem ter de parar a maquina
+		a parte de ecriptcao e util para seguranca
+		(Logical Volume Manager)
+Grub boot loader - gerenciador de boot, identifica os varios sistemas operativos e permite escolher o qual se quer dar boot
+
+
+	-> SUDO
+
+apt install sudo - instala os pacotes necessarios para o sudo
+sudo reboot - dar reboot a maquina para que os pacotes instalados fiquem a funcionar
+sudo -V - ve a versao de sudo, se tivermos com o root login mosta mais info
+
+
+	-> USERs
+
+su <nome> - login como outro user, se nao puser nome da login como root
+sudo adduser <nome> - cria novo user
+sudo addgroup <user42> - cria novo GID (Identificador de grupo)
+getent group - mostra as infos dos grupos, e os users dentro de cada grupo
+sudo adduser <nome> <grupo> - adiciona o user ao grupo
+
+	-> SUDO CONFIGS
+
+nano /etc/sudoers.d/sudo_config - onde a configuracao de senhas sera armazenada, e criado um novo ficheiro para nao mexer no principal /etc/sudoers
+					o ficheiro principal /etc/sudoers inclui autimaticamente os arquivos no diretorio /etc/sudoers.d/
+Defaults  passwd_tries=3 - numero maximo de tentativas para por a password
+Defaults  badpass_message="Mensaje de error personalizado" - mensagem e erro personalizada caso a password estaja mal 
+Defaults  logfile="/var/log/sudo/sudo_config" - arquivo para fazer os logs dos comandos sudo
+Defaults  log_input, log_output - para que tanto comandos de input como de output sejam resguistados
+Defaults  iolog_dir="/var/log/sudo" - vai ser reguistado neste ficheiro
+Defaults  requiretty - o sudo so funciona a partir de um terminal, nao pode ser em nenhum script ou algo do genero
+Defaults  secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin" - define o caminho seguro de execução para o ambiente sudo. Substitui o PATH padrão quando o sudo é executado.
+
+
+	-> SSH
+
+Secure shell	
+Protocolo de comunicacao com base no TCP/IP, encriptado.
+funciona numa topologia cliente e servidor
+port - ponto de comunicao, padrao era a port22
+
+sudo apt update - atuliza os pacotes locais
+sudo apt install openssh-server - instala o pacote de ssh-server
+sudo service ssh status - ver o estado do servico ssh
+sudo nano /etc/ssh/sshd_config - ficheiro onde se muda da porta padrao 22, para a porta 4242, e "PermitRootLogin no" (nao permite login do root via SSH).
+sudo nano /etc/ssh/ssh_config - mudar tambem aqui a port22 para 4242
+sudo service ssh restart - restart ao servico para que as alteracoes tenham efeito
+
+NAT - keep your VM private and secure
+Bridged Adapter - VM public and accessible
+
+
+	-> UFW
+	
+UFW - uncomplicated firewall, seguranca da rede, gere o trafego baseado em regras, impede acessos nao autrizados
+
+sudo apt install ufw - instala os pacotes necessarios para o ufw
+sudo ufw enable - activa a firewall
+sudo ufw allow 4242 - permite que a firewall deixe passar pela port 4242
+sudo ufw status - ver o estado da firewall e as regras que adicionamos
+sudo systemctl status ufw - ver mais informacoes sobre o estado do ufw
+
+
+	-> Politica de Senhas
+
+mkdir /var/log/sudo - onde vai armazenar um log dos comandos executados como sudo
+nano /etc/login.defs - ficheiro para edita o PASS_MAX_DAYS 99999 -> PASS_MAX_DAYS 30, PASS_MIN_DAYS 0 -> PASS_MIN_DAYS 2, PASS_WARN_AGE 7
+sudo apt install libpam-pwquality - pacotes para adicionar mais configracoes a politica de passwords
+nano /etc/pam.d/common-password 
+minlen=10	 tamanho minimo de 10 characteres
+ucredit=-1	 pelo menos uma maiuscula
+dcredit=-1	 pelo menos um digito
+lcredit=-1	 pelo menos uma minuscula
+maxrepeat=3	 nao pode ter o mesmo caracter mais de 3 vezes
+reject_username	 nao pode conter o nome do utilizador
+difok=7		 pelo menos 7 caracteres nao podem fazer parte da palavra passe antiga
+enforce_for_root implementa tambem esta politica para o root
+
+sudo chage -l <user> - para ver a politica de senhas para o user escolhido
+sudo chage -M <numero> <user> - muda o nr maximo de dias
+sudo chage -m <numero> <user> - muda o nr minimo de dias
+sudo chage -W <numero> <user> - muda o nr de warning days
+
+
+	-> crontab
+
+sudo crontab -u root -e
+*/10 * * * * sh /home/hepereir/monitoring.sh
+
+
+
+	->Notas
+
+VM - sistema virtual de maquina onde pode ser configurado qualquer coisa sem alterar o da maquina fisica, seguro
+Debian e Rocky - ambas sao distibuicoes de linux
+Debian - existe mais suporte online, gerenciador de pacotes apt
+Rocky - gerenciador de pacotes dnf
+
+apt - nivel inferior, simples e pratico
+aptitude - nivel superior, recursos avancados, bom para resolver dependecias complexas
+
+APPArmor - framework(ferramenta) de seguranca que permite aos administradores de sistemas operacionais linux dar pemissoes e restringir conforme o user
+
+ls /usr/bin/*session - ver se tem interface grafica
+sudo service ufw status - verifica o ufw
+sudo service ssh status - vierifica o ssh
+uname -v - verificar o tipo de sistema
+getent group sudo
+getent group user42
+
+sudo nano /etc/hostname - mudar o nome do hostname
+sudo nano /etc/hosts - muda o login....
+hostnamectl - resumo do hostname e outras infos
+hostnamectl set-hostname <nome> - muda o hostname (outra forma)
+lsblk - ver as particoes
+
+which sudo - ver o sudo instalado
+
+/var/log/sudo e fazer cat sudo_config - mostra os logs dos comandos executados pelo sudo
+
+sudo ufw allow 8080
+sudo ufw status numbered
+udo ufw delete num_rule
+
+
+	-> Script
+
+
+nano monitoring.sh - cria
+sh monitoring.sh - executa
+/home/hepereir
+
+Notas:
+$() - significa que o resultado do comando vai ser atribuido a uma variavel
+grep - procura "algo" "ficheiro" - procura algo em um ficheiro
+grep -v - exclui da procura
+END - executa o que esta antes e depoiis o que esta a frente
+tail - ve so a ultima linha
+gt - greater than
+
+#!/bin/bash - para dizer a maquina que isto e um script
+
+# ARCH
+arch=$(uname -a) - uname (comando para ver as info dos sistema) -all (todas as infos)
+
+# CPU PHYSICAL
+cpuf=$(grep "physical id" /proc/cpuinfo | wc -l) - procura no /proc/cpuinfo as linhas com o nome "physical id" e conta as linhas com | wc -l 
+
+# CPU VIRTUAL
+cpuv=$(grep "processor" /proc/cpuinfo | wc -l) - procura no /proc/cpuinfo as linhas com o nome "processor" e conta as linhas com | wc -l 
+
+# RAM
+ram_total=$(free --mega | awk '$1 == "Mem:" {print $2}') utiliza o comando free na unidades Megabytes e procura (awk) por linhas onde a primeira palavra seja "Mem:" e faz print ao 2 valor dessa linha.
+ram_use=$(free --mega | awk '$1 == "Mem:" {print $3}') o mesmo que o de cima mas faz do 3 valor da linha
+ram_percent=$(free --mega | awk '$1 == "Mem:" {printf("%.2f"), $3/$2*100}') - divide o 3 valor pelo 2 e utiploca por 100 para encontrar a percentagem de ram utilizada
+
+# DISK
+disk_total=$(df -m | grep "/dev/" | grep -v "/boot" | awk '{disk_t += $2} END {printf ("%.1fGb\n"), disk_t/1024}')
+disk_use=$(df -m | grep "/dev/" | grep -v "/boot" | awk '{disk_u += $3} END {print disk_u}')
+disk_percent=$(df -m | grep "/dev/" | grep -v "/boot" | awk '{disk_u += $3} {disk_t+= $2} END {printf("%d"), disk_u/disk_t*100}')
+
+# CPU LOAD
+cpul=$(vmstat 1 2 | tail -1 | awk '{printf $15}')
+cpu_op=$(expr 100 - $cpul)
+cpu_fin=$(printf "%.1f" $cpu_op)
+
+# LAST BOOT
+lb=$(who -b | awk '$1 == "system" {print $3 " " $4}')
+
+# LVM USE
+lvmu=$(if [ $(lsblk | grep "lvm" | wc -l) -gt 0 ]; then echo yes; else echo no; fi)
+
+# TCP CONNEXIONS
+tcpc=$(ss -ta | grep ESTAB | wc -l)
+
+# USER LOG
+ulog=$(users | wc -w)
+
+# NETWORK
+ip=$(hostname -I)
+mac=$(ip link | grep "link/ether" | awk '{print $2}')
+
+# SUDO
+cmnd=$(journalctl _COMM=sudo | grep COMMAND | wc -l)
+
+wall "	Architecture: $arch
+	CPU physical: $cpuf
+	vCPU: $cpuv
+	Memory Usage: $ram_use/${ram_total}MB ($ram_percent%)
+	Disk Usage: $disk_use/${disk_total} ($disk_percent%)
+	CPU load: $cpu_fin%
+	Last boot: $lb
+	LVM use: $lvmu
+	Connections TCP: $tcpc ESTABLISHED
+	User log: $ulog
+	Network: IP $ip ($mac)
+	Sudo: $cmnd cmd"
+	
+

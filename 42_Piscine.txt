@@ -1,0 +1,157 @@
+C00:
+ex 0	done
+ex 1	done
+ex 2	done
+ex 3	done
+ex 4	done com ajuda
+ex 5	done com ajuda
+ex 6	martelo refeito com ajuda
+ex 7	
+
+C01:
+ex 0	done	alterei no fim para printf para ser mais facil
+ex 1	done
+ex 2	done
+ex 3	done
+ex 4	done
+ex 5	done
+ex 6	done				antigo
+ex 7	done				ex 7 ft_strrev  done
+ex 8	done				ex 8 ft_atoi    done
+
+C02:
+ex 0	done
+ex 1	done
+ex 2	done
+ex 3	done
+ex 4	done
+ex 5	done
+ex 6	done
+ex 7	done
+ex 8	done
+ex 9	done
+ex 10	done
+ex 11	done com ajuda
+ex 12	dá trabalho fica para depois
+
+C03:
+ex 0	done
+ex 1	done
+ex 2	done
+ex 3	done
+ex 4	done
+ex 5	done +/-
+
+C04:
+ex 0	done?	já estava feito
+ex 1	done?	já estava feito
+ex 2	done?	já estava feito
+ex 3	done
+ex 4	done
+ex 5	Nao está acabada
+
+C05:
+ex 0	done
+ex 1	done com ajuda
+ex 2	done
+ex 3	done
+ex 4	done com ajuda
+ex 5	done
+ex 6	done
+ex 7	done
+ex 8	caguei
+
+c06:
+ex 0	done
+ex 1	done
+ex 2	done
+ex 3	done
+
+C07:
+ex 0	done
+ex 1	done	
+ex 2	done mas com muita dificuldade
+ex 3	done 
+ex 4			
+ex 5
+
+c08:
+ex0		done
+ex1		done
+ex2		done
+ex3		done
+ex4 
+ex5
+
+
+
+
+EXAM QUESTION:
+LEVEL 1:
+
+first_word
+fizzbuzz		done
+ft_putstr
+ft_strcpy
+ft_strlen
+ft_swap
+repeat_alpha
+rev_print
+rot_13
+rotone
+search_and_replace
+ulstr
+
+
+
+/* 
+void    ft_del(void *content)
+{
+	free(content);
+}
+
+void    *ft_map(void *c)
+{
+     char *j;
+
+    if (!ft_strncmp("goncalo", c, 3))
+        j = ft_strdup("hello world");
+    else    
+         j = ft_strdup(c);
+    return (j);    
+}
+
+
+void    ft_map2(void *c)
+{
+
+    if (!ft_strncmp("goncalo", c, 3))
+    {
+        free(c);
+        c = ft_strdup("hello world");
+    }
+        
+}
+
+void print_content(void *str)
+{
+    printf("%s\n", (char *)str);
+}
+
+int main(void)
+{
+    t_list *a1;
+    t_list *a2;
+
+    a1 = ft_lstnew(ft_strdup("goncalo"));
+    ft_lstadd_back(&a1, ft_lstnew(ft_strdup("pilar")));
+    ft_lstadd_back(&a1, ft_lstnew(ft_strdup("hugo")));
+
+
+    a2 = ft_lstmap(a1, ft_map, ft_del);
+    // ft_lstiter(a1, ft_map2);
+    ft_lstiter(a1, print_content);
+    ft_lstiter(a2, print_content);
+    
+}
+ */
