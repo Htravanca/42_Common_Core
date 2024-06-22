@@ -21,6 +21,8 @@ long ft_atoi(char *str)
     while (str[i] && str[i] >= '0' && str[i] <= '9')
     {
         result = result * 10 + (str[i] - '0');
+        //if (-result <= INT_MIN || result >= INT_MAX)
+        // return (INT_MAX +1);
         i++;
     }
     return (result * sign);
@@ -128,7 +130,7 @@ void ft_argvs_format(int argc, char **argv)
             exit(0);
         }
         i++;
-    }
+    } 
 
 }
 
