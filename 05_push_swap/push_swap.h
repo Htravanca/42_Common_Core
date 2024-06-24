@@ -17,6 +17,7 @@ typedef struct s_stack_node
 }   t_stack_node;
 
 char    **ft_split(char const *s, char c);
+void	ft_free(char **arr, size_t atual);
 long    ft_atoi(char *str);
 int     ft_nb_str_valid(char *str);
 int     ft_nb_limit(long nb);

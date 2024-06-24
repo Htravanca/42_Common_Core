@@ -21,8 +21,8 @@ long ft_atoi(char *str)
     while (str[i] && str[i] >= '0' && str[i] <= '9')
     {
         result = result * 10 + (str[i] - '0');
-        //if (-result <= INT_MIN || result >= INT_MAX)
-        // return (INT_MAX +1);
+        if (-result <= INT_MIN || result >= INT_MAX)
+            return ((long)INT_MAX +1);
         i++;
     }
     return (result * sign);
@@ -50,11 +50,10 @@ int ft_nb_str_valid(char *str)
     return (1);
 }
 
-int ft_nb_limit(long nb)
+void ft_error_msg(void)
 {
-    if (nb >= INT_MIN && nb <= INT_MAX)
-        return (1);
-    return (0);
+    printf("Error\n");
+    exit(0);
 }
 
 void ft_str_format(char *str)
@@ -63,7 +62,9 @@ void ft_str_format(char *str)
     int elem;
     int j;
     long nb;
+    long error;
 
+    error = (long)INT_MAX + 1;
     j = 0;
     elem = 0;
     a = ft_split(str, ' ');
@@ -72,70 +73,55 @@ void ft_str_format(char *str)
     while (j < elem)
     {
         if (ft_nb_str_valid(a[j]))
-            j++;
-        else
         {
-            printf("Error\n");
-            exit(0);
-        }
-    }
-    //ja vi que os numeros sao validos
-    //agora uso o atoi para tirar os numeros e escreve dentro da lista
-    j = 0;
-    while (j < elem)
-    {
-        nb = ft_atoi(a[j]);
-        if (ft_nb_limit(nb))
+            nb = ft_atoi(a[j]);
+            //se o atoi devolver INT_MAX + 1 e pq o numero rebenta o tipo int
+            if (nb == error)
+            {
+                ft_free(a,elem);
+                ft_error_msg();
+            }
             printf("%ld\n",nb);
-        else
-        {
-            //ft_free
-            printf("Error\n");
-            exit(0);
+            j++;
         }
-        j++;
+        else
+            ft_error_msg();
     }
-
-}
+} 
 
 void ft_argvs_format(int argc, char **argv)
 {
     int i;
     long nb;
+    long error;
 
+    error = (long)INT_MAX + 1;
     i = 1;
-    //ver se os argumentos de entrada sao so numeros e sinais
     while (i < argc)
-    {
+    {   
+        //ver se os argumentos de entrada sao so numeros e sinais
         if (ft_nb_str_valid(argv[i]))
-            i++;
-        else
         {
-            printf("Error\n");
-            exit(0);
-        }
-    }
-    //ja vi que os numeros sao validos
-    //agora uso o atoi para tirar os numeros e escreve dentro da lista
-    i = 1;
-    while (i < argc)
-    {
-        nb = ft_atoi(argv[i]);
-        if (ft_nb_limit(nb))
+            nb = ft_atoi(argv[i]);
+            //se o atoi devolver INT_MAX + 1 e pq o numero rebenta o tipo int
+            if (nb == error)
+            {
+                //ft_free
+                ft_error_msg();
+            }
             printf("%ld\n",nb);
-        else
-        {
-            //ft_free
-            printf("Error\n");
-            exit(0);
+            i++;
         }
-        i++;
-    } 
-
+        else
+            ft_error_msg();
+    }
 }
 
 int main(int argc, char **argv)
 {
+    t_stack_node *a;
+    t_stack_node *b;
+    
     if (argc == 1)
         return (0);
     if (argc == 2)
