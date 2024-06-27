@@ -64,7 +64,7 @@ int main(int argc, char **argv)
     //testes:
     b = ft_argvs_format(argc, argv, b);
     ft_printf_lst(a, 'a');
-    ft_printf_lst(b, 'b');
+    //ft_printf_lst(b, 'b');
 
     //TESTES DE SA SB SS
 /*     sa(&a, 1);
@@ -97,4 +97,8 @@ int main(int argc, char **argv)
     rr(&a, &b);
     ft_printf_lst(a, 'a');
     ft_printf_lst(b, 'b'); */
+
+    //TESTES DE RA RB RR
+    rra(&a, 1);
+    ft_printf_lst(a, 'a');
 }

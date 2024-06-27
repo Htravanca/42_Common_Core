@@ -24,7 +24,6 @@ void ra(t_stack_node **a, int print)
     index++;
     temp_bg->next = NULL;
     temp_bg->index = index;
-
     if (print)
         printf("ra\n");
 }
@@ -53,7 +52,6 @@ void rb(t_stack_node **b, int print)
     index++;
     temp_bg->next = NULL;
     temp_bg->index = index;
-
     if (print)
         printf("rb\n");
 }
