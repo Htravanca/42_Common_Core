@@ -27,9 +27,11 @@ void            ft_error_msg(void);
 t_stack_node    *ft_argvs_format(int argc, char **argv, t_stack_node *a);
 t_stack_node    *ft_str_format(char *str, t_stack_node *a);
 
-//FT_LST
+//LST
 t_stack_node    *ft_lstnew(int content, int index);
 void	        ft_lstadd_back(t_stack_node **lst, int content, int index);
+int             ft_lsta_nok(t_stack_node *a);
+int             ft_is_lst_sorted(t_stack_node *a);
 
 //OPERATIONS SS
 void            sa(t_stack_node **a, int print);
@@ -43,7 +45,18 @@ void            rr(t_stack_node **a, t_stack_node **b);
 
 //OPERATIONS RRR
 void            rra(t_stack_node **a, int print);
-//void            rrb(t_stack_node **b, int print);
-//void            rrr(t_stack_node **a, t_stack_node **b);
+void            rrb(t_stack_node **b, int print);
+void            rrr(t_stack_node **a, t_stack_node **b);
+
+//OPERATIONS PP
+void            ft_update_index(t_stack_node **lst);
+void            pa(t_stack_node **a, t_stack_node **b);
+void            pb(t_stack_node **a, t_stack_node **b);
+
+//SORT 3
+void            ft_sort_three(t_stack_node **a);
+int             ft_index_bg(t_stack_node *a);
+int             ft_index_sm(t_stack_node *a);
+
 
 #endif

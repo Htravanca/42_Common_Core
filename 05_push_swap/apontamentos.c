@@ -82,3 +82,106 @@
     }
 
 } */
+
+
+
+   //TESTES DE SA SB SS
+/*     sa(&a, 1);
+    sb(&b, 1);
+    ft_printf_lst(a, 'a');
+    ft_printf_lst(b, 'b');
+    ss(&a, &b);
+    ft_printf_lst(a, 'a');
+    ft_printf_lst(b, 'b'); */
+
+
+    //TESTES DE RA RB RR
+/*     ra(&a,1);
+    rb(&b,1);
+    ft_printf_lst(a, 'a');
+    ft_printf_lst(b, 'b');
+
+    rr(&a, &b);
+    ft_printf_lst(a, 'a');
+    ft_printf_lst(b, 'b');
+
+    rr(&a, &b);
+    ft_printf_lst(a, 'a');
+    ft_printf_lst(b, 'b');
+
+    rr(&a, &b);
+    ft_printf_lst(a, 'a');
+    ft_printf_lst(b, 'b');
+
+    rr(&a, &b);
+    ft_printf_lst(a, 'a');
+    ft_printf_lst(b, 'b'); */
+
+    //TESTES DE RRA RRB RRR
+/*     rra(&a, 1);
+    ft_printf_lst(a, 'a');
+    rrb(&b, 1);
+    ft_printf_lst(b, 'b');
+
+    rra(&a, 1);
+    ft_printf_lst(a, 'a');
+    rrb(&b, 1);
+    ft_printf_lst(b, 'b');
+
+    rra(&a, 1);
+    ft_printf_lst(a, 'a');
+    rrb(&b, 1);
+    ft_printf_lst(b, 'b'); 
+    rrr(&a, &b);
+    ft_printf_lst(a, 'a');
+    ft_printf_lst(b, 'b'); */
+
+    //TESTE DE PA E PB
+/*     pb(&a, &b);
+    pb(&a, &b);
+    pb(&a, &b);
+    pa(&a, &b);
+    pa(&a, &b);
+    pa(&a, &b);
+    ft_printf_lst(a, 'a');
+    ft_printf_lst(b, 'b'); */
+    
+
+
+    //***************************************************************
+
+    /*     //testes:
+    //b = ft_argvs_format(argc, argv, b);
+    ft_printf_lst(a, 'a');
+    ft_printf_lst(b, 'b');
+
+    //teste da folha enunciado
+    sa(&a,1);
+    ft_printf_lst(a, 'a');
+    ft_printf_lst(b, 'b');
+
+    pb(&a, &b);
+    pb(&a, &b);
+    pb(&a, &b);
+    ft_printf_lst(a, 'a');
+    ft_printf_lst(b, 'b');
+
+    ra(&a,1);
+    rb(&b,1);
+    ft_printf_lst(a, 'a');
+    ft_printf_lst(b, 'b');
+
+    rra(&a, 1);
+    rrb(&b, 1);
+    ft_printf_lst(a, 'a');
+    ft_printf_lst(b, 'b');
+
+    sa(&a,1);
+    ft_printf_lst(a, 'a');
+    ft_printf_lst(b, 'b');
+
+    pa(&a, &b);
+    pa(&a, &b);
+    pa(&a, &b);
+    ft_printf_lst(a, 'a');
+    ft_printf_lst(b, 'b'); */

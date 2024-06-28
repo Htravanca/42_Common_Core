@@ -10,10 +10,9 @@ void sa(t_stack_node **a, int print)
     temp = (*a);
     temp_next = (*a)->next->next;
     *a = (*a)->next;
-    (*a)->index = 1;
     (*a)->next = temp;
-    (*a)->next->index = 2;
     (*a)->next->next = temp_next;
+    ft_update_index(a);
     if (print)
         printf("sa\n");
 }
@@ -28,10 +27,9 @@ void sb(t_stack_node **b, int print)
     temp = (*b);
     temp_next = (*b)->next->next;
     *b = (*b)->next;
-    (*b)->index = 1;
     (*b)->next = temp;
-    (*b)->next->index = 2;
     (*b)->next->next = temp_next;
+    ft_update_index(b);
     if (print)
         printf("sb\n");
 }

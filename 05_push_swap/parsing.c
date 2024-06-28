@@ -20,8 +20,8 @@ long ft_atoi(char *str)
     while (str[i] && str[i] >= '0' && str[i] <= '9')
     {
         result = result * 10 + (str[i] - '0');
-        if (-result <= INT_MIN || result >= INT_MAX)
-            return ((long)INT_MAX +1);
+        if (((-result) < (long)INT_MIN && sign == -1) || (result > (long)INT_MAX && sign == 1))
+            return ((long)INT_MAX + 1); 
         i++;
     }
     return (result * sign);

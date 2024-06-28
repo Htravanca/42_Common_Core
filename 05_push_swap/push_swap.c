@@ -9,8 +9,7 @@ void ft_printf_lst(t_stack_node *a, char l)
     {
         printf("NULL\n");
         return ;
-    }
-        
+    }  
     while (temp)
     {
         if(temp->index <= 9)
@@ -22,83 +21,35 @@ void ft_printf_lst(t_stack_node *a, char l)
     printf("\n");
 }
 
-int ft_lsta_nok(t_stack_node *a)
-{
-    t_stack_node *temp;
-    t_stack_node *temp_aux;
-
-    temp = a;
-    temp_aux = temp->next;
-    while (temp)
-    {
-        temp_aux = temp->next;
-        while (temp_aux)
-        {
-            if (temp->data == temp_aux->data)
-                return (1);
-            temp_aux = temp_aux->next;
-        }
-        temp = temp->next;
-    }
-    return (0);
-}
-
 int main(int argc, char **argv)
 {
     t_stack_node *a;
     t_stack_node *b;
+    int nodes;
     
     a = NULL;
     b = NULL;
+    nodes = 0;
     if (argc == 1)
         return (0);
     if (argc == 2)
         a = ft_str_format(argv[1], a);
     if (argc >= 3)
         a = ft_argvs_format(argc, argv, a);
-
-    //validar que a ista A nao tem repetidos
-    if (ft_lsta_nok(a))
+    //validar que a ista A nao tem repetidos e tambem devolve o nr de elementos
+    nodes = ft_lsta_nok(a);
+    if (nodes == 0)
         ft_error_msg();
+    //ve se A esta sorted, se nao comeca a dar sort
+    if(ft_is_lst_sorted(a) == 0)
+    {
+        if(nodes == 2)
+            sa(&a, 1);
+        else if(nodes == 3)
+            ft_sort_three(&a);
+    }
+    else
+        printf("sorted!\n");
 
-    //testes:
-    b = ft_argvs_format(argc, argv, b);
-    ft_printf_lst(a, 'a');
-    //ft_printf_lst(b, 'b');
-
-    //TESTES DE SA SB SS
-/*     sa(&a, 1);
-    sb(&b, 1);
-    ft_printf_lst(a, 'a');
-    ft_printf_lst(b, 'b');
-    ss(&a, &b);
-    ft_printf_lst(a, 'a');
-    ft_printf_lst(b, 'b'); */
-
-
-    //TESTES DE RA RB RR
-/*     ra(&a,1);
-    rb(&b,1);
-    ft_printf_lst(a, 'a');
-    ft_printf_lst(b, 'b');
-
-    rr(&a, &b);
-    ft_printf_lst(a, 'a');
-    ft_printf_lst(b, 'b');
-
-    rr(&a, &b);
-    ft_printf_lst(a, 'a');
-    ft_printf_lst(b, 'b');
-
-    rr(&a, &b);
-    ft_printf_lst(a, 'a');
-    ft_printf_lst(b, 'b');
-
-    rr(&a, &b);
-    ft_printf_lst(a, 'a');
-    ft_printf_lst(b, 'b'); */
-
-    //TESTES DE RA RB RR
-    rra(&a, 1);
     ft_printf_lst(a, 'a');
 }
