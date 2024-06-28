@@ -108,7 +108,7 @@ t_stack_node *ft_str_format(char *str, t_stack_node *a)
                 ft_free(arr,elem);
                 ft_error_msg();
             }
-            ft_lstadd_back(&a, nb, j);
+            ft_lstadd_back(&a, nb, j + 1);
             //printf("%ld\n",nb);
             j++;
         }

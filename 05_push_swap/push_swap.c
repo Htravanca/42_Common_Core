@@ -37,6 +37,7 @@ int main(int argc, char **argv)
     if (argc >= 3)
         a = ft_argvs_format(argc, argv, a);
     //validar que a ista A nao tem repetidos e tambem devolve o nr de elementos
+    //ft_printf_lst(a, 'a');
     nodes = ft_lsta_nok(a);
     if (nodes == 0)
         ft_error_msg();

@@ -46,7 +46,6 @@ void rrb(t_stack_node **b, int print)
         printf("rrb\n");
 }
 
-
 void rrr(t_stack_node **a, t_stack_node **b)
 {
     if (!(*b) || !((*b)->next) || !(*a) || !((*a)->next))
