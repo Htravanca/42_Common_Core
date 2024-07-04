@@ -57,6 +57,14 @@ void            pb(t_stack_node **a, t_stack_node **b);
 void            ft_sort_three(t_stack_node **a);
 int             ft_index_bg(t_stack_node *a);
 int             ft_index_sm(t_stack_node *a);
+void            ft_put_top_a(t_stack_node **a, int index_sm, int size);
+void            ft_sort_four(t_stack_node **a, t_stack_node **b);
+void            ft_sort_five(t_stack_node **a, t_stack_node **b);
 
+
+//SORT
+void            ft_sort(t_stack_node **a, t_stack_node **b);
+void            ft_first_step(t_stack_node **a, t_stack_node **b);
+int             ft_lst_size(t_stack_node *a);
 
 #endif

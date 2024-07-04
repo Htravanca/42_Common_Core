@@ -37,7 +37,6 @@ int main(int argc, char **argv)
     if (argc >= 3)
         a = ft_argvs_format(argc, argv, a);
     //validar que a ista A nao tem repetidos e tambem devolve o nr de elementos
-    //ft_printf_lst(a, 'a');
     nodes = ft_lsta_nok(a);
     if (nodes == 0)
         ft_error_msg();
@@ -48,9 +47,18 @@ int main(int argc, char **argv)
             sa(&a, 1);
         else if(nodes == 3)
             ft_sort_three(&a);
+        else if(nodes == 4)
+            ft_sort_four(&a, &b);
+        else if(nodes == 5)
+            ft_sort_five(&a, &b);
+        else if (nodes > 5)
+            ft_sort(&a, &b);
     }
     else
         printf("sorted!\n");
 
+
+    //print as listas no fim
     ft_printf_lst(a, 'a');
+    ft_printf_lst(b, 'b');
 }
