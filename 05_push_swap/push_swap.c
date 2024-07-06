@@ -13,9 +13,11 @@ void ft_printf_lst(t_stack_node *a, char l)
     while (temp)
     {
         if(temp->index <= 9)
-            printf("%c%02d:%d\n", l, temp->index, temp->data);
+            printf("%c%02d:%d\t\tbf:%d\t\tcost:%d\tra:%d\trb:%d\trr:%d\trra:%d\trrb:%d\trrr:%d\t\n", l, temp->index, temp->data, temp->bf, temp->cost->total_cost, 
+            temp->cost->ra, temp->cost->rb, temp->cost->rr, temp->cost->rra, temp->cost->rrb, temp->cost->rrr);
         else
-            printf("%c%d:%d\n", l, temp->index, temp->data);
+            printf("%c%d:%d\t\tbf:%d\t\tcost:%d\tra:%d\trb:%d\trr:%d\trra:%d\trrb:%d\trrr:%d\t\n", l, temp->index, temp->data, temp->bf, temp->cost->total_cost, 
+            temp->cost->ra, temp->cost->rb, temp->cost->rr, temp->cost->rra, temp->cost->rrb, temp->cost->rrr);
         temp = temp->next;
     }
     printf("\n");
@@ -54,11 +56,11 @@ int main(int argc, char **argv)
         else if (nodes > 5)
             ft_sort(&a, &b);
     }
-    else
-        printf("sorted!\n");
+    //else
+    //    printf("sorted!\n");
 
 
     //print as listas no fim
-    ft_printf_lst(a, 'a');
-    ft_printf_lst(b, 'b');
+    //ft_printf_lst(a, 'a');
+    //ft_printf_lst(b, 'b');
 }

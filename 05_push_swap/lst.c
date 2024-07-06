@@ -3,12 +3,25 @@
 t_stack_node    *ft_lstnew(int content, int index)
 {
 	t_stack_node	*new;
+    t_cost          *cost;
 
 	new = malloc(sizeof(t_stack_node));
 	if (!new)
 		return (NULL);
+    cost = malloc(sizeof(t_cost));
+    if (!cost)
+		return (NULL);
 	new->data = content;
     new->index = index;
+    new->bf = 0;
+    new->cost = cost;
+    new->cost->ra = 0;
+    new->cost->rb = 0;
+    new->cost->rr = 0;
+    new->cost->rra = 0;
+    new->cost->rrb = 0;
+    new->cost->rrr = 0;
+    new->cost->total_cost = 0;
 	new->next = NULL;
 	return (new);
 }
@@ -74,4 +87,19 @@ int ft_is_lst_sorted(t_stack_node *a)
             return (0);
     }
     return (1);
+}
+
+int ft_lst_size(t_stack_node *a)
+{
+    t_stack_node *temp;
+	int i;
+
+	i = 0;
+    temp = a;
+    while (temp)
+    {
+        i++;
+        temp = temp->next;
+    }
+    return (i);
 }

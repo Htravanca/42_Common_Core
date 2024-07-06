@@ -3,15 +3,27 @@
 # define PUSH_SWAP_H
 
 # include <stdlib.h>
-//# include "libft/libft.h"
 //# include "ft_printf/ft_printf.h"
 # include <limits.h>
 # include <stdio.h>
+
+typedef struct s_cost
+{
+	int		        ra;
+	int		        rb;
+	int		        rr;
+	int		        rra;
+	int		        rrb;
+	int		        rrr;
+	int		        total_cost;
+}	t_cost;
 
 typedef struct s_stack_node
 {
     int                 data;
     int                 index;
+    int                 bf;
+    t_cost              *cost;
     struct s_stack_node *next;
     //struct s_stack_node *prev;
 }   t_stack_node;
@@ -32,6 +44,7 @@ t_stack_node    *ft_lstnew(int content, int index);
 void	        ft_lstadd_back(t_stack_node **lst, int content, int index);
 int             ft_lsta_nok(t_stack_node *a);
 int             ft_is_lst_sorted(t_stack_node *a);
+int             ft_lst_size(t_stack_node *a);
 
 //OPERATIONS SS
 void            sa(t_stack_node **a, int print);
@@ -61,10 +74,18 @@ void            ft_put_top_a(t_stack_node **a, int index_sm, int size);
 void            ft_sort_four(t_stack_node **a, t_stack_node **b);
 void            ft_sort_five(t_stack_node **a, t_stack_node **b);
 
-
 //SORT
-void            ft_sort(t_stack_node **a, t_stack_node **b);
+int				ft_mean_val(t_stack_node *a);
 void            ft_first_step(t_stack_node **a, t_stack_node **b);
-int             ft_lst_size(t_stack_node *a);
+void    		ft_bf_finder(t_stack_node **a, t_stack_node **b);
+void			ft_find_and_exec(t_stack_node **a, t_stack_node **b);
+void            ft_sort(t_stack_node **a, t_stack_node **b);
+
+//COST
+void 			ft_total_cost_calc(t_stack_node **lst);
+void 			ft_best_cost(t_stack_node **lst);
+void			ft_cost_calc(t_stack_node **a, t_stack_node **b);
+void    		ft_cost_clean(t_stack_node **b);
+
 
 #endif

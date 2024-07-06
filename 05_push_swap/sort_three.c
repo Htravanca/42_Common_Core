@@ -1,13 +1,13 @@
 #include "push_swap.h"
 
-int ft_index_bg(t_stack_node *a)
+int ft_index_bg(t_stack_node *lst)
 {
     long nb;
     t_stack_node *temp;
     int index;
 
     nb = (long)INT_MIN - 1;
-    temp = a;
+    temp = lst;
     index = 0;
     while (temp)
     {
@@ -21,14 +21,14 @@ int ft_index_bg(t_stack_node *a)
     return (index);
 }
 
-int ft_index_sm(t_stack_node *a)
+int ft_index_sm(t_stack_node *lst)
 {
     long nb;
     t_stack_node *temp;
     int index;
 
     nb = (long)INT_MAX + 1;
-    temp = a;
+    temp = lst;
     index = 0;
     while (temp)
     {
