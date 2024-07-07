@@ -28,6 +28,9 @@ typedef struct s_stack_node
     //struct s_stack_node *prev;
 }   t_stack_node;
 
+//PUSH SWAP
+void ft_printf_lst(t_stack_node *a, char l);
+
 //FT_SPLIT
 char            **ft_split(char const *s, char c);
 void	        ft_free(char **arr, size_t atual);

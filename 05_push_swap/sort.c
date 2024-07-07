@@ -85,7 +85,9 @@ void ft_find_and_exec(t_stack_node **a, t_stack_node **b)
         }
         temp_b = temp_b->next;
     }
-    //printf("INDEX a ser feito:%d\n", index);
+    /* printf("INDEX a ser feito:%d\n", index);
+    ft_printf_lst(*a, 'a');
+    ft_printf_lst(*b, 'b'); */
     temp_b = *b;
     while (temp_b->index != index)
         temp_b = temp_b->next;
@@ -107,7 +109,7 @@ void ft_find_and_exec(t_stack_node **a, t_stack_node **b)
     }
     while (temp_b->cost->rb)
     {
-        rb(a, 1);
+        rb(b, 1);
         temp_b->cost->rb--;
     }
     while (temp_b->cost->rra)
@@ -117,7 +119,7 @@ void ft_find_and_exec(t_stack_node **a, t_stack_node **b)
     }
     while (temp_b->cost->rrb)
     {
-        rrb(a, 1);
+        rrb(b, 1);
         temp_b->cost->rrb--;
     }
 }
