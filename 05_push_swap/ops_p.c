@@ -27,7 +27,7 @@ void pa(t_stack_node **a, t_stack_node **b)
     (*a)->next = temp;
     ft_update_index(a);
     ft_update_index(b);
-    printf("pa\n");
+    write(1, "pa\n", 3);
 }
 
 void pb(t_stack_node **a, t_stack_node **b)
@@ -42,5 +42,5 @@ void pb(t_stack_node **a, t_stack_node **b)
     (*b)->next = temp;
     ft_update_index(a);
     ft_update_index(b);
-    printf("pb\n");
+    write(1, "pb\n", 3);
 }

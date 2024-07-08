@@ -2,10 +2,10 @@
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
+# include <unistd.h>
 # include <stdlib.h>
-//# include "ft_printf/ft_printf.h"
 # include <limits.h>
-# include <stdio.h>
+//# include <stdio.h>
 
 typedef struct s_cost
 {
@@ -25,11 +25,10 @@ typedef struct s_stack_node
     int                 bf;
     t_cost              *cost;
     struct s_stack_node *next;
-    //struct s_stack_node *prev;
 }   t_stack_node;
 
 //PUSH SWAP
-void ft_printf_lst(t_stack_node *a, char l);
+//void ft_printf_lst(t_stack_node *a, char l);
 
 //FT_SPLIT
 char            **ft_split(char const *s, char c);

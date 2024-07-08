@@ -20,7 +20,7 @@ void rra(t_stack_node **a, int print)
     temp_lst->next = NULL;
     ft_update_index(a);
     if (print)
-        printf("rra\n");
+        write(1, "rra\n", 4);
 }
 
 void rrb(t_stack_node **b, int print)
@@ -43,7 +43,7 @@ void rrb(t_stack_node **b, int print)
     temp_lst->next = NULL;
     ft_update_index(b);
     if (print)
-        printf("rrb\n");
+        write(1, "rrb\n", 4);
 }
 
 void rrr(t_stack_node **a, t_stack_node **b)
@@ -52,5 +52,5 @@ void rrr(t_stack_node **a, t_stack_node **b)
         return ;
     rra(a ,0);
     rrb(b ,0);
-    printf("rrr\n");
+    write(1, "rrr\n", 4);
 }

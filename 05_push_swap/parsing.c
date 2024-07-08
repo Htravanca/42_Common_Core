@@ -51,7 +51,9 @@ int ft_nb_str_valid(char *str)
 
 void ft_error_msg(void)
 {
-    printf("Error\n");
+    write(1, "Error\n", 6);
+    //free A
+    //free B
     exit(0);
 }
 
@@ -73,7 +75,6 @@ t_stack_node *ft_argvs_format(int argc, char **argv, t_stack_node *a)
             if (nb == error)
                 ft_error_msg();
             ft_lstadd_back(&a, nb, i);
-            //printf("%ld\n",nb);
             i++;
         }
         else
@@ -109,7 +110,6 @@ t_stack_node *ft_str_format(char *str, t_stack_node *a)
                 ft_error_msg();
             }
             ft_lstadd_back(&a, nb, j + 1);
-            //printf("%ld\n",nb);
             j++;
         }
         else

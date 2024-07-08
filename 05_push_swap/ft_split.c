@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <stdlib.h>
+#include "push_swap.h"
 
 static size_t	ft_count_string(char const *s, char c)
 {
@@ -74,7 +73,6 @@ static char	*ft_write_arr(char const *s, char c, size_t *pos)
 	return (arr);
 }
 
-//atencao modifique esta funcao para poder a usar noutro sitio
 void	ft_free(char **arr, size_t atual)
 {
 	while (atual > 0)

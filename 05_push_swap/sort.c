@@ -85,9 +85,6 @@ void ft_find_and_exec(t_stack_node **a, t_stack_node **b)
         }
         temp_b = temp_b->next;
     }
-    /* printf("INDEX a ser feito:%d\n", index);
-    ft_printf_lst(*a, 'a');
-    ft_printf_lst(*b, 'b'); */
     temp_b = *b;
     while (temp_b->index != index)
         temp_b = temp_b->next;
@@ -132,7 +129,6 @@ void    ft_sort(t_stack_node **a, t_stack_node **b)
 
     aux_up = 0;
     aux_dw = 0;
-    //printf("sort func has started\n");
     //calula a media e move para a lista B caso esteja abaixo da media ate ficarem 5 na lista A
     ft_first_step(a, b);
     //Agora com 5 elem na lista A. Organiza-se

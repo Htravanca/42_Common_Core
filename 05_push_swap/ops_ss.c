@@ -14,7 +14,7 @@ void sa(t_stack_node **a, int print)
     (*a)->next->next = temp_next;
     ft_update_index(a);
     if (print)
-        printf("sa\n");
+        write(1, "sa\n", 3);
 }
 
 void sb(t_stack_node **b, int print)
@@ -31,7 +31,7 @@ void sb(t_stack_node **b, int print)
     (*b)->next->next = temp_next;
     ft_update_index(b);
     if (print)
-        printf("sb\n");
+        write(1, "sb\n", 3);
 }
 
 void ss(t_stack_node **a, t_stack_node **b)
@@ -40,5 +40,5 @@ void ss(t_stack_node **a, t_stack_node **b)
         return ;
     sa(a, 0);
     sb(b, 0);
-    printf("ss\n");
+    write(1, "ss\n", 3);
 }
