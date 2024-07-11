@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hepereir <hepereir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hepereir <hepereir@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/09 18:07:23 by hepereir          #+#    #+#             */
-/*   Updated: 2024/06/22 19:12:40 by hepereir         ###   ########.fr       */
+/*   Created: 2024/07/11 22:16:33 by hepereir          #+#    #+#             */
+/*   Updated: 2024/07/11 22:17:27 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	ft_free(char **arr, size_t atual)
 		free(arr[atual - 1]);
 		atual--;
 	}
-	free (arr);
+	free(arr);
 }
 
 char	**ft_split(char const *s, char c)
