@@ -1,5 +1,26 @@
 #include "push_swap.h"
 
+void ft_clean_lst(t_stack_node **lst)
+{
+    t_stack_node *temp;
+    t_stack_node *next;
+
+    if (!lst || !*lst)
+        return;
+
+    temp = *lst;
+    while (temp)
+    {
+        next = temp->next;
+        if (temp->cost)
+            free(temp->cost);
+        free(temp);
+        temp = next;
+    }
+    *lst = NULL;
+}
+
+
 int main(int argc, char **argv)
 {
     t_stack_node *a;
@@ -33,5 +54,6 @@ int main(int argc, char **argv)
         else if (nodes > 5)
             ft_sort(&a, &b);
     }
-    
+    ft_clean_lst(&a);
+    ft_clean_lst(&b);
 }
