@@ -57,24 +57,32 @@ void ft_error_msg(void)
     exit(0);
 }
 
-t_stack_node *ft_argvs_format(int argc, char **argv, t_stack_node *a)
+int ft_parsing_aux(t_stack_node **a, char *arr, int pos)
 {
-    int i;
     long nb;
     long error;
 
     error = (long)INT_MAX + 1;
+    nb = ft_atoi(arr);
+    if (nb == error)        //se o atoi devolver INT_MAX + 1 e pq o numero rebenta o tipo int
+    {
+        ft_error_msg();
+        return (1);
+    }
+    ft_lstadd_back(a, nb, pos);
+    return (0);
+}
+
+t_stack_node *ft_argvs_format(int argc, char **argv, t_stack_node *a)
+{
+    int i;
+
     i = 1;
     while (i < argc)
     {   
-        //ver se os argumentos de entrada sao so numeros e sinais
-        if (ft_nb_str_valid(argv[i]))
+        if (ft_nb_str_valid(argv[i]))   //ver se os argumentos de entrada sao so numeros e sinais
         {
-            nb = ft_atoi(argv[i]);
-            //se o atoi devolver INT_MAX + 1 e pq o numero rebenta o tipo int
-            if (nb == error)
-                ft_error_msg();
-            ft_lstadd_back(&a, nb, i);
+            ft_parsing_aux(&a, argv[i], i);
             i++;
         }
         else
@@ -88,10 +96,7 @@ t_stack_node *ft_str_format(char *str, t_stack_node *a)
     char **arr;
     int elem;
     int j;
-    long nb;
-    long error;
 
-    error = (long)INT_MAX + 1;
     j = 0;
     elem = 0;
     arr = ft_split(str, ' ');
@@ -101,15 +106,8 @@ t_stack_node *ft_str_format(char *str, t_stack_node *a)
     {
         if (ft_nb_str_valid(arr[j]))
         {
-            nb = ft_atoi(arr[j]);
-            //se o atoi devolver INT_MAX + 1 e pq o numero rebenta o tipo int
-            if (nb == error)
-            {
-                //vai ter leak pq ja criei lista, tb tenho de dar free na lst
+            if (ft_parsing_aux(&a, arr[j], j + 1))
                 ft_free(arr,elem);
-                ft_error_msg();
-            }
-            ft_lstadd_back(&a, nb, j + 1);
             j++;
         }
         else

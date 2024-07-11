@@ -44,8 +44,6 @@ void    ft_bf_finder(t_stack_node **a, t_stack_node **b)
     int aux_sub;
     int prev_sub;
 
-    bf_found = INT_MAX;
-    temp_a = *a;
     temp_b = *b;
     while(temp_b)
     {
@@ -65,6 +63,45 @@ void    ft_bf_finder(t_stack_node **a, t_stack_node **b)
         temp_b->bf = bf_found;
         temp_b = temp_b->next;
     }
+}
+
+void ft_exec_aux(t_stack_node **a, t_stack_node **b, t_stack_node *temp_b)
+{
+    while (temp_b->cost->rra)
+    {
+        rra(a, 1);
+        temp_b->cost->rra--;
+    }
+    while (temp_b->cost->rrb)
+    {
+        rrb(b, 1);
+        temp_b->cost->rrb--;
+    }
+}
+
+void ft_exec(t_stack_node **a, t_stack_node **b, t_stack_node *temp_b)
+{
+    while (temp_b->cost->rr)
+    {
+        rr(a, b);
+        temp_b->cost->rr--;
+    }
+    while (temp_b->cost->rrr)
+    {
+        rrr(a, b);
+        temp_b->cost->rrr--;
+    }
+    while (temp_b->cost->ra)
+    {
+        ra(a, 1);
+        temp_b->cost->ra--;
+    }
+    while (temp_b->cost->rb)
+    {
+        rb(b, 1);
+        temp_b->cost->rb--;
+    }
+    ft_exec_aux(a, b, temp_b);
 }
 
 void ft_find_and_exec(t_stack_node **a, t_stack_node **b)
@@ -88,69 +125,16 @@ void ft_find_and_exec(t_stack_node **a, t_stack_node **b)
     temp_b = *b;
     while (temp_b->index != index)
         temp_b = temp_b->next;
-    
-    while (temp_b->cost->rr)
-    {
-        rr(a, b);
-        temp_b->cost->rr--;
-    }
-    while (temp_b->cost->rrr)
-    {
-        rrr(a, b);
-        temp_b->cost->rrr--;
-    }
-    while (temp_b->cost->ra)
-    {
-        ra(a, 1);
-        temp_b->cost->ra--;
-    }
-    while (temp_b->cost->rb)
-    {
-        rb(b, 1);
-        temp_b->cost->rb--;
-    }
-    while (temp_b->cost->rra)
-    {
-        rra(a, 1);
-        temp_b->cost->rra--;
-    }
-    while (temp_b->cost->rrb)
-    {
-        rrb(b, 1);
-        temp_b->cost->rrb--;
-    }
+    ft_exec(a, b, temp_b);
 }
 
-void    ft_sort(t_stack_node **a, t_stack_node **b)
+void ft_rotate_a(t_stack_node **a)
 {
     int aux_up;
     int aux_dw;
-    int index_sm;
 
     aux_up = 0;
     aux_dw = 0;
-    //calula a media e move para a lista B caso esteja abaixo da media ate ficarem 5 na lista A
-    ft_first_step(a, b);
-    //Agora com 5 elem na lista A. Organiza-se
-    ft_sort_five(a, b);
-
-    while (ft_lst_size(*b) > 0)
-    {
-        //Calcula os BF da lista B com a lista A
-        ft_bf_finder(a, b);
-
-        //calcula o custo de por BF no top de A e o nr atual no topo de B
-        ft_cost_calc(a, b);
-
-        //Com os custo calculadps encontra o menor e executa-o 
-        ft_find_and_exec(a, b);
-
-        //limpa o custo de toda a lista
-        ft_cost_clean(b);
-
-        //push para A
-        pa(a, b);
-    }
     while (ft_index_sm(*a) != 1)
     {
         aux_up = ft_index_sm(*a) - 1;
@@ -160,5 +144,19 @@ void    ft_sort(t_stack_node **a, t_stack_node **b)
         else
             rra(a ,1);
     }
-    
+}
+
+void    ft_sort(t_stack_node **a, t_stack_node **b)
+{
+    ft_first_step(a, b);            //calula a media e move para a lista B caso esteja abaixo da media ate ficarem 5 na lista A
+    ft_sort_five(a, b);             //Agora com 5 elem na lista A. Organiza-se
+    while (ft_lst_size(*b) > 0)
+    {
+        ft_bf_finder(a, b);         //Calcula os BF da lista B com a lista A
+        ft_cost_calc(a, b);         //calcula o custo de por BF no top de A e o nr atual no topo de B
+        ft_find_and_exec(a, b);     //Com os custo calculadps encontra o menor e executa-o 
+        ft_cost_clean(b);           //limpa o custo de toda a lista
+        pa(a, b);                   //push para A
+    }
+    ft_rotate_a(a);
 }

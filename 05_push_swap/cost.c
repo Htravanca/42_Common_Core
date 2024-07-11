@@ -37,12 +37,36 @@ void ft_best_cost(t_stack_node **lst)
     ft_total_cost_calc(lst);
 }
 
+void ft_cost_calc_auxb(t_stack_node **b, t_stack_node *temp_b)
+{
+    int aux_up;
+    int aux_dw;
+
+    aux_up = temp_b->index - 1;
+    aux_dw = ft_lst_size(*b) - temp_b->index + 1;
+    if (aux_up <= aux_dw)
+         temp_b->cost->rb = aux_up;
+    else
+        temp_b->cost->rrb = aux_dw;
+}
+
+void ft_cost_calc_auxa(t_stack_node **a, t_stack_node *temp_a, t_stack_node *temp_b)
+{
+    int aux_up;
+    int aux_dw;
+
+    aux_up = temp_a->index - 1;
+    aux_dw = ft_lst_size(*a) - temp_a->index + 1;
+    if (aux_up <= aux_dw)
+        temp_b->cost->ra = aux_up;
+    else
+        temp_b->cost->rra = aux_dw;
+}
+
 void ft_cost_calc(t_stack_node **a, t_stack_node **b)
 {
     t_stack_node *temp_b;
     t_stack_node *temp_a;
-    int aux_up;
-    int aux_dw;
 
     temp_b = *b;
     temp_a = *a;
@@ -50,25 +74,11 @@ void ft_cost_calc(t_stack_node **a, t_stack_node **b)
     {
         temp_a = *a;
         if(temp_b->index != 1)
-        {
-            aux_up = temp_b->index - 1;
-            aux_dw = ft_lst_size(*b) - temp_b->index + 1;
-            if (aux_up <= aux_dw)
-                temp_b->cost->rb = aux_up;
-            else
-                temp_b->cost->rrb = aux_dw;
-        }
+            ft_cost_calc_auxb(b, temp_b);
         while (temp_a && temp_b->bf != temp_a->data)
             temp_a = temp_a->next;
         if(temp_a->index != 1)
-        {
-            aux_up = temp_a->index - 1;
-            aux_dw = ft_lst_size(*a) - temp_a->index + 1;
-            if (aux_up <= aux_dw)
-                temp_b->cost->ra = aux_up;
-            else
-                temp_b->cost->rra = aux_dw;
-        }
+            ft_cost_calc_auxa(a, temp_a, temp_b);
         temp_b = temp_b->next;
     }
     ft_best_cost(b);

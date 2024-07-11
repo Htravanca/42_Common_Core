@@ -20,7 +20,6 @@ void ft_clean_lst(t_stack_node **lst)
     *lst = NULL;
 }
 
-
 int main(int argc, char **argv)
 {
     t_stack_node *a;
