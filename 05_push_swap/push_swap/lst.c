@@ -6,7 +6,7 @@
 /*   By: hepereir <hepereir@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 22:16:40 by hepereir          #+#    #+#             */
-/*   Updated: 2024/07/11 22:16:41 by hepereir         ###   ########.fr       */
+/*   Updated: 2024/07/12 22:11:06 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,19 +64,22 @@ int	ft_lsta_nok(t_stack_node *a)
 	int				i;
 
 	i = 0;
-	temp = a;
-	temp_aux = temp->next;
-	while (temp)
+	if (a)
 	{
+		temp = a;
 		temp_aux = temp->next;
-		while (temp_aux)
+		while (temp)
 		{
-			if (temp->data == temp_aux->data)
-				return (0);
-			temp_aux = temp_aux->next;
+			temp_aux = temp->next;
+			while (temp_aux)
+			{
+				if (temp->data == temp_aux->data)
+					return (0);
+				temp_aux = temp_aux->next;
+			}
+			i++;
+			temp = temp->next;
 		}
-		i++;
-		temp = temp->next;
 	}
 	return (i);
 }

@@ -6,7 +6,7 @@
 /*   By: hepereir <hepereir@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 22:16:53 by hepereir          #+#    #+#             */
-/*   Updated: 2024/07/12 16:24:32 by hepereir         ###   ########.fr       */
+/*   Updated: 2024/07/12 22:12:28 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ int	ft_nb_str_valid(char *str)
 			if (!((str[i] >= '0' && str[i] <= '9') || str[i] == '-'
 					|| str[i] == '+'))
 				return (0);
-			if ((str[i] == '-' || str[i] == '+') && !(str[1] >= '0' && str[1] <= '9'))
+			if ((str[i] == '-' || str[i] == '+') && !(str[1] >= '0'
+					&& str[1] <= '9'))
 				return (0);
 		}
 		else
