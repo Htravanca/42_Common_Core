@@ -6,7 +6,7 @@
 /*   By: hepereir <hepereir@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 22:16:53 by hepereir          #+#    #+#             */
-/*   Updated: 2024/07/11 22:46:13 by hepereir         ###   ########.fr       */
+/*   Updated: 2024/07/12 16:24:32 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ int	ft_nb_str_valid(char *str)
 			if (!((str[i] >= '0' && str[i] <= '9') || str[i] == '-'
 					|| str[i] == '+'))
 				return (0);
+			if ((str[i] == '-' || str[i] == '+') && !(str[1] >= '0' && str[1] <= '9'))
+				return (0);
 		}
 		else
 		{
@@ -72,9 +74,9 @@ int	ft_parsing_aux(t_stack_node **a, char *arr, int pos)
 	error = (long)INT_MAX + 1;
 	nb = ft_atoi(arr);
 	if (nb == error)
-		return (1);
+		return (0);
 	ft_lstadd_back(a, nb, pos);
-	return (0);
+	return (1);
 }
 
 t_stack_node	*ft_argvs_format(int argc, char **argv, t_stack_node *a,
@@ -85,14 +87,8 @@ t_stack_node	*ft_argvs_format(int argc, char **argv, t_stack_node *a,
 	i = 1;
 	while (i < argc)
 	{
-		if (ft_nb_str_valid(argv[i]))
-		{
-			if (ft_parsing_aux(&a, argv[i], i))
-			{
-				ft_error_msg(&a, &b);
-			}
+		if (ft_nb_str_valid(argv[i]) && ft_parsing_aux(&a, argv[i], i))
 			i++;
-		}
 		else
 			ft_error_msg(&a, &b);
 	}
@@ -112,17 +108,13 @@ t_stack_node	*ft_str_format(char *str, t_stack_node *a, t_stack_node *b)
 		elem++;
 	while (j < elem)
 	{
-		if (ft_nb_str_valid(arr[j]))
-		{
-			if (ft_parsing_aux(&a, arr[j], j + 1))
-			{
-				ft_free(arr, elem);
-				ft_error_msg(&a, &b);
-			}
+		if (ft_nb_str_valid(arr[j]) && ft_parsing_aux(&a, arr[j], j + 1))
 			j++;
-		}
 		else
+		{
+			ft_free(arr, elem);
 			ft_error_msg(&a, &b);
+		}
 	}
 	ft_free(arr, elem);
 	return (a);

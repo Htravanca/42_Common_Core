@@ -33,7 +33,7 @@ void	ft_cost_clean(t_stack_node **b)
 
 void	ft_error_msg(t_stack_node **a, t_stack_node **b)
 {
-	write(1, "Error\n", 6);
+	write(2, "Error\n", 6);
 	ft_clean_lst(a);
 	ft_clean_lst(b);
 	exit(0);
