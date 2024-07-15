@@ -15,7 +15,10 @@ int ft_check_map_name(char *name)
     while (name[pos] != '.')
         pos++;
     if (!(name[pos] == '.' && name[pos + 1] == 'b' && name[pos + 2] == 'e' && name[pos + 3] == 'r' && name[pos + 4] == '\0'))
+    {
+        close(fd);
         return (1);
+    }
     close(fd);
 	return (0);
 }
