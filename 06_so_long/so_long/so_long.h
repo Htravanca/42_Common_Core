@@ -9,5 +9,7 @@
 
 //PARSING
 int     ft_map_parsing(int argc, char **argv);
+int     ft_check_map_name(char *name);
+int     ft_check_map(char *str);
 
 #endif
