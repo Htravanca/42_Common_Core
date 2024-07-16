@@ -4,6 +4,7 @@
         "random": "c",
         "push_swap.h": "c",
         "stdlib.h": "c",
-        "get_next_line_bonus.h": "c"
+        "get_next_line_bonus.h": "c",
+        "so_long.h": "c"
     }
 }

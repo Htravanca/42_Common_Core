@@ -67,7 +67,7 @@ int ft_map_lines(char *str)
     return (lines);
 }
 
-int ft_check_map(char *str)
+char **ft_check_map(char *str)
 {
     int fd;
 	char **map;
@@ -75,34 +75,29 @@ int ft_check_map(char *str)
     int lines;
     int i;
 
-    lines = 0;
     i = 0;
 	fd = open(str, O_RDONLY);
 	if (fd == -1)
 	{
 		printf("Error opening map, choose a valid .ber file!\n");
-		return (1);
+		return (NULL);
 	}
     lines = ft_map_lines(str);
     map = malloc((lines + 1) * sizeof(char *));
     if (map == NULL)
     {
         close(fd);
-        return (1);
+        return (NULL);
     }
     while (i < lines)
 	{
         temp = get_next_line(fd);
 	 	if (temp == NULL)
-		{
-			printf("[%d]:%s\n", i, temp);
 			break ;
-		}
-        i++;
         map[i] = temp;
-		printf("[%d]:%s", i, map[i]);
+        i++;
 	}
     map[i] = NULL;
 	close(fd);
-	return (0);
+	return (map);
 }
