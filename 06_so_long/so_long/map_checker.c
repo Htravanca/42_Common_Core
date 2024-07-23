@@ -35,15 +35,47 @@ int ft_map_square(char **map)
     return (0);
 }
 
+int ft_wall_map(char **map)
+{
+    int j;
+    int len;
+    int i;
+
+    i = 0;
+    j = 0;
+    while (map[0][j])
+    {
+        if (map[0][j] != '1' && map[0][j + 1] != '\0')
+            return (1);
+        j++;
+    }
+    j = 1;
+    len = ft_strlen_map(map[0]) - 1;
+    while (map[j])
+    {
+        if (map[j][0] != '1' || map[j][len] != '1')
+            return (1);
+        j++;
+    }
+    j--;
+    while (map[j][i])
+        if (map[j][i++] != '1')
+            return (1);
+    return (0);
+}
 
 int ft_map_checker(char **map)
 {
     if (ft_map_square(map))
     {
-        printf("mapa n e quadrado\n");
+        printf("mapa nao e quadrado\n");
         return (1);
     }
-        
+    if (ft_wall_map(map))
+    {
+        printf("mapa nao esta fechado por paredes\n");
+        return (1);
+    }
 
 
     return (0);

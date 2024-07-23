@@ -23,7 +23,7 @@ int main(int argc, char **argv)
 	if(map == NULL)
 		return (0);
 
-	ft_print_map(map);
+	ft_print_map(map);				//print o mapa
 
 	ft_map_checker(map);			//verifica um mapa valido
 }

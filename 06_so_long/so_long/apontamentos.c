@@ -48,6 +48,7 @@ int main(void)
     // Leave the control to the EVENT LOOP
     mlx_loop(data.mlx_ptr);
 
+    free(data.mlx_ptr);
 	//mlx_destroy_window(mlx_connection, mlx_window);	//Necessario para free da window
     //mlx_destroy_display(mlx_connection);   			//Necessario para free das struct internas
     //free(mlx_connection);                  			//Necessario para free de tudo
