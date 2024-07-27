@@ -23,13 +23,16 @@ typedef struct s_game
 int     ft_map_parsing(int argc, char **argv);
 int     ft_check_map_name(char *name);
 int     ft_map_lines(char *str);
-char    **ft_check_map(char *str);
+int	 	ft_check_map(char *str, t_game *game);
 
 //MAP CHECKER
 int     ft_strlen_map(char *line);
-int     ft_map_square(char **map);
-int     ft_wall_map(char **map);
-int     ft_map_checker(char **map);
+int 	ft_map_square(t_game *game);
+int		ft_wall_map(t_game *game);
+int     ft_map_checker(t_game *game);
 
+//MAP CHECKER 2
+void 	ft_count_stuff(t_game *game);
+int 	ft_check_initial(t_game *game);
 
 #endif

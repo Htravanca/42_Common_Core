@@ -67,12 +67,10 @@ int ft_map_lines(char *str)
     return (lines);
 }
 
-char **ft_check_map(char *str)
+int ft_check_map(char *str, t_game *game)
 {
     int fd;
-	char **map;
     char *temp;
-    int lines;
     int i;
 
     i = 0;
@@ -80,24 +78,24 @@ char **ft_check_map(char *str)
 	if (fd == -1)
 	{
 		printf("Error opening map, choose a valid .ber file!\n");
-		return (NULL);
+		return (1);
 	}
-    lines = ft_map_lines(str);
-    map = malloc((lines + 1) * sizeof(char *));
-    if (map == NULL)
+    game->map_heigth = ft_map_lines(str);
+    game->map = malloc((game->map_heigth + 1) * sizeof(char *));
+    if (game->map == NULL)
     {
         close(fd);
-        return (NULL);
+        return (1);
     }
-    while (i < lines)
+    while (i < game->map_heigth)
 	{
         temp = get_next_line(fd);
 	 	if (temp == NULL)
 			break ;
-        map[i] = temp;
+        game->map[i] = temp;
         i++;
 	}
-    map[i] = NULL;
+    game->map[i] = NULL;
 	close(fd);
-	return (map);
+	return (0);
 }

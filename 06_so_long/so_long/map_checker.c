@@ -20,22 +20,21 @@ int ft_strlen_map(char *line)
     return (j);
 }
 
-int ft_map_square(char **map)
+int ft_map_square(t_game *game)
 {
-    int len;
     int i;
 
     i = 0;
-    len = ft_strlen_map(map[i]);
+    game->map_width = ft_strlen_map(game->map[i]);
     i++;
-    while (map[i] && ft_strlen_map(map[i]) == len)
+    while (game->map[i] && ft_strlen_map(game->map[i]) == game->map_width)
         i++;
-    if (map[i] != NULL)
+    if (game->map[i] != NULL)
         return (1);
     return (0);
 }
 
-int ft_wall_map(char **map)
+int ft_wall_map(t_game *game)
 {
     int j;
     int len;
@@ -43,40 +42,42 @@ int ft_wall_map(char **map)
 
     i = 0;
     j = 0;
-    while (map[0][j])
+    while (game->map[0][j])
     {
-        if (map[0][j] != '1' && map[0][j + 1] != '\0')
+        if (game->map[0][j] != '1' && game->map[0][j + 1] != '\0')
             return (1);
         j++;
     }
     j = 1;
-    len = ft_strlen_map(map[0]) - 1;
-    while (map[j])
+    len = game->map_width - 1;
+    while (game->map[j])
     {
-        if (map[j][0] != '1' || map[j][len] != '1')
+        if (game->map[j][0] != '1' || game->map[j][len] != '1')
             return (1);
         j++;
     }
     j--;
-    while (map[j][i])
-        if (map[j][i++] != '1')
+    while (game->map[j][i])
+        if (game->map[j][i++] != '1')
             return (1);
     return (0);
 }
 
-int ft_map_checker(char **map)
-{
-    if (ft_map_square(map))
+int ft_map_checker(t_game *game)
+{  
+    game->collectible_count = 0;
+    game->exit_count = 0;
+    game->start_count = 0;
+    if (ft_map_square(game) || ft_wall_map(game))
     {
-        printf("mapa nao e quadrado\n");
+        printf("Erro: mapa não é quadrado ou nao esta fechado por paredes\n");
         return (1);
     }
-    if (ft_wall_map(map))
+    ft_count_stuff(game);
+    if (ft_check_initial(game))
     {
-        printf("mapa nao esta fechado por paredes\n");
+        printf("Erro: elementos errados ou inacessiveis\n");
         return (1);
     }
-
-
     return (0);
 }

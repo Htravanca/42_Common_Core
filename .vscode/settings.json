@@ -5,6 +5,7 @@
         "push_swap.h": "c",
         "stdlib.h": "c",
         "get_next_line_bonus.h": "c",
-        "so_long.h": "c"
+        "so_long.h": "c",
+        "get_next_line.h": "c"
     }
 }
