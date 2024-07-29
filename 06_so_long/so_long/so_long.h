@@ -21,8 +21,9 @@ typedef struct s_game
 	int		player_y;
 }			t_game;
 
-//main temp
+//AUXILIAR PRINT
 void	ft_print_map(char **map);
+void	ft_print_struct(t_game *game);
 
 //PARSING
 int     ft_map_parsing(int argc, char **argv);

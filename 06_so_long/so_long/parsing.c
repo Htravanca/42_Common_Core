@@ -70,7 +70,6 @@ int ft_map_lines(char *str)
 int ft_check_map(char *str, t_game *game)
 {
     int fd;
-    char *temp;
     int i;
 
     i = 0;
@@ -89,10 +88,9 @@ int ft_check_map(char *str, t_game *game)
     }
     while (i < game->map_heigth)
 	{
-        temp = get_next_line(fd);
-	 	if (temp == NULL)
+        game->map[i] = get_next_line(fd);
+	 	if (game->map[i] == NULL)
 			break ;
-        game->map[i] = temp;
         i++;
 	}
     game->map[i] = NULL;
