@@ -18,7 +18,9 @@ void	ft_print_struct(t_game *game)
 	printf("map_width:\t\t%d\n",game->map_width);
 	printf("map_heigth:\t\t%d\n",game->map_heigth);
 	printf("collectible_count:\t%d\n",game->collectible_count);
+	printf("collectible_found:\t%d\n",game->collectible_found);
 	printf("exit_count:\t\t%d\n",game->exit_count);
+	printf("exit_found:\t\t%d\n",game->exit_found);
 	printf("start_count:\t\t%d\n",game->start_count);
 	printf("player_x:\t\t%d\n",game->player_x);
 	printf("player_y:\t\t%d\n",game->player_y);
@@ -34,5 +36,6 @@ int main(int argc, char **argv)
 	ft_map_checker(&game);											//verifica um mapa valido
 	ft_print_struct(&game);											//print dados
 	
-				
+	
+	ft_free_map(game.map);											//free map
 }

@@ -13,11 +13,16 @@ typedef struct s_game
 	int		map_width;
 	int		map_heigth;
 	int		collectible_count;
+	int		collectible_found;
 	int		exit_count;
+	int		exit_found;
     int     start_count;
     int		player_x;
 	int		player_y;
 }			t_game;
+
+//main temp
+void	ft_print_map(char **map);
 
 //PARSING
 int     ft_map_parsing(int argc, char **argv);
@@ -33,6 +38,8 @@ int     ft_map_checker(t_game *game);
 
 //MAP CHECKER 2
 void 	ft_count_stuff(t_game *game);
+void 	ft_dfs(t_game *game, char **map, int y, int x);
+void    ft_free_map(char **map_temp);
 int 	ft_check_initial(t_game *game);
 
 #endif
