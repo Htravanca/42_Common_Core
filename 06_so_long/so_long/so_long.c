@@ -1,5 +1,6 @@
 #include "so_long.h"
 
+
 int main(int argc, char **argv)
 {
 	t_game game;
@@ -9,7 +10,8 @@ int main(int argc, char **argv)
 		return (0);													//abre o ficheiro e cria com malloc um array 2D com o mapa 
 	ft_map_checker(&game);											//verifica um mapa valido
 	ft_print_struct(&game);											//print dados
-	
+
+	ft_game_start(&game);
 	
 	ft_free_map(game.map);											//free map
 	return (0);
