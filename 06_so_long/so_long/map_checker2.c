@@ -75,7 +75,8 @@ int ft_check_initial(t_game *game)
     map_temp[i] = NULL;
     ft_dfs(game, map_temp, game->player_y, game->player_x);
     ft_free_map(map_temp);
-    if (game->collectible_found != game->collectible_count || game->exit_found != game->exit_count)
+    if (game->collectible_count < 1 || game->collectible_found != 
+            game->collectible_count || game->exit_found != game->exit_count)
         return (1);
     return (0);
 }
