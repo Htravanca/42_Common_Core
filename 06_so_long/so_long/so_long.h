@@ -16,6 +16,7 @@ typedef struct s_mlx_data
 typedef struct s_game
 {
 	char		**map;
+	char		**img;
 	int			map_width;
 	int			map_heigth;
 	int			collectible_count;
@@ -51,6 +52,10 @@ void    ft_free_map(char **map_temp);
 int 	ft_check_initial(t_game *game);
 
 //GAME
+void 	ft_game_cleanup(t_game *game);
+int		handle_input(int keysym, t_game *game);
+void 	ft_init_images(t_game *game);
+void	ft_map_visualizer(t_game *game);
 void    ft_game_start(t_game *game);
 
 #endif
