@@ -2,6 +2,12 @@
 #include "minilibx-linux/mlx.h"
 #include <X11/keysym.h>
 
+int	ft_pressed_x(t_game *game)
+{
+	mlx_loop_end(game->mlx.mlx_ptr);
+    return (1);
+}
+
 int ft_move(t_game *game, int x, int y)
 {
     game->map[game->player_y][game->player_x] = '0';
@@ -21,11 +27,13 @@ int ft_check_movement(t_game *game, int x, int y)
         game->collectible_count--;
         game->map[y][x] = '0';
     }
-   /*  if(game->map[y][x] == 'E')
+    if(game->map[y][x] == 'E')
     {
         if (game->collectible_count == 0)
-            exit_game(game);
-    } */
+            ft_pressed_x(game);
+        else
+            return (1);
+    }
     ft_move(game, x, y);
     return (1);
 }
@@ -42,20 +50,11 @@ int	ft_handle_input(int keysym, t_game *game)
         ft_check_movement(game, game->player_x - 1, game->player_y);
     else if (keysym == XK_Escape)
     {
-        printf("The %d key (ESC) has been pressed\n\n", keysym);
-        mlx_loop_end(game->mlx.mlx_ptr);
+        ft_pressed_x(game);
         return (1);
     }
-    else
-        printf("The %d key has been pressed\n\n", keysym);
     return (0);
 } 
-
-int	ft_pressed_x(t_game *game)
-{
-	mlx_loop_end(game->mlx.mlx_ptr);
-    return (1);
-}
 
 void    ft_game_start(t_game *game)
 {

@@ -7,6 +7,10 @@
 #define WINDOW_WIDTH    400
 #define WINDOW_HEIGHT   400
 
+
+
+//printf("The %d key (ESC) has been pressed\n\n", keysym);
+
 typedef struct s_mlx_data
 {
     void	*mlx_ptr;
