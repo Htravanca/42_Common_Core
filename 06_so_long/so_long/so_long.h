@@ -38,7 +38,7 @@ void	ft_print_struct(t_game *game);
 int     ft_map_parsing(int argc, char **argv);
 int     ft_check_map_name(char *name);
 int     ft_map_lines(char *str);
-int	 	ft_check_map(char *str, t_game *game);
+int	 	ft_init_map(char *str, t_game *game);
 
 //MAP CHECKER
 int     ft_strlen_map(char *line);

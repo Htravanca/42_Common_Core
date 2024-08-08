@@ -70,7 +70,7 @@ int ft_map_lines(char *str)
     return (lines);
 }
 
-int ft_check_map(char *str, t_game *game)
+int ft_init_map(char *str, t_game *game)
 {
     int fd;
     int i;

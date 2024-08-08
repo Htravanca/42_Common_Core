@@ -1,6 +1,7 @@
 #include "so_long.h"
 #include "minilibx-linux/mlx.h"
 #include <X11/keysym.h>
+#include <X11/X.h>
 
 int	ft_pressed_x(t_game *game)
 {
@@ -73,7 +74,7 @@ void    ft_game_start(t_game *game)
     ft_init_images(game);
     ft_map_visualizer(game);
     mlx_hook(game->mlx.win_ptr, 17, 0, ft_pressed_x, game);
-	mlx_key_hook(game->mlx.win_ptr, ft_handle_input, game);
+    mlx_hook(game->mlx.win_ptr, KeyPress, KeyPressMask, ft_handle_input, game); //mlx_key_hook(game->mlx.win_ptr, ft_handle_input, game);
     mlx_loop(game->mlx.mlx_ptr);
     ft_game_cleanup(game);
 }

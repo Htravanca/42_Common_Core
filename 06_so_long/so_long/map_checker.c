@@ -44,7 +44,7 @@ int ft_wall_map(t_game *game)
     j = 0;
     while (game->map[0][j])
     {
-        if (game->map[0][j] != '1' && game->map[0][j + 1] != '\0')
+        if (game->map[0][j] != '1' && game->map[0][j + 1] != '\0')  //to do
             return (1);
         j++;
     }
