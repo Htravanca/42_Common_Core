@@ -24,4 +24,5 @@ void	ft_print_struct(t_game *game)
 	printf("start_count:\t\t%d\n",game->start_count);
 	printf("player_x:\t\t%d\n",game->player_x);
 	printf("player_y:\t\t%d\n",game->player_y);
+	printf("steps:\t\t%d\n",game->steps);
 }

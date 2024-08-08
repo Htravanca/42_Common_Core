@@ -26,6 +26,7 @@ typedef struct s_game
     int     	start_count;
     int			player_x;
 	int			player_y;
+	int			steps;
 	t_mlx_data	mlx;
 }				t_game;
 

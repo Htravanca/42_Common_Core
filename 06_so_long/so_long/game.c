@@ -35,6 +35,8 @@ int ft_check_movement(t_game *game, int x, int y)
             return (1);
     }
     ft_move(game, x, y);
+    game->steps++;
+    printf("Steps:\t%d\n", game->steps);
     return (1);
 }
 

@@ -70,6 +70,7 @@ int ft_map_checker(t_game *game)
     game->start_count = 0;
     game->collectible_found = 0;
     game->exit_found = 0;
+    game->steps = 0;
     if (ft_map_square(game) || ft_wall_map(game))
     {
         printf("Erro: mapa não é quadrado ou nao esta fechado por paredes\n");
