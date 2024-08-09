@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hepereir <hepereir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hepereir <hepereir@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/04 18:59:01 by hepereir          #+#    #+#             */
-/*   Updated: 2024/05/21 21:26:43 by hepereir         ###   ########.fr       */
+/*   Updated: 2024/08/09 12:01:33 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ char	*get_next_line(int fd);
 int		ft_is_newline(const char *str);
 void	ft_trim(char *buffer, char *stash, int flag);
 void	ft_bzero(void *s, size_t n);
-size_t	ft_strlen(const char *s);
-char	*ft_strjoin(char *s1, const char *s2);
+size_t	ft_strlen_gnl(const char *s);
+char	*ft_strjoin_gnl(char *s1, const char *s2);
 char	*ft_aux(char *stash, char *buffer, int read_bytes);
 
 #endif

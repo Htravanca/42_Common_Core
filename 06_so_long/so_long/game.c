@@ -1,7 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   game.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hepereir <hepereir@student.42lisboa.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/08/09 12:17:27 by hepereir          #+#    #+#             */
+/*   Updated: 2024/08/09 12:17:28 by hepereir         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
-#include "minilibx-linux/mlx.h"
-#include <X11/keysym.h>
-#include <X11/X.h>
 
 int	ft_pressed_x(t_game *game)
 {

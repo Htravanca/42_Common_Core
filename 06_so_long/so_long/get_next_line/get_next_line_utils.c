@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hepereir <hepereir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hepereir <hepereir@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/04 18:58:52 by hepereir          #+#    #+#             */
-/*   Updated: 2024/05/21 20:55:33 by hepereir         ###   ########.fr       */
+/*   Updated: 2024/08/09 12:04:32 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	ft_trim(char *buffer, char *stash, int flag)
 		buffer[i++] = '\0';
 }
 
-size_t	ft_strlen(const char *s)
+size_t	ft_strlen_gnl(const char *s)
 {
 	size_t	j;
 
@@ -64,7 +64,7 @@ size_t	ft_strlen(const char *s)
 char	*ft_aux(char *stash, char *buffer, int read_bytes)
 {
 	if (read_bytes > 0)
-		stash = ft_strjoin(stash, buffer);
+		stash = ft_strjoin_gnl(stash, buffer);
 	if (read_bytes < 0)
 	{
 		if (stash)
@@ -74,7 +74,7 @@ char	*ft_aux(char *stash, char *buffer, int read_bytes)
 	return (stash);
 }
 
-char	*ft_strjoin(char *s1, const char *s2)
+char	*ft_strjoin_gnl(char *s1, const char *s2)
 {
 	size_t	i;
 	size_t	j;
@@ -82,7 +82,7 @@ char	*ft_strjoin(char *s1, const char *s2)
 
 	j = 0;
 	i = 0;
-	result = (char *)malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
+	result = (char *)malloc((ft_strlen_gnl(s1) + ft_strlen_gnl(s2) + 1) * sizeof(char));
 	if (!result)
 		return (NULL);
 	while (s1 && s1[j])
