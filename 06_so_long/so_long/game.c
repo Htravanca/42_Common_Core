@@ -6,7 +6,7 @@
 /*   By: hepereir <hepereir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 12:17:27 by hepereir          #+#    #+#             */
-/*   Updated: 2024/08/09 15:21:21 by hepereir         ###   ########.fr       */
+/*   Updated: 2024/08/09 16:03:40 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	ft_check_movement(t_game *game, int x, int y)
 	}
 	ft_move(game, x, y);
 	game->steps++;
-	printf("Steps:\t%d\n", game->steps);
+	ft_printf("Steps:\t%d\n", game->steps);
 	return (1);
 }
 

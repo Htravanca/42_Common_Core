@@ -6,7 +6,7 @@
 /*   By: hepereir <hepereir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 12:18:44 by hepereir          #+#    #+#             */
-/*   Updated: 2024/08/09 15:49:53 by hepereir         ###   ########.fr       */
+/*   Updated: 2024/08/09 16:03:20 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define SO_LONG_H
 
 # include "get_next_line/get_next_line.h"
+# include "ft_printf/ft_printf.h"
 # include "libft/libft.h"
 # include "minilibx-linux/mlx.h"
 # include <X11/X.h>

@@ -6,7 +6,7 @@
 /*   By: hepereir <hepereir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 12:17:54 by hepereir          #+#    #+#             */
-/*   Updated: 2024/08/09 15:43:06 by hepereir         ###   ########.fr       */
+/*   Updated: 2024/08/09 15:58:02 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,20 +37,20 @@ int	ft_map_parsing(int argc, char **argv)
 {
 	if (argc == 1)
 	{
-		printf("Error: Choose a map!\n");
+		perror("Error: Choose a map!");
 		return (1);
 	}
 	else if (argc == 2)
 	{
 		if (ft_check_map_name(argv[1]))
 		{
-			printf("Error: Error opening map, choose a valid .ber file!\n");
+			perror("Error: Error opening map, choose a valid .ber file!");
 			return (1);
 		}
 	}
 	else if (argc >= 3)
 	{
-		printf("Error: Choose only a map!\n");
+		perror("Error: Choose only a map!");
 		return (1);
 	}
 	return (0);
@@ -66,7 +66,7 @@ int	ft_map_lines(char *str)
 	fd = open(str, O_RDONLY);
 	if (fd == -1)
 	{
-		printf("Error opening map, choose a valid .ber file!\n");
+		perror("Error opening map, choose a valid .ber file!");
 		return (1);
 	}
 	while (1)
@@ -107,7 +107,7 @@ int	ft_init_map(char *str, t_game *game)
 	fd = open(str, O_RDONLY);
 	if (fd == -1)
 	{
-		printf("Error opening map, choose a valid .ber file!\n");
+		perror("Error opening map, choose a valid .ber file!");
 		return (1);
 	}
 	game->map_heigth = ft_map_lines(str);

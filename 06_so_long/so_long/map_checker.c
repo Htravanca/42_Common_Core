@@ -6,7 +6,7 @@
 /*   By: hepereir <hepereir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 12:17:47 by hepereir          #+#    #+#             */
-/*   Updated: 2024/08/09 15:26:06 by hepereir         ###   ########.fr       */
+/*   Updated: 2024/08/09 16:00:14 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,13 +86,13 @@ int	ft_map_checker(t_game *game)
 	game->steps = 0;
 	if (ft_map_square(game) || ft_wall_map(game))
 	{
-		printf("Erro: mapa não é quadrado ou nao esta fechado por paredes\n");
+		perror("Erro: mapa não é quadrado ou nao esta fechado por paredes");
 		return (1);
 	}
 	ft_count_stuff(game);
 	if (ft_check_initial(game))
 	{
-		printf("Erro: elementos errados ou inacessiveis\n");
+		perror("Erro: elementos errados ou inacessiveis");
 		return (1);
 	}
 	return (0);
