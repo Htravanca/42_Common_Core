@@ -6,7 +6,7 @@
 /*   By: hepereir <hepereir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 12:17:27 by hepereir          #+#    #+#             */
-/*   Updated: 2024/08/09 16:03:40 by hepereir         ###   ########.fr       */
+/*   Updated: 2024/08/09 16:58:50 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	ft_game_start(t_game *game)
 	}
 	ft_init_images(game);
 	ft_map_visualizer(game);
-	mlx_hook(game->mlx.win_ptr, 17, 0, ft_pressed_x, game);
+	mlx_hook(game->mlx.win_ptr, DestroyNotify, NoEventMask, ft_pressed_x, game);
 	mlx_hook(game->mlx.win_ptr, KeyPress, KeyPressMask, ft_handle_input, game);
 	mlx_loop(game->mlx.mlx_ptr);
 	ft_game_cleanup(game);
