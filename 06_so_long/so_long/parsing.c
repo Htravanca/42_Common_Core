@@ -3,111 +3,125 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hepereir <hepereir@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: hepereir <hepereir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 12:17:54 by hepereir          #+#    #+#             */
-/*   Updated: 2024/08/09 12:17:55 by hepereir         ###   ########.fr       */
+/*   Updated: 2024/08/09 15:43:06 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int ft_check_map_name(char *name)
+int	ft_check_map_name(char *name)
 {
-    int fd;
-    int pos;
+	int	fd;
+	int	pos;
 
-    pos = 0;
-    fd = open(name, O_RDONLY);
+	pos = 0;
+	fd = open(name, O_RDONLY);
 	if (fd == -1)
 		return (1);
-    while (name[pos] != '.')
-        pos++;
-    if (!(name[pos] == '.' && name[pos + 1] == 'b' && name[pos + 2] == 'e' && name[pos + 3] == 'r' && name[pos + 4] == '\0'))
-    {
-        close(fd);
-        return (1);
-    }
-    close(fd);
+	while (name[pos] != '.')
+		pos++;
+	if (!(name[pos] == '.' && name[pos + 1] == 'b' && name[pos + 2] == 'e'
+			&& name[pos + 3] == 'r' && name[pos + 4] == '\0'))
+	{
+		close(fd);
+		return (1);
+	}
+	close(fd);
 	return (0);
 }
 
-int ft_map_parsing(int argc, char **argv)
+int	ft_map_parsing(int argc, char **argv)
 {
-    if (argc == 1)
-    {
-        printf("Error: Choose a map!\n");
-        return (1);
-    }
-    else if(argc == 2)
-    {
-        if (ft_check_map_name(argv[1]))
-        {
-            printf("Error: Error opening map, choose a valid .ber file!\n");
-            return (1);
-        }
-    }
-    else if (argc >= 3)
-    {
-        printf("Error: Choose only a map!\n");
-        return (1);
-    }
-    return (0);
-}
-
-int ft_map_lines(char *str)
-{
-    int lines;
-    char *getline;
-    int fd;
-
-    lines = 0;
-    fd = open(str, O_RDONLY);
-	if (fd == -1)
+	if (argc == 1)
 	{
-		printf("Error opening map, choose a valid .ber file!\n");
+		printf("Error: Choose a map!\n");
 		return (1);
 	}
-    while (1)
+	else if (argc == 2)
 	{
-		getline = get_next_line(fd);
-		if (getline == NULL)
-			break ;
-        lines++;
-		free(getline);
-		getline = NULL;
+		if (ft_check_map_name(argv[1]))
+		{
+			printf("Error: Error opening map, choose a valid .ber file!\n");
+			return (1);
+		}
 	}
-    close (fd);
-    return (lines);
+	else if (argc >= 3)
+	{
+		printf("Error: Choose only a map!\n");
+		return (1);
+	}
+	return (0);
 }
 
-int ft_init_map(char *str, t_game *game)
+int	ft_map_lines(char *str)
 {
-    int fd;
-    int i;
+	int		lines;
+	char	*getline;
+	int		fd;
 
-    i = 0;
+	lines = 0;
 	fd = open(str, O_RDONLY);
 	if (fd == -1)
 	{
 		printf("Error opening map, choose a valid .ber file!\n");
 		return (1);
 	}
-    game->map_heigth = ft_map_lines(str);
-    game->map = malloc((game->map_heigth + 1) * sizeof(char *));
-    if (game->map == NULL)
-    {
-        close(fd);
-        return (1);
-    }
-    while (i < game->map_heigth)
+	while (1)
 	{
-        game->map[i] = get_next_line(fd);
-	 	if (game->map[i] == NULL)
+		getline = get_next_line(fd);
+		if (getline == NULL)
 			break ;
-        i++;
+		lines++;
+		free(getline);
+		getline = NULL;
 	}
-    game->map[i] = NULL;
+	close(fd);
+	return (lines);
+}
+
+int	ft_write_map(t_game *game, int fd)
+{
+	int	i;
+
+	i = 0;
+	while (i < game->map_heigth)
+	{
+		game->map[i] = get_next_line(fd);
+		if (game->map[i] == NULL)
+			break ;
+		i++;
+	}
+	game->map[i] = NULL;
+	if (i != game->map_heigth)
+		return (1);
+	return (0);
+}
+
+int	ft_init_map(char *str, t_game *game)
+{
+	int	fd;
+
+	fd = open(str, O_RDONLY);
+	if (fd == -1)
+	{
+		printf("Error opening map, choose a valid .ber file!\n");
+		return (1);
+	}
+	game->map_heigth = ft_map_lines(str);
+	game->map = malloc((game->map_heigth + 1) * sizeof(char *));
+	if (game->map == NULL)
+	{
+		close(fd);
+		return (1);
+	}
+	if (ft_write_map(game, fd))
+	{
+		close(fd);
+		return (1);
+	}
 	close(fd);
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hepereir <hepereir@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: hepereir <hepereir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/04 18:58:52 by hepereir          #+#    #+#             */
-/*   Updated: 2024/08/09 12:04:32 by hepereir         ###   ########.fr       */
+/*   Updated: 2024/08/09 15:27:54 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,8 @@ char	*ft_strjoin_gnl(char *s1, const char *s2)
 
 	j = 0;
 	i = 0;
-	result = (char *)malloc((ft_strlen_gnl(s1) + ft_strlen_gnl(s2) + 1) * sizeof(char));
+	result = (char *)malloc((ft_strlen_gnl(s1) + ft_strlen_gnl(s2) + 1)
+			* sizeof(char));
 	if (!result)
 		return (NULL);
 	while (s1 && s1[j])
