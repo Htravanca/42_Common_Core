@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hepereir <hepereir@student.42.fr>          +#+  +:+       +#+         #
+#    By: hepereir <hepereir@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/01 13:01:52 by hepereir          #+#    #+#              #
-#    Updated: 2024/08/09 17:29:57 by hepereir         ###   ########.fr        #
+#    Updated: 2024/08/11 14:27:02 by hepereir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,7 @@ $(LIBFT):
 	@make -s -C ./libft
 
 $(NAME):	$(OBJ) $(LIBFT) $(PRINTF) $(MLX)
-		@${CC} ${CFLAGS} $(MLX_FLAGS) ${OBJ} $(LIBFT) $(PRINTF) $(MLX) -o $(NAME)
+		@${CC} ${CFLAGS} ${OBJ} $(LIBFT) $(PRINTF) $(MLX) $(MLX_FLAGS) -o $(NAME)
 		@echo "$(NAME) created"
 
 clean:
@@ -55,4 +55,4 @@ fclean:			clean
 
 re: fclean all
 
-.PHONY: fclean all
+.PHONY: all clean fclean re
