@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_checker2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hepereir <hepereir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hepereir <hepereir@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 12:17:51 by hepereir          #+#    #+#             */
-/*   Updated: 2024/08/09 15:22:02 by hepereir         ###   ########.fr       */
+/*   Updated: 2024/08/16 21:32:07 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,17 +58,19 @@ void	ft_dfs(t_game *game, char **map, int y, int x)
 	ft_dfs(game, map, y - 1, x);
 }
 
-void	ft_free_map(char **map_temp)
+void	ft_free_map(char **map)
 {
 	int	i;
 
 	i = 0;
-	while (map_temp[i] != NULL)
+	if (!map || !*map)
+		return ;
+	while (map[i] != NULL)
 	{
-		free(map_temp[i]);
+		free(map[i]);
 		i++;
 	}
-	free(map_temp);
+	free(map);
 }
 
 int	ft_check_initial(t_game *game)
