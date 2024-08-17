@@ -6,7 +6,7 @@
 /*   By: hepereir <hepereir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 12:17:42 by hepereir          #+#    #+#             */
-/*   Updated: 2024/08/09 15:46:55 by hepereir         ###   ########.fr       */
+/*   Updated: 2024/08/17 17:18:38 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,9 @@ void	ft_game_cleanup(t_game *game)
 		free(game->img);
 	}
 	if (game->mlx.win_ptr != NULL)
+	{
 		mlx_destroy_window(game->mlx.mlx_ptr, game->mlx.win_ptr);
+	}
 	if (game->mlx.mlx_ptr != NULL)
 	{
 		mlx_destroy_display(game->mlx.mlx_ptr);
@@ -81,6 +83,11 @@ void	ft_map_visualizer(t_game *game)
 	int	x;
 
 	y = 0;
+	if (!game || !game->map || !game->img)
+	{
+		perror("Error\nCan't load the imgs");
+		return ;
+	}
 	while (game->map[y])
 	{
 		x = 0;

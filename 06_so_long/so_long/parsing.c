@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hepereir <hepereir@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: hepereir <hepereir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 12:17:54 by hepereir          #+#    #+#             */
-/*   Updated: 2024/08/16 21:31:09 by hepereir         ###   ########.fr       */
+/*   Updated: 2024/08/17 16:39:14 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ int	ft_init_map(char *str, t_game *game)
 	fd = open(str, O_RDONLY);
 	if (fd == -1)
 	{
-		perror("Error\nOpening map, choose a valid .ber file");
+		perror("Error\nCan't open the map file");
 		return (1);
 	}
 	game->map_heigth = ft_map_lines(str);

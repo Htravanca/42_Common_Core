@@ -71,3 +71,6 @@ https://github.com/Kuninoto/42_ft_printf/blob/master/lvl_1_ft_printf/main.c
 
 https://42.nauman.cc/2023/09/12/get-next-line-c-summary/
 https://medium.com/@lannur-s/gnl-c3cff1ee552b
+
+
+valgrind --leak-check=full --track-origins=yes

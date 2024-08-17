@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hepereir <hepereir@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: hepereir <hepereir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 12:17:59 by hepereir          #+#    #+#             */
-/*   Updated: 2024/08/16 21:24:30 by hepereir         ###   ########.fr       */
+/*   Updated: 2024/08/17 16:54:36 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int	main(int argc, char **argv)
 	t_game	game;
 
 	game.map = NULL;
+	game.img = NULL;
 	if (ft_map_parsing(argc, argv))
 		return (0);
 	if (ft_init_map(argv[1], &game) || ft_map_checker(&game))
