@@ -6,7 +6,7 @@
 /*   By: hepereir <hepereir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 12:18:44 by hepereir          #+#    #+#             */
-/*   Updated: 2024/08/09 16:03:20 by hepereir         ###   ########.fr       */
+/*   Updated: 2024/08/17 17:25:13 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 # include <X11/X.h>
 # include <X11/keysym.h>
 # include <fcntl.h>
-# include <stdio.h>
 # include <stdlib.h>
 
 typedef struct s_mlx_data
