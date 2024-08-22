@@ -21,6 +21,7 @@ void ft_execute_child1(int *fd, char **argv)
     close(fd[1]);  
     //execlp(argv[2], argv[2], NULL);
     execlp("grep", "grep", "a1", NULL);
+
     perror("Error executing the cmd1");
     exit(1);
 }
@@ -41,6 +42,7 @@ void ft_execute_child2(int *fd, char **argv)
     close(fd[1]);
     //execlp(argv[3], argv[3], NULL);
     execlp("wc", "wc", "-l", NULL);
+    
     perror("Error executing the cmd2");
     exit(1);
 }
