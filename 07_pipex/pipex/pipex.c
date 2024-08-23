@@ -8,7 +8,7 @@
 void ft_execute_child1(int *fd, char **argv)
 {
     int rfd;
-    rfd = open(argv[1], O_RDONLY);
+    rfd = open(argv[1], O_RDONLY, 0777);
     if (rfd == -1)
     {
         perror("Error opening file1");
@@ -20,8 +20,8 @@ void ft_execute_child1(int *fd, char **argv)
     close(fd[0]);
     close(fd[1]);  
     //execlp(argv[2], argv[2], NULL);
-    execlp("grep", "grep", "a1", NULL);
-
+    //execlp("grep", "grep", "a1", NULL);
+    execve(path, argv, envp);
     perror("Error executing the cmd1");
     exit(1);
 }
@@ -29,7 +29,7 @@ void ft_execute_child1(int *fd, char **argv)
 void ft_execute_child2(int *fd, char **argv)
 {
     int wfd;
-    wfd = open(argv[4], O_WRONLY);
+    wfd = open(argv[4], O_WRONLY | O_CREAT | O_TRUNC, 0777);
     if (wfd == -1)
     {
         perror("Error opening file2");
@@ -41,7 +41,8 @@ void ft_execute_child2(int *fd, char **argv)
     close(fd[0]);
     close(fd[1]);
     //execlp(argv[3], argv[3], NULL);
-    execlp("wc", "wc", "-l", NULL);
+    //execlp("wc", "wc", "-w", NULL);
+    execve();
     
     perror("Error executing the cmd2");
     exit(1);
