@@ -1,0 +1,11 @@
+
+
+ver se o coletavel esta escondido pela saida... se tiver o mapa nao e valido
+MLX screen size e ver se a janela que vamos abrir cabe na ecra.
+Passar algunas funcoes para static. fica o programa mais leve
+
+talvez fazer o clear windows antes de gerar novamente
+//mlx_clear_window(game->mlx.mlx_ptr, game->mlx.win_ptr);
+
+imprimir os steps no ecra e algo deste genero:
+//mlx_string_put(game->mlx.mlx_ptr, game->mlx.win_ptr, 15, 15, 000000, ft_itoa(game->steps));
