@@ -50,14 +50,12 @@ char	*ft_path(char *cmd, char **envp)
 
 	i = 0;
 	pfinal = NULL;
-	while (!ft_strnstr(envp[i], "PATH", 4))
-		// procura nos sistem variables a variavel PATH
+	while (!ft_strnstr(envp[i], "PATH", 4))	// procura nos sistem variables a variavel PATH
 		i++;
-	options = ft_split(envp[i] + 5, ':');
-		// separa os paths possvies onde pode existir o cmd
+	options = ft_split(envp[i] + 5, ':');	// separa os paths possvies onde pode existir o cmd
 	if (!options)
 		return (NULL);
-	cmds = ft_split(cmd, ' '); // necessaio para tirar o -l do "ls -l"
+	cmds = ft_split(cmd, ' '); 				// necessaio para tirar o -l do "ls -l"
 	if (!cmds)
 		return (NULL);
 	pfinal = ft_find_path(options, cmds[0]);

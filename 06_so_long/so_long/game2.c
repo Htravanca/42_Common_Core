@@ -6,7 +6,7 @@
 /*   By: hepereir <hepereir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 12:17:42 by hepereir          #+#    #+#             */
-/*   Updated: 2024/08/17 17:18:38 by hepereir         ###   ########.fr       */
+/*   Updated: 2024/08/30 17:05:58 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void	ft_init_images(t_game *game)
 
 void	ft_put_img(t_game *game, int y, int x)
 {
+	//mlx_clear_window(game->mlx.mlx_ptr, game->mlx.win_ptr);
 	if (game->map[y][x] == '0')
 		mlx_put_image_to_window(game->mlx.mlx_ptr, game->mlx.win_ptr,
 			game->img[2], x * 32, y * 32);
@@ -75,6 +76,7 @@ void	ft_put_img(t_game *game, int y, int x)
 	else if (game->map[y][x] == 'E')
 		mlx_put_image_to_window(game->mlx.mlx_ptr, game->mlx.win_ptr,
 			game->img[1], x * 32, y * 32);
+	//mlx_string_put(game->mlx.mlx_ptr, game->mlx.win_ptr, 15, 15, 000000, ft_itoa(game->steps));
 }
 
 void	ft_map_visualizer(t_game *game)
