@@ -3,22 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   game.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hepereir <hepereir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hepereir <hepereir@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 12:17:27 by hepereir          #+#    #+#             */
-/*   Updated: 2024/08/17 17:42:08 by hepereir         ###   ########.fr       */
+/*   Updated: 2024/09/11 22:50:37 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	ft_pressed_x(t_game *game)
+static int	ft_pressed_x(t_game *game)
 {
 	mlx_loop_end(game->mlx.mlx_ptr);
 	return (1);
 }
 
-int	ft_move(t_game *game, int x, int y)
+static int	ft_move(t_game *game, int x, int y)
 {
 	game->map[game->player_y][game->player_x] = '0';
 	game->player_x = x;
@@ -28,7 +28,7 @@ int	ft_move(t_game *game, int x, int y)
 	return (1);
 }
 
-int	ft_check_movement(t_game *game, int x, int y)
+static int	ft_check_movement(t_game *game, int x, int y)
 {
 	if (x < 0 || y < 0 || game->map[y][x] == '1')
 		return (0);
@@ -50,7 +50,7 @@ int	ft_check_movement(t_game *game, int x, int y)
 	return (1);
 }
 
-int	ft_handle_input(int keysym, t_game *game)
+static int	ft_handle_input(int keysym, t_game *game)
 {
 	if (keysym == XK_Up || keysym == XK_w)
 		ft_check_movement(game, game->player_x, game->player_y - 1);
@@ -73,12 +73,16 @@ void	ft_game_start(t_game *game)
 	game->mlx.mlx_ptr = mlx_init();
 	if (game->mlx.mlx_ptr == NULL)
 		return ;
+	if (ft_screen_size(game))
+	{
+		ft_game_cleanup(game);
+		return ;
+	}	
 	game->mlx.win_ptr = mlx_new_window(game->mlx.mlx_ptr, game->map_width * 32,
 			game->map_heigth * 32, "So Long!");
 	if (game->mlx.win_ptr == NULL)
 	{
-		mlx_destroy_display(game->mlx.mlx_ptr);
-		free(game->mlx.mlx_ptr);
+		ft_game_cleanup(game);
 		return ;
 	}
 	ft_init_images(game);

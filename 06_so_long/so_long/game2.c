@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hepereir <hepereir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hepereir <hepereir@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 12:17:42 by hepereir          #+#    #+#             */
-/*   Updated: 2024/08/30 17:05:58 by hepereir         ###   ########.fr       */
+/*   Updated: 2024/09/11 22:53:50 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,8 @@ void	ft_init_images(t_game *game)
 			&i, &i);
 }
 
-void	ft_put_img(t_game *game, int y, int x)
+static void	ft_put_img(t_game *game, int y, int x)
 {
-	//mlx_clear_window(game->mlx.mlx_ptr, game->mlx.win_ptr);
 	if (game->map[y][x] == '0')
 		mlx_put_image_to_window(game->mlx.mlx_ptr, game->mlx.win_ptr,
 			game->img[2], x * 32, y * 32);
@@ -76,7 +75,6 @@ void	ft_put_img(t_game *game, int y, int x)
 	else if (game->map[y][x] == 'E')
 		mlx_put_image_to_window(game->mlx.mlx_ptr, game->mlx.win_ptr,
 			game->img[1], x * 32, y * 32);
-	//mlx_string_put(game->mlx.mlx_ptr, game->mlx.win_ptr, 15, 15, 000000, ft_itoa(game->steps));
 }
 
 void	ft_map_visualizer(t_game *game)
@@ -100,4 +98,20 @@ void	ft_map_visualizer(t_game *game)
 		}
 		y++;
 	}
+}
+
+int		ft_screen_size(t_game *game)
+{
+	int width;
+	int height;
+	
+	width = 0;
+	height = 0;
+	mlx_get_screen_size(game->mlx.mlx_ptr, &width, &height);
+	if ((game->map_width * 32) > width || (game->map_heigth * 32) > height)
+	{
+		perror("Error\nMap is bigger than your screen");
+		return (1);
+	}
+	return (0);
 }

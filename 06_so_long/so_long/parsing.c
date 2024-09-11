@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hepereir <hepereir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hepereir <hepereir@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 12:17:54 by hepereir          #+#    #+#             */
-/*   Updated: 2024/08/17 16:39:14 by hepereir         ###   ########.fr       */
+/*   Updated: 2024/09/11 22:14:10 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	ft_check_map_name(char *name)
+static int	ft_check_map_name(char *name)
 {
 	int	fd;
 	int	pos;
@@ -56,7 +56,7 @@ int	ft_map_parsing(int argc, char **argv)
 	return (0);
 }
 
-int	ft_map_lines(char *str)
+static int	ft_map_lines(char *str)
 {
 	int		lines;
 	char	*getline;
@@ -82,7 +82,7 @@ int	ft_map_lines(char *str)
 	return (lines);
 }
 
-int	ft_write_map(t_game *game, int fd)
+static int	ft_write_map(t_game *game, int fd)
 {
 	int	i;
 

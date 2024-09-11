@@ -6,7 +6,7 @@
 #    By: hepereir <hepereir@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/01 13:01:52 by hepereir          #+#    #+#              #
-#    Updated: 2024/08/11 14:27:02 by hepereir         ###   ########.fr        #
+#    Updated: 2024/09/11 21:19:34 by hepereir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,7 @@ LIBFT			= libft/libft.a
 MLX				= minilibx-linux/libmlx.a
 
 SRC = so_long.c game.c game2.c map_checker.c map_checker2.c parsing.c \
+		auxiliar_print.c \
 		get_next_line/get_next_line.c get_next_line/get_next_line_utils.c 
 OBJ = $(SRC:.c=.o)
 

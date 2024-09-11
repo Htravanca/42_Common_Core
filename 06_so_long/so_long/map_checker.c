@@ -6,13 +6,13 @@
 /*   By: hepereir <hepereir@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 12:17:47 by hepereir          #+#    #+#             */
-/*   Updated: 2024/08/16 20:34:31 by hepereir         ###   ########.fr       */
+/*   Updated: 2024/09/11 22:17:19 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	ft_strlen_map(char *line)
+static int	ft_strlen_map(char *line)
 {
 	int	j;
 	int	valid;
@@ -33,7 +33,7 @@ int	ft_strlen_map(char *line)
 	return (j);
 }
 
-int	ft_map_square(t_game *game)
+static int	ft_map_square(t_game *game)
 {
 	int	i;
 
@@ -47,7 +47,7 @@ int	ft_map_square(t_game *game)
 	return (0);
 }
 
-int	ft_wall_map(t_game *game)
+static int	ft_wall_map(t_game *game)
 {
 	int	j;
 	int	len;

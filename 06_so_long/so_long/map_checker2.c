@@ -6,7 +6,7 @@
 /*   By: hepereir <hepereir@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 12:17:51 by hepereir          #+#    #+#             */
-/*   Updated: 2024/08/16 21:32:07 by hepereir         ###   ########.fr       */
+/*   Updated: 2024/09/11 22:18:56 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,17 +39,21 @@ void	ft_count_stuff(t_game *game)
 	}
 }
 
-void	ft_dfs(t_game *game, char **map, int y, int x)
+static void	ft_dfs(t_game *game, char **map, int y, int x)
 {
 	if (y < 0 || y >= game->map_heigth || x < 0 || x >= game->map_width
 		|| map[y][x] == '1' || map[y][x] == 'V')
 		return ;
+	if (map[y][x] == 'E')
+	{
+		game->exit_found++;
+		map[y][x] = '1';
+		return ;
+	}
 	if (map[y][x] != '1')
 	{
 		if (map[y][x] == 'C')
 			game->collectible_found++;
-		if (map[y][x] == 'E')
-			game->exit_found++;
 		map[y][x] = 'V';
 	}
 	ft_dfs(game, map, y, x + 1);
