@@ -6,7 +6,7 @@
 /*   By: hepereir <hepereir@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 12:17:42 by hepereir          #+#    #+#             */
-/*   Updated: 2024/09/11 22:53:50 by hepereir         ###   ########.fr       */
+/*   Updated: 2024/09/11 22:58:02 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,11 +100,11 @@ void	ft_map_visualizer(t_game *game)
 	}
 }
 
-int		ft_screen_size(t_game *game)
+int	ft_screen_size(t_game *game)
 {
-	int width;
-	int height;
-	
+	int	width;
+	int	height;
+
 	width = 0;
 	height = 0;
 	mlx_get_screen_size(game->mlx.mlx_ptr, &width, &height);

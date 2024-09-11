@@ -6,7 +6,7 @@
 /*   By: hepereir <hepereir@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 12:17:27 by hepereir          #+#    #+#             */
-/*   Updated: 2024/09/11 22:50:37 by hepereir         ###   ########.fr       */
+/*   Updated: 2024/09/11 22:57:11 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	ft_game_start(t_game *game)
 	{
 		ft_game_cleanup(game);
 		return ;
-	}	
+	}
 	game->mlx.win_ptr = mlx_new_window(game->mlx.mlx_ptr, game->map_width * 32,
 			game->map_heigth * 32, "So Long!");
 	if (game->mlx.win_ptr == NULL)
