@@ -6,7 +6,7 @@
 /*   By: hepereir <hepereir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 15:27:04 by hepereir          #+#    #+#             */
-/*   Updated: 2024/09/12 15:34:59 by hepereir         ###   ########.fr       */
+/*   Updated: 2024/09/12 15:51:40 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	ft_update_moves(t_game *game)
 {
-	char *move;
-	char *steps;
+	char	*move;
+	char	*steps;
 
 	steps = ft_itoa(game->steps);
 	move = ft_strjoin("Moves: ", steps);
