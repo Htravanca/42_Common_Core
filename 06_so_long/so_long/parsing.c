@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hepereir <hepereir@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: hepereir <hepereir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 12:17:54 by hepereir          #+#    #+#             */
-/*   Updated: 2024/09/11 22:14:10 by hepereir         ###   ########.fr       */
+/*   Updated: 2024/09/12 17:58:48 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,10 @@ static int	ft_check_map_name(char *name)
 {
 	int	fd;
 	int	pos;
+	char *buffer;
 
 	pos = 0;
+	buffer = NULL;
 	fd = open(name, O_RDONLY);
 	if (fd == -1)
 		return (1);
@@ -111,13 +113,14 @@ int	ft_init_map(char *str, t_game *game)
 		return (1);
 	}
 	game->map_heigth = ft_map_lines(str);
-	game->map = malloc((game->map_heigth + 1) * sizeof(char *));
-	if (game->map == NULL)
+	if (game->map_heigth == 0)
 	{
+		perror("Error\nError opening map, choose a valid .ber file");
 		close(fd);
 		return (1);
 	}
-	if (ft_write_map(game, fd))
+	game->map = malloc((game->map_heigth + 1) * sizeof(char *));
+	if (game->map == NULL || ft_write_map(game, fd))
 	{
 		close(fd);
 		return (1);

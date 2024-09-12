@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hepereir <hepereir@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: hepereir <hepereir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 12:17:42 by hepereir          #+#    #+#             */
-/*   Updated: 2024/09/12 12:34:09 by hepereir         ###   ########.fr       */
+/*   Updated: 2024/09/12 18:35:06 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ void	ft_map_visualizer(t_game *game)
 		perror("Error\nCan't load the imgs");
 		return ;
 	}
+	mlx_clear_window(game->mlx.mlx_ptr, game->mlx.win_ptr);
 	while (game->map[y])
 	{
 		x = 0;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_checker.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hepereir <hepereir@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: hepereir <hepereir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 12:17:47 by hepereir          #+#    #+#             */
-/*   Updated: 2024/09/11 22:17:19 by hepereir         ###   ########.fr       */
+/*   Updated: 2024/09/12 18:10:45 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,9 @@ int	ft_map_checker(t_game *game)
 	game->collectible_found = 0;
 	game->exit_found = 0;
 	game->steps = 0;
+	game->img = NULL;
+	game->mlx.win_ptr = NULL;
+	game->mlx.mlx_ptr = NULL;
 	if (ft_map_square(game) || ft_wall_map(game))
 	{
 		perror("Error\nMap is not rectangular or closed by walls");
