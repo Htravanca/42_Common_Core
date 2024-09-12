@@ -10,4 +10,4 @@
 5 - imprimir os steps no ecra e algo deste genero:
 //mlx_string_put(game->mlx.mlx_ptr, game->mlx.win_ptr, 15, 15, 000000, ft_itoa(game->steps));
 
-ver se as alocacoes para as imagens correram bem, se nao parar por ai
+6 - ver se as alocacoes para as imagens correram bem, se nao parar por ai - DONE

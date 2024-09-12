@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hepereir <hepereir@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: hepereir <hepereir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 12:18:44 by hepereir          #+#    #+#             */
-/*   Updated: 2024/09/12 12:14:40 by hepereir         ###   ########.fr       */
+/*   Updated: 2024/09/12 15:29:03 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,9 @@ int				ft_init_images(t_game *game);
 //static void	ft_put_img(t_game *game, int y, int x);
 void			ft_map_visualizer(t_game *game);
 int				ft_screen_size(t_game *game);
+
+// GAME3
+void 			ft_update_moves(t_game *game);
 
 // MAP CHECKER
 //static int	ft_strlen_map(char *line);
