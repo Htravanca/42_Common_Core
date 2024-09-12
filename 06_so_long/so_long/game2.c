@@ -6,7 +6,7 @@
 /*   By: hepereir <hepereir@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 12:17:42 by hepereir          #+#    #+#             */
-/*   Updated: 2024/09/11 22:58:02 by hepereir         ###   ########.fr       */
+/*   Updated: 2024/09/12 12:34:09 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,14 @@ void	ft_game_cleanup(t_game *game)
 	}
 }
 
-void	ft_init_images(t_game *game)
+int	ft_init_images(t_game *game)
 {
 	int	i;
 
 	i = 0;
 	game->img = malloc(5 * sizeof(void *));
 	if (!game->img)
-		return ;
+		return (1);
 	game->img[0] = mlx_xpm_file_to_image(game->mlx.mlx_ptr,
 			"imagens/collect.xpm", &i, &i);
 	game->img[1] = mlx_xpm_file_to_image(game->mlx.mlx_ptr, "imagens/exit.xpm",
@@ -56,6 +56,13 @@ void	ft_init_images(t_game *game)
 			"imagens/player.xpm", &i, &i);
 	game->img[4] = mlx_xpm_file_to_image(game->mlx.mlx_ptr, "imagens/wall.xpm",
 			&i, &i);
+	if (game->img[0] == NULL || game->img[1] == NULL || game->img[2] == NULL
+		|| game->img[3] == NULL || game->img[4] == NULL)
+	{
+		perror("Error\nError loading images");
+		return (1);
+	}
+	return (0);
 }
 
 static void	ft_put_img(t_game *game, int y, int x)

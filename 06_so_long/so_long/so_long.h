@@ -6,7 +6,7 @@
 /*   By: hepereir <hepereir@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 12:18:44 by hepereir          #+#    #+#             */
-/*   Updated: 2024/09/11 22:50:45 by hepereir         ###   ########.fr       */
+/*   Updated: 2024/09/12 12:14:40 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void			ft_game_start(t_game *game);
 
 // GAME2
 void			ft_game_cleanup(t_game *game);
-void			ft_init_images(t_game *game);
+int				ft_init_images(t_game *game);
 //static void	ft_put_img(t_game *game, int y, int x);
 void			ft_map_visualizer(t_game *game);
 int				ft_screen_size(t_game *game);

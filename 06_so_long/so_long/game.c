@@ -6,7 +6,7 @@
 /*   By: hepereir <hepereir@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 12:17:27 by hepereir          #+#    #+#             */
-/*   Updated: 2024/09/11 22:57:11 by hepereir         ###   ########.fr       */
+/*   Updated: 2024/09/12 12:27:13 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static int	ft_check_movement(t_game *game, int x, int y)
 	}
 	ft_move(game, x, y);
 	game->steps++;
-	ft_printf("Steps:\t%d\n", game->steps);
+	ft_printf("Moves:\t%d\n", game->steps);
 	return (1);
 }
 
@@ -68,7 +68,7 @@ static int	ft_handle_input(int keysym, t_game *game)
 	return (0);
 }
 
-void	ft_game_start(t_game *game)
+/* void	ft_game_start(t_game *game)
 {
 	game->mlx.mlx_ptr = mlx_init();
 	if (game->mlx.mlx_ptr == NULL)
@@ -85,7 +85,35 @@ void	ft_game_start(t_game *game)
 		ft_game_cleanup(game);
 		return ;
 	}
-	ft_init_images(game);
+	if (ft_init_images(game))
+	{
+		ft_game_cleanup(game);
+		return ;
+	}
+	ft_map_visualizer(game);
+	mlx_hook(game->mlx.win_ptr, DestroyNotify, NoEventMask, ft_pressed_x, game);
+	mlx_hook(game->mlx.win_ptr, KeyPress, KeyPressMask, ft_handle_input, game);
+	mlx_loop(game->mlx.mlx_ptr);
+	ft_game_cleanup(game);
+} */
+
+void	ft_game_start(t_game *game)
+{
+	game->mlx.mlx_ptr = mlx_init();
+	if (game->mlx.mlx_ptr == NULL)
+		return ;
+	if (ft_screen_size(game))
+	{
+		ft_game_cleanup(game);
+		return ;
+	}
+	game->mlx.win_ptr = mlx_new_window(game->mlx.mlx_ptr, game->map_width * 32,
+			game->map_heigth * 32, "So Long!");
+	if (game->mlx.win_ptr == NULL || ft_init_images(game))
+	{
+		ft_game_cleanup(game);
+		return ;
+	}
 	ft_map_visualizer(game);
 	mlx_hook(game->mlx.win_ptr, DestroyNotify, NoEventMask, ft_pressed_x, game);
 	mlx_hook(game->mlx.win_ptr, KeyPress, KeyPressMask, ft_handle_input, game);
