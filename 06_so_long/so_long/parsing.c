@@ -6,7 +6,7 @@
 /*   By: hepereir <hepereir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 12:17:54 by hepereir          #+#    #+#             */
-/*   Updated: 2024/09/12 17:58:48 by hepereir         ###   ########.fr       */
+/*   Updated: 2024/09/13 14:56:10 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 static int	ft_check_map_name(char *name)
 {
-	int	fd;
-	int	pos;
-	char *buffer;
+	int		fd;
+	int		pos;
+	char	*buffer;
 
 	pos = 0;
 	buffer = NULL;
