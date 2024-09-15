@@ -9,6 +9,7 @@
         "get_next_line.h": "c",
         "stdio.h": "c",
         "mlx.h": "c",
-        "type_traits": "c"
+        "type_traits": "c",
+        "pipex.h": "c"
     }
 }

@@ -1,3 +1,7 @@
+
+//fprintf(stderr, "path2:%s\n", path);
+//fprintf(stderr, "path1:%s\n", path);
+
 int main (int argc, char **argv)
 {
     int fd[2];

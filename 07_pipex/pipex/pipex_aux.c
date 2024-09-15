@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pipex_aux.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hepereir <hepereir@student.42lisboa.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/15 16:43:47 by hepereir          #+#    #+#             */
+/*   Updated: 2024/09/15 16:44:46 by hepereir         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "pipex.h"
 
 void	ft_free(char **var)
@@ -15,7 +27,7 @@ void	ft_free(char **var)
 	free(var);
 }
 
-char	*ft_find_path(char **options, char *cmd)
+static char	*ft_find_path(char **options, char *cmd)
 {
 	int		i;
 	char	*temp;
@@ -41,25 +53,39 @@ char	*ft_find_path(char **options, char *cmd)
 	return (pfinal);
 }
 
-char	*ft_path(char *cmd, char **envp)
+char	*ft_path(char **cmdsarr, char **envp)
 {
 	char	**options;
-	char	**cmds;
 	char	*pfinal;
 	int		i;
 
 	i = 0;
 	pfinal = NULL;
-	while (!ft_strnstr(envp[i], "PATH", 4))	// procura nos sistem variables a variavel PATH
+	while (!ft_strnstr(envp[i], "PATH", 4)) // procura nos sistem variables a variavel PATH
 		i++;
-	options = ft_split(envp[i] + 5, ':');	// separa os paths possvies onde pode existir o cmd
+	options = ft_split(envp[i] + 5, ':'); // separa os paths possvies onde pode existir o cmd
 	if (!options)
 		return (NULL);
-	cmds = ft_split(cmd, ' '); 				// necessaio para tirar o -l do "ls -l"
-	if (!cmds)
-		return (NULL);
-	pfinal = ft_find_path(options, cmds[0]);
-	ft_free(cmds);
+	pfinal = ft_find_path(options, cmdsarr[0]); // tirar o "-l" do "ls -l"
 	ft_free(options);
 	return (pfinal);
+}
+
+int	ft_handle_error(int val, const char *msg)
+{
+	if (val < 0)
+	{
+		perror(msg);
+		exit(1);
+	}
+	return (val);
+}
+
+void	ft_split_result(char **cmdsarr)
+{
+	if (!cmdsarr || !cmdsarr[0])
+	{
+		perror("Error while spliting the comands");
+		exit(1);
+	}
 }
