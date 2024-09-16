@@ -6,7 +6,7 @@
 #    By: hepereir <hepereir@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/15 16:47:13 by hepereir          #+#    #+#              #
-#    Updated: 2024/09/15 16:48:43 by hepereir         ###   ########.fr        #
+#    Updated: 2024/09/15 22:00:29 by hepereir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,9 @@ CC				= cc
 RM				= rm -f
 CFLAGS			= -Wall -Wextra -Werror
 
+%.o: %.c
+		@${CC} ${CFLAGS} -c $< -o $@
+
 all: $(NAME)
 
 $(LIBFT):
@@ -32,12 +35,12 @@ $(NAME):	$(OBJ) $(LIBFT)
 clean:
 	@$(RM) $(OBJ)
 	@make clean -s -C ./libft
+	@echo "$(NAME) cleaned"
 
 
 fclean:			clean
 					@$(RM) $(NAME)
 					@$(RM) $(LIBFT)
-					@echo "$(NAME) deleted"
 
 re: fclean all
 
