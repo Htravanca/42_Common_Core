@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.c                                            :+:      :+:    :+:   */
+/*   pipex_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hepereir <hepereir@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 16:43:40 by hepereir          #+#    #+#             */
-/*   Updated: 2024/09/15 16:43:41 by hepereir         ###   ########.fr       */
+/*   Updated: 2024/09/17 22:35:46 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	ft_execute_child2(int *fd, char **argv, char **envp)
 	exit(1);
 }
 
-int	main(int argc, char **argv, char **envp)
+/* int	main(int argc, char **argv, char **envp)
 {
 	int	fd[2];
 	int	pid1;
@@ -90,4 +90,29 @@ int	main(int argc, char **argv, char **envp)
 	else
 		perror("Error in ARGS, correct usage: ./pipex file1 cmd1 cmd2 file2");
 	return (0);
+} */
+
+int main(int argc, char **argv, char **envp)
+{
+	int rfd;
+	int wfd;
+	int	i;
+	
+	i = 2;
+    if (argc >= 5)
+	{
+		rfd = ft_handle_error(open(argv[1], O_RDONLY, 0777), "Error opening file1");
+		wfd = ft_handle_error(open(argv[argc -1], O_WRONLY | O_CREAT | O_TRUNC, 0777),
+			"Error opening file2");
+		dup2(rfd, STDIN_FILENO);
+		while (i < (argc - 2))
+		{
+			/* execute child*/
+			i++;
+		}
+		dup2(wfd, STDOUT_FILENO);
+		//execute(argv[argc - 2], envp);
+	}
+	
+    return 0;
 }
