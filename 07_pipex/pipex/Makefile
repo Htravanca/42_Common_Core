@@ -6,7 +6,7 @@
 #    By: hepereir <hepereir@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/15 16:47:13 by hepereir          #+#    #+#              #
-#    Updated: 2024/09/19 17:59:58 by hepereir         ###   ########.fr        #
+#    Updated: 2024/09/19 18:01:53 by hepereir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,12 +43,14 @@ $(NAME_B):	$(OBJ_B) $(LIBFT)
 
 clean:
 	@$(RM) $(OBJ)
+	@$(RM) $(OBJ_B)
 	@make clean -s -C ./libft
 	@echo "$(NAME) cleaned"
 
 
 fclean:			clean
 					@$(RM) $(NAME)
+					@$(RM) $(NAME_B)
 					@$(RM) $(LIBFT)
 
 re: fclean all
