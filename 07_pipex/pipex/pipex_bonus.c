@@ -6,17 +6,17 @@
 /*   By: hepereir <hepereir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 16:43:40 by hepereir          #+#    #+#             */
-/*   Updated: 2024/09/19 17:55:15 by hepereir         ###   ########.fr       */
+/*   Updated: 2024/09/19 18:35:28 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void ft_execute(char *argv, char **envp)
+void	ft_execute(char *argv, char **envp)
 {
-	char **cmdsarr;
-	char *path;
-	
+	char	**cmdsarr;
+	char	*path;
+
 	cmdsarr = ft_split(argv, ' ');
 	ft_split_result(cmdsarr);
 	path = ft_path(cmdsarr, envp);
@@ -50,7 +50,7 @@ void	ft_execute_child(char *argv, char **envp)
 
 	ft_handle_error(pipe(fd), "Pipe Error");
 	pid = ft_handle_error(fork(), "Fork error");
-	if(pid == 0)
+	if (pid == 0)
 	{
 		close(fd[0]);
 		dup2(fd[1], STDOUT_FILENO);
@@ -64,18 +64,19 @@ void	ft_execute_child(char *argv, char **envp)
 	}
 }
 
-int main(int argc, char **argv, char **envp)
+int	main(int argc, char **argv, char **envp)
 {
-	int rfd;
-	int wfd;
+	int	rfd;
+	int	wfd;
 	int	i;
-	
+
 	i = 2;
-    if (argc >= 5)
+	if (argc >= 5)
 	{
-		rfd = ft_handle_error(open(argv[1], O_RDONLY, 0777), "Error opening file1");
-		wfd = ft_handle_error(open(argv[argc -1], O_WRONLY | O_CREAT | O_TRUNC, 0777),
-			"Error opening file2");
+		rfd = ft_handle_error(open(argv[1], O_RDONLY, 0777),
+				"Error opening file1");
+		wfd = ft_handle_error(open(argv[argc - 1], O_WRONLY | O_CREAT | O_TRUNC,
+					0777), "Error opening file2");
 		dup2(rfd, STDIN_FILENO);
 		while (i < (argc - 2))
 		{
@@ -86,6 +87,6 @@ int main(int argc, char **argv, char **envp)
 		ft_execute(argv[argc - 2], envp);
 	}
 	else
-		perror("Error in ARGS, correct usage: ./pipex file1 cmd1 cmd2 cmdn... file2");
-    return 0;
+		perror("Error ARGS,correct usage: ./pipex file1 cmd1 cmdn... file2");
+	return (0);
 }
