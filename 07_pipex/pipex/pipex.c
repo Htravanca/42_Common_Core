@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hepereir <hepereir@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: hepereir <hepereir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 16:43:40 by hepereir          #+#    #+#             */
-/*   Updated: 2024/09/15 16:43:41 by hepereir         ###   ########.fr       */
+/*   Updated: 2024/09/19 16:46:30 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	ft_execute_child1(int *fd, char **argv, char **envp)
 	if (!path)
 	{
 		perror("Command not found");
+		ft_free(cmdsarr);
 		exit(1);
 	}
 	execve(path, cmdsarr, envp);
@@ -58,6 +59,7 @@ void	ft_execute_child2(int *fd, char **argv, char **envp)
 	if (!path)
 	{
 		perror("Command not found");
+		ft_free(cmdsarr);
 		exit(1);
 	}
 	execve(path, cmdsarr, envp);

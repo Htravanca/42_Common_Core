@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex_aux.c                                        :+:      :+:    :+:   */
+/*   pipex_aux_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hepereir <hepereir@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: hepereir <hepereir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 16:43:47 by hepereir          #+#    #+#             */
-/*   Updated: 2024/09/15 16:44:46 by hepereir         ###   ########.fr       */
+/*   Updated: 2024/09/19 16:14:54 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,15 +71,6 @@ char	*ft_path(char **cmdsarr, char **envp)
 	return (pfinal);
 }
 
-int	ft_handle_error(int val, const char *msg)
-{
-	if (val < 0)
-	{
-		perror(msg);
-		exit(1);
-	}
-	return (val);
-}
 
 void	ft_split_result(char **cmdsarr)
 {
