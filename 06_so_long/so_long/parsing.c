@@ -16,10 +16,10 @@ static int	ft_check_map_name(char *name)
 {
 	int		fd;
 	int		pos;
-	char	*buffer;
+	//char	*buffer;
 
 	pos = 0;
-	buffer = NULL;
+	//buffer = NULL;
 	fd = open(name, O_RDONLY);
 	if (fd == -1)
 		return (1);
