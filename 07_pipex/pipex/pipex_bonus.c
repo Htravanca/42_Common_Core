@@ -12,7 +12,8 @@
 
 #include "pipex.h"
 
-//pequeno teste dgdrgt
+//pequeno teste dgdrgt adsdasd
+
 
 void	ft_execute(char *argv, char **envp)
 {
