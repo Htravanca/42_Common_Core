@@ -12,6 +12,8 @@
 
 #include "pipex.h"
 
+//pequeno teste
+
 void	ft_execute(char *argv, char **envp)
 {
 	char	**cmdsarr;
