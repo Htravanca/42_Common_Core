@@ -1,3 +1,6 @@
 valgrind --leak-check=full --show-leak-kinds=all ./a.out file1.txt \"cat\" \"grep foo\" \"wc -l\" file2.txt
 
 mudar o return values do Exit para os codes corretos
+
+./pipex_bonus file1 "head -n 5" "grep test" "cut -d ' ' -f 1" file2
+o split ja conta bem as palavras agora falta por o escrever bem

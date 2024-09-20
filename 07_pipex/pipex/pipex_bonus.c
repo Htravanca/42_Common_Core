@@ -24,7 +24,7 @@ void	ft_execute(char *argv, char **envp)
 	{
 		perror("Command not found");
 		ft_free(cmdsarr);
-		exit(1);
+		exit(127);
 	}
 	execve(path, cmdsarr, envp);
 	perror("Error executing the cmd");

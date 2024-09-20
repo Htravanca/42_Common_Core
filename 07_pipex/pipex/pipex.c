@@ -31,7 +31,7 @@ void	ft_execute_child1(int *fd, char **argv, char **envp)
 	{
 		perror("Command not found");
 		ft_free(cmdsarr);
-		exit(1);
+		exit(127);
 	}
 	execve(path, cmdsarr, envp);
 	perror("Error executing the cmd1");
@@ -60,7 +60,7 @@ void	ft_execute_child2(int *fd, char **argv, char **envp)
 	{
 		perror("Command not found");
 		ft_free(cmdsarr);
-		exit(1);
+		exit(127);
 	}
 	execve(path, cmdsarr, envp);
 	perror("Error executing the cmd2");

@@ -26,7 +26,18 @@ static size_t	ft_count_string(char const *s, char c)
 		if (s[j])
 			count++;
 		while (s[j] != c && s[j])
-			j++;
+		{
+			if (s[j] == '\'' && s[j])
+			{
+				j++;
+				while (s[j] != '\'' && s[j])
+					j++;
+				if (s[j] == '\'')
+					j++;
+			}
+			else
+				j++;
+		}
 	}
 	return (count);
 }
@@ -59,13 +70,30 @@ static char	*ft_write_arr(char const *s, char c, size_t *pos)
 		pos_begin = (char *)&s[*pos + 1];
 		(*pos)++;
 	}
-	pos_final = (char *)&s[*pos];
-	while (s[*pos] != c && s[*pos])
+
+	if (s[*pos] == '\'' && s[*pos])
 	{
-		pos_final = (char *)&s[*pos + 1];
+		pos_begin = (char *)&s[*pos + 1];
+		(*pos)++;
+		pos_final = (char *)&s[*pos];
+		while (s[*pos] != '\'' && s[*pos])
+		{
+			pos_final = (char *)&s[*pos + 1];
+			(*pos)++;
+		}
+		len = pos_final - pos_begin;
 		(*pos)++;
 	}
-	len = pos_final - pos_begin;
+	else
+	{
+		pos_final = (char *)&s[*pos];
+		while (s[*pos] != c && s[*pos])
+		{
+			pos_final = (char *)&s[*pos + 1];
+			(*pos)++;
+		}
+		len = pos_final - pos_begin;
+	}
 	arr = (char *)malloc(len + 1);
 	if (!arr)
 		return (NULL);
