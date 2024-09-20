@@ -1,1 +1,3 @@
 valgrind --leak-check=full --show-leak-kinds=all ./a.out file1.txt \"cat\" \"grep foo\" \"wc -l\" file2.txt
+
+mudar o return values do Exit para os codes corretos
