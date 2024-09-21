@@ -11,11 +11,11 @@
 # **************************************************************************** #
 
 NAME			= pipex
-NAME_B			= pipex_bonus
+NAME_B			= pipex
 LIBFT			= libft/libft.a
 
-SRC = pipex.c pipex_aux.c
-SRC_B = pipex_bonus.c pipex_aux_bonus.c
+SRC = pipex.c pipex_aux.c split_adapt.c split_adapt2.c
+SRC_B = pipex_bonus.c pipex_aux.c split_adapt.c split_adapt2.c
 OBJ = $(SRC:.c=.o)
 OBJ_B = $(SRC_B:.c=.o)
 

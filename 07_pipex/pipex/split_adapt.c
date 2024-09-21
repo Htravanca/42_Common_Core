@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "pipex.h"
 
 static int	ft_skip_quotes(const char *s, size_t j)
 {
@@ -38,82 +38,12 @@ static size_t	ft_count_string(char const *s, char c)
 		while (s[j] != c && s[j])
 		{
 			if (s[j] == '\'' && s[j])
-				ft_skip_quotes(s, j);
+				j = ft_skip_quotes(s, j);
 			else
 				j++;
 		}
 	}
 	return (count);
-}
-
-static char	*ft_aux_write(char *arr, char *pos_begin, size_t len)
-{
-	size_t	j;
-
-	j = 0;
-	while (j < len)
-	{
-		arr[j] = pos_begin[j];
-		j++;
-	}
-	arr[j] = '\0';
-	return (arr);
-}
-
-static size_t	ft_find_quote_len(char *pos_begin, char const *s, size_t *pos)
-{
-	size_t	len;
-	char	*pos_final;
-
-	len = 0;
-	pos_begin = (char *)&s[*pos + 1];
-	(*pos)++;
-	pos_final = (char *)&s[*pos];
-	while (s[*pos] != '\'' && s[*pos])
-	{
-		pos_final = (char *)&s[*pos + 1];
-		(*pos)++;
-	}
-	len = pos_final - pos_begin;
-	(*pos)++;
-	return (len);
-}
-
-static size_t	ft_find_len(char *pos_begin, char const *s, size_t *pos, char c)
-{
-	size_t	len;
-	char	*pos_final;
-
-	len = 0;
-	pos_final = (char *)&s[*pos];
-	while (s[*pos] != c && s[*pos])
-	{
-		pos_final = (char *)&s[*pos + 1];
-		(*pos)++;
-	}
-	len = pos_final - pos_begin;
-	return (len);
-}
-
-static char	*ft_write_arr(char const *s, char c, size_t *pos)
-{
-	char	*pos_begin;
-	size_t	len;
-	char	*arr;
-
-	len = 0;
-	while (s[*pos] == c && s[*pos])
-		(*pos)++;
-	pos_begin = (char *)&s[*pos + 1];
-	if (s[*pos] == '\'' && s[*pos])
-		len = ft_find_quote_len(pos_begin, s, pos);
-	else
-		len = ft_find_len(pos_begin, s, pos, c);
-	arr = (char *)malloc(len + 1);
-	if (!arr)
-		return (NULL);
-	arr = ft_aux_write(arr, pos_begin, len);
-	return (arr);
 }
 
 static void	ft_free(char **arr, size_t atual)
@@ -126,7 +56,7 @@ static void	ft_free(char **arr, size_t atual)
 	free(arr);
 }
 
-char	**ft_split(char const *s, char c)
+char	**ft_split_adapt(char const *s, char c)
 {
 	size_t	count;
 	char	**arr;

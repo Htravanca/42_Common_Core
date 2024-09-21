@@ -4,3 +4,38 @@ mudar o return values do Exit para os codes corretos
 
 ./pipex_bonus file1 "head -n 5" "grep test" "cut -d ' ' -f 1" file2
 o split ja conta bem as palavras agora falta por o escrever bem
+
+-------------Parte mandatoria-----------------------------------
+TESTE 1
+./pipex /dev/stdin cat ls /dev/stdout
+ls
+
+valgrind --track-fds=all --trace-children=yes
+
+
+
+-------------Parte bonus-----------------------------------
+TESTE 1
+./pipex_bonus file1.txt "cat" "grep foo" "wc -l" file2.txt
+< file1.txt cat | grep foo | wc -l > file2.txt
+
+TESTE 2
+./pipex_bonus file1.txt "cat" "invalid_command" "wc -l" file2.txt
+
+TESTE 3
+./pipex_bonus file1.txt "cat" "grep something" "exit 1" file2.txt
+
+TESTE 4
+./pipex_bonus file1.txt "head -n 5" "grep test" "cut -d ' ' -f 1" file2.txt
+
+TESTE 5
+./pipex_bonus emptyfile "cat" "wc -l" "echo Done" file2.txt
+
+TESTE 6 
+./pipex_bonus file1.txt "tr a-z A-Z" "sort" "uniq" file2.txt
+
+TESTE 7
+./pipex_bonus file1.txt "cat" "grep hello" "sed 's/hello/world/'" "sort" "wc -l" file2.txt
+
+TESTE 8
+./pipex_bonus file1.txt "echo 'This is a test'" "tr -d 'aeiou'" "rev" file2.txt

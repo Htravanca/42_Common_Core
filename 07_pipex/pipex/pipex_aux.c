@@ -12,7 +12,7 @@
 
 #include "pipex.h"
 
-void	ft_free(char **var)
+void	ft_free_arr(char **var)
 {
 	int	i;
 
@@ -67,7 +67,7 @@ char	*ft_path(char **cmdsarr, char **envp)
 	if (!options)
 		return (NULL);
 	pfinal = ft_find_path(options, cmdsarr[0]);
-	ft_free(options);
+	ft_free_arr(options);
 	return (pfinal);
 }
 

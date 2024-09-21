@@ -24,18 +24,18 @@ void	ft_execute_child1(int *fd, char **argv, char **envp)
 	close(rfd);
 	close(fd[0]);
 	close(fd[1]);
-	cmdsarr = ft_split(argv[2], ' ');
+	cmdsarr = ft_split_adapt(argv[2], ' ');
 	ft_split_result(cmdsarr);
 	path = ft_path(cmdsarr, envp);
 	if (!path)
 	{
 		perror("Command not found");
-		ft_free(cmdsarr);
+		ft_free_arr(cmdsarr);
 		exit(127);
 	}
 	execve(path, cmdsarr, envp);
 	perror("Error executing the cmd1");
-	ft_free(cmdsarr);
+	ft_free_arr(cmdsarr);
 	free(path);
 	exit(1);
 }
@@ -53,18 +53,18 @@ void	ft_execute_child2(int *fd, char **argv, char **envp)
 	close(wfd);
 	close(fd[0]);
 	close(fd[1]);
-	cmdsarr = ft_split(argv[3], ' ');
+	cmdsarr = ft_split_adapt(argv[3], ' ');
 	ft_split_result(cmdsarr);
 	path = ft_path(cmdsarr, envp);
 	if (!path)
 	{
 		perror("Command not found");
-		ft_free(cmdsarr);
+		ft_free_arr(cmdsarr);
 		exit(127);
 	}
 	execve(path, cmdsarr, envp);
 	perror("Error executing the cmd2");
-	ft_free(cmdsarr);
+	ft_free_arr(cmdsarr);
 	free(path);
 	exit(1);
 }

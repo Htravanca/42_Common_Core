@@ -17,30 +17,20 @@ void	ft_execute(char *argv, char **envp)
 	char	**cmdsarr;
 	char	*path;
 
-	cmdsarr = ft_split(argv, ' ');
+	cmdsarr = ft_split_adapt(argv, ' ');
 	ft_split_result(cmdsarr);
 	path = ft_path(cmdsarr, envp);
 	if (!path)
 	{
 		perror("Command not found");
-		ft_free(cmdsarr);
+		ft_free_arr(cmdsarr);
 		exit(127);
 	}
 	execve(path, cmdsarr, envp);
 	perror("Error executing the cmd");
-	ft_free(cmdsarr);
+	ft_free_arr(cmdsarr);
 	free(path);
 	exit(1);
-}
-
-int	ft_handle_error(int val, const char *msg)
-{
-	if (val < 0)
-	{
-		perror(msg);
-		exit(1);
-	}
-	return (val);
 }
 
 void	ft_execute_child(char *argv, char **envp)
