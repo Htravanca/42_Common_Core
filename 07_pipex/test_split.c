@@ -1,31 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear.c                                      :+:      :+:    :+:   */
+/*   test_split.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hepereir <hepereir@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/18 17:10:28 by hepereir          #+#    #+#             */
-/*   Updated: 2024/09/22 14:34:25 by hepereir         ###   ########.fr       */
+/*   Created: 2024/09/22 13:43:32 by hepereir          #+#    #+#             */
+/*   Updated: 2024/09/22 13:43:33 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "pipex.h"
 
-void	ft_lstclear(t_list **lst, void (*del)(void *))
+int	main(void)
 {
-	t_list	*temp;
-	t_list	*temp_next;
+	char	*string = "awk '{ if (length($0) > max) max = length($0) } END { print max }'";
+	char	**cmds;
+	int		i = 0;
 
-	if (!(*lst))
-		return ;
-	temp = *lst;
-	while (temp)
+	cmds = ft_split_adapt(string, ' ');
+	while (cmds[i] != NULL)
 	{
-		temp_next = temp->next;
-		del(temp->content);
-		free(temp);
-		temp = temp_next;
+		printf("cmds[%d]:%s|\n", i, cmds[i]);
+		i++;
 	}
-	*lst = NULL;
 }
