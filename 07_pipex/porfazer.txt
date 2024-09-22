@@ -39,3 +39,15 @@ TESTE 7
 
 TESTE 8
 ./pipex_bonus file1.txt "echo 'This is a test'" "tr -d 'aeiou'" "rev" file2.txt
+
+
+  Test 4. Du, Sort, Head, and WC
+        ORIGINAL - < infile du -sh * | sort -hr | head -5 | wc -l > outfile
+        PIPEX - ./pipex infile "du -sh *" "sort -hr" "head -5" "wc -l" outfile
+
+
+Test 6. Out of scope arguments
+        ORIGINAL - < Makefile grep $ | 'awk '{ if (length($0) > max) max = length($0) } END { print max }'
+        PIPEX - ./pipex Makefile "grep $" "'awk '{ if (length($0) > max) max = length($0) } END { print max }'" outfile.txt
+
+        Explanation: This test provides complex and nested commands to ensure the program can handle more advanced and potentially out-of-scope commands.

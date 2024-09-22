@@ -2,7 +2,7 @@
 
 int	main(void)
 {
-	char	*string = "'awk '{ if (length($0) > max) max = length($0) } END { print max }'";
+	char	*string = "awk '{ if (length($0) > max) max = length($0) } END { print max }'";
 	char	**cmds;
 	int		i = 0;
 
