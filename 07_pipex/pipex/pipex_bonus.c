@@ -6,7 +6,7 @@
 /*   By: hepereir <hepereir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 16:43:40 by hepereir          #+#    #+#             */
-/*   Updated: 2024/09/25 19:43:03 by hepereir         ###   ########.fr       */
+/*   Updated: 2024/09/25 20:33:01 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,13 @@ void	ft_execute_child(char *argv, char **envp)
 	{
 		close(fd[0]);
 		dup2(fd[1], STDOUT_FILENO);
-		//close(fd[1]); //checkkkkkkkkkkkkkkkk
 		ft_execute(argv, envp);
 	}
 	else
 	{
 		close(fd[1]);
 		dup2(fd[0], STDIN_FILENO);
-		close(fd[0]); //checkkkkkkkkkkkkkkkk
+		close(fd[0]);
 		if (waitpid(pid, NULL, 0) < 0)
 		{
 			perror("Error waiting for child process");
