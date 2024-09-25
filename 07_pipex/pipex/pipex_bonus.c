@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hepereir <hepereir@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: hepereir <hepereir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 16:43:40 by hepereir          #+#    #+#             */
-/*   Updated: 2024/09/23 22:30:15 by hepereir         ###   ########.fr       */
+/*   Updated: 2024/09/25 19:43:03 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,19 @@ void	ft_execute_child(char *argv, char **envp)
 	{
 		close(fd[0]);
 		dup2(fd[1], STDOUT_FILENO);
+		//close(fd[1]); //checkkkkkkkkkkkkkkkk
 		ft_execute(argv, envp);
 	}
 	else
 	{
 		close(fd[1]);
 		dup2(fd[0], STDIN_FILENO);
-		waitpid(pid, NULL, 0);
+		close(fd[0]); //checkkkkkkkkkkkkkkkk
+		if (waitpid(pid, NULL, 0) < 0)
+		{
+			perror("Error waiting for child process");
+			exit(1);
+		}
 	}
 }
 
@@ -75,6 +81,8 @@ int	main(int argc, char **argv, char **envp)
 		}
 		dup2(wfd, STDOUT_FILENO);
 		ft_execute(argv[argc - 2], envp);
+		close(rfd);
+		close(wfd);
 	}
 	else
 		perror("Error ARGS,correct usage: ./pipex file1 cmd1 cmdn... file2");

@@ -1,0 +1,11 @@
+file1.txt
+file2.txt
+libft
+Makefile
+pipex
+pipex_aux.c
+pipex_bonus.c
+pipex.c
+pipex.h
+split_adapt2.c
+split_adapt.c

@@ -1,9 +1,12 @@
-valgrind --leak-check=full --show-leak-kinds=all ./a.out file1.txt \"cat\" \"grep foo\" \"wc -l\" file2.txt
+ok valgrind --leak-check=full --show-leak-kinds=all ./a.out file1.txt \"cat\" \"grep foo\" \"wc -l\" file2.txt
+ok mudar o return values do Exit para os codes corretos
 
-mudar o return values do Exit para os codes corretos
+ok ./pipex_bonus file1 "head -n 5" "grep test" "cut -d ' ' -f 1" file2
+ok o split ja conta bem as palavras agora falta por o escrever bem
 
-./pipex_bonus file1 "head -n 5" "grep test" "cut -d ' ' -f 1" file2
-o split ja conta bem as palavras agora falta por o escrever bem
+No pipex por a protecao caso o waitpid nao resulte
+
+ok valgrind --trace-children=yes --leak-check=full --show-leak-kinds=all ./pipex file1.txt "pwd" "wc -l" "    " file2.txt
 
 -------------Parte mandatoria-----------------------------------
 TESTE 1
@@ -12,8 +15,8 @@ ls
 
 valgrind --track-fds=all --trace-children=yes
 
-
-
+"grep foo"
+wc -l
 -------------Parte bonus-----------------------------------
 TESTE 1
 ./pipex file1.txt "cat" "grep foo" "wc -l" file2.txt

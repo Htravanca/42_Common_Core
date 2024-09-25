@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_aux.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hepereir <hepereir@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: hepereir <hepereir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 16:43:47 by hepereir          #+#    #+#             */
-/*   Updated: 2024/09/15 16:44:46 by hepereir         ###   ########.fr       */
+/*   Updated: 2024/09/25 20:21:25 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_free_arr(char **var)
 	int	i;
 
 	i = 0;
-	if (!var || !*var)
+	if (!var)
 		return ;
 	while (var[i] != NULL)
 	{
@@ -85,6 +85,7 @@ void	ft_split_result(char **cmdsarr)
 {
 	if (!cmdsarr || !cmdsarr[0])
 	{
+		ft_free_arr(cmdsarr);
 		perror("Error while spliting the comands");
 		exit(1);
 	}
