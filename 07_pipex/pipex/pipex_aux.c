@@ -6,7 +6,7 @@
 /*   By: hepereir <hepereir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 16:43:47 by hepereir          #+#    #+#             */
-/*   Updated: 2024/09/25 20:21:25 by hepereir         ###   ########.fr       */
+/*   Updated: 2024/09/27 15:08:59 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,16 @@ char	*ft_path(char **cmdsarr, char **envp)
 
 	i = 0;
 	pfinal = NULL;
-	while (!ft_strnstr(envp[i], "PATH", 4))
-		i++;
-	options = ft_split(envp[i] + 5, ':');
-	if (!options)
-		return (NULL);
+	if (!*envp)
+		options = ft_options();
+	else
+	{
+		while (!ft_strnstr(envp[i], "PATH", 4))
+			i++;
+		options = ft_split(envp[i] + 5, ':');
+		if (!options)
+			return (NULL);
+	}
 	pfinal = ft_find_path(options, cmdsarr[0]);
 	ft_free_arr(options);
 	return (pfinal);

@@ -6,7 +6,7 @@
 /*   By: hepereir <hepereir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 16:43:40 by hepereir          #+#    #+#             */
-/*   Updated: 2024/09/19 16:46:30 by hepereir         ###   ########.fr       */
+/*   Updated: 2024/09/27 12:05:36 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	ft_execute_child2(int *fd, char **argv, char **envp)
 	char	*path;
 	char	**cmdsarr;
 
-	wfd = ft_handle_error(open(argv[4], O_WRONLY | O_CREAT | O_TRUNC, 0777),
+	wfd = ft_handle_error(open(argv[4], O_WRONLY | O_CREAT | O_TRUNC, 0644),
 			"Error opening file2");
 	dup2(wfd, STDOUT_FILENO);
 	dup2(fd[0], STDIN_FILENO);

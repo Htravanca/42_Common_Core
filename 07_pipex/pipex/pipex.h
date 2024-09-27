@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hepereir <hepereir@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: hepereir <hepereir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 16:43:52 by hepereir          #+#    #+#             */
-/*   Updated: 2024/09/23 22:29:54 by hepereir         ###   ########.fr       */
+/*   Updated: 2024/09/27 15:09:24 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,6 @@ void	ft_execute_child2(int *fd, char **argv, char **envp);
 char	**ft_split_adapt(char const *s, char c);
 //SPLIT ADAPT
 char	*ft_write_arr(char const *s, char c, size_t *pos);
+char	**ft_options(void);
 
 #endif

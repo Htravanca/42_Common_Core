@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_adapt2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hepereir <hepereir@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: hepereir <hepereir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 14:31:45 by hepereir          #+#    #+#             */
-/*   Updated: 2024/09/22 14:31:46 by hepereir         ###   ########.fr       */
+/*   Updated: 2024/09/27 15:09:07 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,4 +83,17 @@ char	*ft_write_arr(char const *s, char c, size_t *pos)
 		return (NULL);
 	arr = ft_aux_write(arr, pos_begin, len);
 	return (arr);
+}
+
+char	**ft_options(void)
+{
+	char	**options;
+
+	options = (char **)malloc(3 * sizeof(char *));
+	if (!options)
+		exit(1);
+	options[0] = ft_strdup("/usr/bin");
+	options[1] = ft_strdup("/bin");
+	options[2] = NULL;
+	return (options);
 }
