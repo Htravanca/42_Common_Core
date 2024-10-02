@@ -6,7 +6,16 @@ ok o split ja conta bem as palavras agora falta por o escrever bem
 
 No pipex por a protecao caso o waitpid nao resulte
 
-ok valgrind --trace-children=yes --leak-check=full --show-leak-kinds=all ./pipex file1.txt "pwd" "wc -l" "    " file2.txt
+ok 
+valgrind --trace-children=yes --leak-check=full --show-leak-kinds=all --track-fds=yes ./pipex file1.txt "pwd" "wc -l" "    " file2.txt
+valgrind --trace-children=yes --leak-check=full --show-leak-kinds=all --track-fds=yes ./pipex infile "pwd" "wc -l" file2.txt
+
+echo $? - check the exit codes.
+
+PATH=' ' ./pipex infile "ls" "wc -l" outfile
+
+
+
 
 -------------Parte mandatoria-----------------------------------
 TESTE 1

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hepereir <hepereir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hepereir <hepereir@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 16:43:40 by hepereir          #+#    #+#             */
-/*   Updated: 2024/09/27 12:05:36 by hepereir         ###   ########.fr       */
+/*   Updated: 2024/10/02 21:51:41 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 void	ft_execute_child1(int *fd, char **argv, char **envp)
 {
-	int		rfd;
+	pid_t	rfd;
 	char	*path;
 	char	**cmdsarr;
 
 	rfd = ft_handle_error(open(argv[1], O_RDONLY, 0777), "Error opening file1");
 	dup2(rfd, STDIN_FILENO);
-	dup2(fd[1], STDOUT_FILENO);
 	close(rfd);
+	dup2(fd[1], STDOUT_FILENO);
 	close(fd[0]);
 	close(fd[1]);
 	cmdsarr = ft_split_adapt(argv[2], ' ');
@@ -42,15 +42,15 @@ void	ft_execute_child1(int *fd, char **argv, char **envp)
 
 void	ft_execute_child2(int *fd, char **argv, char **envp)
 {
-	int		wfd;
+	pid_t	wfd;
 	char	*path;
 	char	**cmdsarr;
 
 	wfd = ft_handle_error(open(argv[4], O_WRONLY | O_CREAT | O_TRUNC, 0644),
 			"Error opening file2");
 	dup2(wfd, STDOUT_FILENO);
-	dup2(fd[0], STDIN_FILENO);
 	close(wfd);
+	dup2(fd[0], STDIN_FILENO);
 	close(fd[0]);
 	close(fd[1]);
 	cmdsarr = ft_split_adapt(argv[3], ' ');
