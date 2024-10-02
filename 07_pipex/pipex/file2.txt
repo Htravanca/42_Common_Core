@@ -1,1 +1,15 @@
-     15      15     164
+Makefile
+file2.txt
+infile
+libft
+pipex
+pipex.c
+pipex.h
+pipex.o
+pipex_aux.c
+pipex_aux.o
+pipex_bonus.c
+split_adapt.c
+split_adapt.o
+split_adapt2.c
+split_adapt2.o
