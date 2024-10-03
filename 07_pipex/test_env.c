@@ -1,5 +1,15 @@
 #include "pipex.h"
 
+void	ft_split_result(char **cmdsarr)
+{
+	if (!cmdsarr || !cmdsarr[0])
+	{
+		ft_free_arr(cmdsarr);
+		perror("Error while spliting the comands");
+		exit(1);
+	}
+}
+
 void	ft_free_arr(char **var)
 {
 	int	i;
@@ -64,16 +74,16 @@ char	*ft_path(char **cmdsarr, char **envp)
 
 	i = 0;
 	pfinal = NULL;
-    if (!*envp)
-        options = ft_options();
-    else
-    {
-        while (!ft_strnstr(envp[i], "PATH", 4))
+	while (*envp && !ft_strnstr(envp[i], "PATH", 4))
 		    i++;
-	    options = ft_split(envp[i] + 5, ':');
+	if (i == 0 || !ft_strnstr(envp[i], "/usr/bin", ft_strlen(envp[i])))
+		options = ft_options();
+	else
+	{
+		options = ft_split(envp[i] + 5, ':');
 	    if (!options)
 		    return (NULL);
-    }
+	}
 	pfinal = ft_find_path(options, cmdsarr[0]);
 	ft_free_arr(options);
 	return (pfinal);

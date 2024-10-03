@@ -12,8 +12,10 @@ valgrind --trace-children=yes --leak-check=full --show-leak-kinds=all --track-fd
 
 echo $? - check the exit codes.
 
-PATH=' ' ./pipex infile "ls" "wc -l" outfile
+OK PATH=' ' ./pipex infile "ls" "wc -l" outfile
 
+OK unset PATH
+/bin/valgrind
 
 
 
@@ -63,3 +65,61 @@ Test 6. Out of scope arguments
         PIPEX - ./pipex Makefile "grep $" "'awk '{ if (length($0) > max) max = length($0) } END { print max }'" outfile.txt
 
         Explanation: This test provides complex and nested commands to ensure the program can handle more advanced and potentially out-of-scope commands.
+
+
+
+
+
+        The issue you're encountering stems from how the exit status of child processes is being propagated to the parent process. In your main function, you're using waitpid(pid1, NULL, 0) and waitpid(pid2, NULL, 0). However, passing NULL as the second argument means that you are not capturing the exit status of the child processes, which is why the return code you get with echo $? is always 0.
+
+To fix this, you need to capture the exit status of the child processes and handle it properly. Here's how you can modify your code:
+
+    Create a variable to store the exit status of each child.
+    Pass this variable to waitpid to capture the exit status.
+    Use WEXITSTATUS(status) to retrieve the actual exit code from the status variable.
+
+Here is an updated version of your main function:
+
+c
+
+int	main(int argc, char **argv, char **envp)
+{
+	int	fd[2];
+	int	pid1, pid2;
+	int	status1, status2;
+
+	if (argc == 5)
+	{
+		ft_handle_error(pipe(fd), "Pipe error");
+		pid1 = ft_handle_error(fork(), "Fork error");
+		if (pid1 == 0)
+			ft_execute_child1(fd, argv, envp);
+		pid2 = ft_handle_error(fork(), "Fork error");
+		if (pid2 == 0)
+			ft_execute_child2(fd, argv, envp);
+		close(fd[0]);
+		close(fd[1]);
+		waitpid(pid1, &status1, 0);  // Capture exit status of first child
+		waitpid(pid2, &status2, 0);  // Capture exit status of second child
+
+		// Check and print the exit status of child processes
+		if (WIFEXITED(status1))
+			printf("Child 1 exited with status: %d\n", WEXITSTATUS(status1));
+		if (WIFEXITED(status2))
+			printf("Child 2 exited with status: %d\n", WEXITSTATUS(status2));
+	}
+	else
+		perror("Error in ARGS, correct usage: ./pipex file1 cmd1 cmd2 file2");
+	return (0);
+}
+
+Explanation:
+
+    waitpid(pid1, &status1, 0) captures the exit status of pid1 into status1.
+    waitpid(pid2, &status2, 0) captures the exit status of pid2 into status2.
+    WIFEXITED(status) checks if the child process exited normally.
+    WEXITSTATUS(status) extracts the exit code from the status variable.
+
+With this modification, you should see the correct exit status when running your program.
+
+Let me know if this works or if you need further assistance!
