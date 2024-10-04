@@ -6,7 +6,7 @@
 /*   By: hepereir <hepereir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 16:43:40 by hepereir          #+#    #+#             */
-/*   Updated: 2024/10/04 14:50:05 by hepereir         ###   ########.fr       */
+/*   Updated: 2024/10/04 15:01:12 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,17 +69,17 @@ void	ft_execute_child2(int *fd, char **argv, char **envp)
 	exit(1);
 }
 
-static void ft_wait_pid(int pid1, int pid2)
+static void	ft_wait_pid(int pid1, int pid2)
 {
-	int status1;
-	int status2;
-	
+	int	status1;
+	int	status2;
+
 	waitpid(pid1, &status1, 0);
 	waitpid(pid2, &status2, 0);
 	if (WIFEXITED(status1))
-		exit (WEXITSTATUS(status1));
+		exit(WEXITSTATUS(status1));
 	if (WIFEXITED(status2))
-		exit (WEXITSTATUS(status2));
+		exit(WEXITSTATUS(status2));
 }
 
 int	main(int argc, char **argv, char **envp)

@@ -10,6 +10,7 @@ ok
 valgrind --trace-children=yes --leak-check=full --show-leak-kinds=all --track-fds=yes ./pipex file1.txt "pwd" "wc -l" "    " file2.txt
 valgrind --trace-children=yes --leak-check=full --show-leak-kinds=all --track-fds=yes ./pipex infile "pwd" "wc -l" file2.txt
 
+ok
 echo $? - check the exit codes.
 
 OK PATH=' ' ./pipex infile "ls" "wc -l" outfile
