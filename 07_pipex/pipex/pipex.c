@@ -6,7 +6,7 @@
 /*   By: hepereir <hepereir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 16:43:40 by hepereir          #+#    #+#             */
-/*   Updated: 2024/10/03 16:45:30 by hepereir         ###   ########.fr       */
+/*   Updated: 2024/10/04 14:15:35 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,11 @@ void	ft_execute_child2(int *fd, char **argv, char **envp)
 	exit(1);
 }
 
+void ft_wait_pid(int pid1, int pid2)
+{
+	
+}
+
 int	main(int argc, char **argv, char **envp)
 {
 	int	fd[2];
@@ -86,8 +91,9 @@ int	main(int argc, char **argv, char **envp)
 			ft_execute_child2(fd, argv, envp);
 		close(fd[0]);
 		close(fd[1]);
-		waitpid(pid1, NULL, 0);
-		waitpid(pid2, NULL, 0);
+		ft_wait_pid(pid1, pid2);
+		//waitpid(pid1, NULL, 0);
+		//waitpid(pid2, NULL, 0);
 	}
 	else
 		perror("Error in ARGS, correct usage: ./pipex file1 cmd1 cmd2 file2");
