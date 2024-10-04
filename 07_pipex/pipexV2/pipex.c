@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hepereir <hepereir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hepereir <hepereir@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 16:43:40 by hepereir          #+#    #+#             */
-/*   Updated: 2024/10/04 21:02:22 by hepereir         ###   ########.fr       */
+/*   Updated: 2024/10/04 23:49:10 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	ft_execute(char *argv, char **envp)
 		exit(127);
 	}
 	execve(path, cmdsarr, envp);
-	perror("Error executing the cmd");	
+	perror("Error executing the cmd");
 	ft_free_arr(cmdsarr);
 	free(path);
 	exit(1);
@@ -57,24 +57,13 @@ int	ft_execute_child(char *argv, char **envp)
 	return (0);
 }
 
-static void	ft_wait(int *pid, int i)
+static void	ft_wait(void)
 {
-	int	j;
 	int	status;
 
-	j = 0;
-	while (j <= i)
-	{
-		fprintf(stderr, "j:%d\n", j);
-		if (waitpid(pid[j], &status, 0) < 0)
-		{
-			perror("Error waiting for child process");
-			exit(1);
-		}
-		if (WEXITSTATUS(status) != 0)
-			exit(WEXITSTATUS(status));
-		j++;
-	}
+	waitpid(-1, &status, 0);
+	if (WEXITSTATUS(status) != 0)
+		exit(WEXITSTATUS(status));
 }
 
 static void	ft_loop_process(int argc, char **argv, char **envp)
@@ -96,7 +85,7 @@ static void	ft_loop_process(int argc, char **argv, char **envp)
 	pid[i - 2] = ft_handle_error(fork(), "Fork error");
 	if (pid[i - 2] == 0)
 		ft_execute(argv[argc - 2], envp);
-	ft_wait(pid, (i - 2));
+	ft_wait();
 }
 
 int	main(int argc, char **argv, char **envp)

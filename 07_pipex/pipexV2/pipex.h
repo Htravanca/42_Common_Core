@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hepereir <hepereir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hepereir <hepereir@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 16:43:52 by hepereir          #+#    #+#             */
-/*   Updated: 2024/10/04 18:33:35 by hepereir         ###   ########.fr       */
+/*   Updated: 2024/10/04 23:49:42 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,11 @@ void	ft_split_result(char **cmdsarr);
 
 // PIPEX BONUS
 void	ft_execute(char *argv, char **envp);
-int     ft_execute_child(char *argv, char **envp);
+int		ft_execute_child(char *argv, char **envp);
 
-//SPLIT ADAPT
+// SPLIT ADAPT
 char	**ft_split_adapt(char const *s, char c);
-//SPLIT ADAPT
+// SPLIT ADAPT
 char	*ft_write_arr(char const *s, char c, size_t *pos);
 char	**ft_options(void);
 

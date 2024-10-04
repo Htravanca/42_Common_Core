@@ -44,3 +44,24 @@
 	ft_free_arr(options);
 	return (pfinal);
 } */
+
+
+/* static void	ft_wait(int *pid, int i)
+{
+	int	j;
+	int	status;
+
+	j = 0;
+	while (j <= i)
+	{
+		//fprintf(stderr, "j:%d\n", j);
+		if (waitpid(pid[j], &status, 0) < 0)
+		{
+			perror("Error waiting for child process");
+			exit(1);
+		}
+		if (WEXITSTATUS(status) != 0)
+			exit(WEXITSTATUS(status));
+		j++;
+	}
+} */

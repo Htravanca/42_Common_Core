@@ -22,7 +22,9 @@ OK unset PATH
 
 ./pipex infile "cat" "grep name" "grep -E a$" "wc -l" outfile10
 
-
+The next test will use the following command:
+../pipex/pipex "/dev/urandom" "cat" "head -1" "outs/test-xx.txt"
+# 31: The program does not timeout                                          [TO]
 
 some excellent code, handling aspas well (minishell level skills). 
 Just a couple of edge cases that resulted in FDs left open and a parallelism issue 
