@@ -18,6 +18,12 @@ OK PATH=' ' ./pipex infile "ls" "wc -l" outfile
 OK unset PATH
 /bin/valgrind
 
+
+
+./pipex infile "cat" "grep name" "grep -E a$" "wc -l" outfile10
+
+
+
 some excellent code, handling aspas well (minishell level skills). 
 Just a couple of edge cases that resulted in FDs left open and a parallelism issue 
 too many open FDs (only in mandatory - bonus is working) when: infile doesn't exist infile/outfile has insufficient permissions
@@ -74,56 +80,154 @@ Test 6. Out of scope arguments
 
 
 
-        The issue you're encountering stems from how the exit status of child processes is being propagated to the parent process. In your main function, you're using waitpid(pid1, NULL, 0) and waitpid(pid2, NULL, 0). However, passing NULL as the second argument means that you are not capturing the exit status of the child processes, which is why the return code you get with echo $? is always 0.
+I see a couple of areas in your code that need adjustments for handling pipes correctly, and I’ll also address the issue causing the infinite loop.
+1. Pipe Closure Management
 
-To fix this, you need to capture the exit status of the child processes and handle it properly. Here's how you can modify your code:
+You are not properly closing pipes in both the parent and child processes. In a pipe, each process must close the file descriptors it doesn't need to avoid potential deadlocks. Specifically:
 
-    Create a variable to store the exit status of each child.
-    Pass this variable to waitpid to capture the exit status.
-    Use WEXITSTATUS(status) to retrieve the actual exit code from the status variable.
+    The child process should close the pipe read-end (fd[0]).
+    The parent process should close the pipe write-end (fd[1]).
 
-Here is an updated version of your main function:
+2. Handling /dev/urandom Issue
+
+Your infinite loop is likely due to the fact that /dev/urandom is an infinite stream of random data. This means the cat command will never finish reading. A solution would be to limit the read size or detect when to stop reading.
+
+You can achieve this by handling the signal (like SIGPIPE) or limiting the output size by using head -1 to cut the output. However, the cat command doesn't know when to stop because you're reading from /dev/urandom, which never ends.
+3. Redundant Open of Output File in main
+
+You are opening the output file twice: once in main and once in ft_loop_process. The first open is unnecessary since ft_loop_process handles it correctly.
+4. Dynamic Array for pid
+
+Currently, you declare a large fixed-size array for PIDs (pid[10000]). Instead, it's better to dynamically allocate the array based on the number of commands.
+5. Fixing Pipe Management and Execution
+
+Let me restructure your code with proper pipe management, dynamic PID handling, and a strategy to avoid the infinite loop.
+Corrected Code:
 
 c
 
+void	ft_execute(char *argv, char **envp)
+{
+	char	**cmdsarr;
+	char	*path;
+
+	cmdsarr = ft_split_adapt(argv, ' ');
+	ft_split_result(cmdsarr);
+	path = ft_path(cmdsarr, envp);
+	if (!path)
+	{
+		perror("Command not found");
+		ft_free_arr(cmdsarr);
+		exit(127);
+	}
+	execve(path, cmdsarr, envp);
+	perror("Error executing the cmd");
+	ft_free_arr(cmdsarr);
+	free(path);
+	exit(1);
+}
+
+int	ft_execute_child(char *argv, char **envp, int input_fd, int output_fd)
+{
+	int	pid;
+
+	pid = ft_handle_error(fork(), "Fork error");
+	if (pid == 0)
+	{
+		// Child process
+		dup2(input_fd, STDIN_FILENO);  // Redirect input
+		dup2(output_fd, STDOUT_FILENO);  // Redirect output
+		ft_execute(argv, envp);
+	}
+	return (pid);
+}
+
+static void	ft_wait(int *pid, int i)
+{
+	int	j;
+	int	status;
+
+	j = 0;
+	while (j <= i)
+	{
+		if (waitpid(pid[j], &status, 0) < 0)
+		{
+			perror("Error waiting for child process");
+			exit(1);
+		}
+		if (WEXITSTATUS(status) != 0)
+			exit(WEXITSTATUS(status));
+		j++;
+	}
+}
+
+static void	ft_loop_process(int argc, char **argv, char **envp)
+{
+	int	*pid;
+	int	i;
+	int	fd[2];
+	int	input_fd;
+
+	// Allocate memory for PIDs based on the number of commands
+	pid = malloc(sizeof(int) * (argc - 3));
+
+	// Open input file
+	input_fd = ft_handle_error(open(argv[1], O_RDONLY), "Error opening file1");
+
+	// Loop through the commands and execute each in a pipeline
+	i = 2;
+	while (i < (argc - 2))
+	{
+		pipe(fd); // Create a new pipe
+
+		pid[i - 2] = ft_execute_child(argv[i], envp, input_fd, fd[1]);
+
+		close(fd[1]);  // Close the write-end of the pipe in the parent
+		input_fd = fd[0];  // Update input_fd to be the read-end for the next command
+
+		i++;
+	}
+
+	// Handle last command (redirect output to file)
+	int wfd = ft_handle_error(open(argv[argc - 1], O_WRONLY | O_CREAT | O_TRUNC, 0644), "Error opening file2");
+	pid[i - 2] = ft_execute_child(argv[argc - 2], envp, input_fd, wfd);
+
+	close(wfd); // Close output file
+	close(input_fd); // Close the last pipe input
+
+	// Wait for all child processes to finish
+	ft_wait(pid, (i - 2));
+
+	// Free dynamically allocated memory
+	free(pid);
+}
+
 int	main(int argc, char **argv, char **envp)
 {
-	int	fd[2];
-	int	pid1, pid2;
-	int	status1, status2;
-
-	if (argc == 5)
-	{
-		ft_handle_error(pipe(fd), "Pipe error");
-		pid1 = ft_handle_error(fork(), "Fork error");
-		if (pid1 == 0)
-			ft_execute_child1(fd, argv, envp);
-		pid2 = ft_handle_error(fork(), "Fork error");
-		if (pid2 == 0)
-			ft_execute_child2(fd, argv, envp);
-		close(fd[0]);
-		close(fd[1]);
-		waitpid(pid1, &status1, 0);  // Capture exit status of first child
-		waitpid(pid2, &status2, 0);  // Capture exit status of second child
-
-		// Check and print the exit status of child processes
-		if (WIFEXITED(status1))
-			printf("Child 1 exited with status: %d\n", WEXITSTATUS(status1));
-		if (WIFEXITED(status2))
-			printf("Child 2 exited with status: %d\n", WEXITSTATUS(status2));
-	}
+	if (argc >= 5)
+		ft_loop_process(argc, argv, envp);
 	else
-		perror("Error in ARGS, correct usage: ./pipex file1 cmd1 cmd2 file2");
+		perror("Error ARGS, correct usage: ./pipex file1 cmd1 cmdn... file2");
 	return (0);
 }
 
-Explanation:
+Key Corrections:
 
-    waitpid(pid1, &status1, 0) captures the exit status of pid1 into status1.
-    waitpid(pid2, &status2, 0) captures the exit status of pid2 into status2.
-    WIFEXITED(status) checks if the child process exited normally.
-    WEXITSTATUS(status) extracts the exit code from the status variable.
+    Proper Pipe Management:
+        After each fork, the parent process closes the write-end of the pipe and the child process uses dup2 to replace standard input/output.
+        The parent closes the read-end of the pipe after the next child gets it.
 
-With this modification, you should see the correct exit status when running your program.
+    Dynamic PID Allocation:
+        PIDs are stored dynamically based on the number of commands using malloc instead of a large fixed array.
 
-Let me know if this works or if you need further assistance!
+    Avoid Infinite Loop:
+        The infinite loop happens because cat is reading from /dev/urandom, which doesn't terminate. You could use commands like head -c 100 to limit the number of characters read, or handle the situation with signals like SIGPIPE. For example, replace cat with head -n 1 to only take one line from the stream.
+
+Test with:
+
+bash
+
+./pipex /dev/urandom "head -n 1" "head -n 1" outfile
+
+This will prevent the process from hanging in an infinite loop
+	

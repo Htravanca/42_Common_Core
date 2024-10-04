@@ -6,7 +6,7 @@
 /*   By: hepereir <hepereir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 16:43:52 by hepereir          #+#    #+#             */
-/*   Updated: 2024/09/27 15:09:24 by hepereir         ###   ########.fr       */
+/*   Updated: 2024/10/04 18:33:35 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,7 @@ void	ft_split_result(char **cmdsarr);
 
 // PIPEX BONUS
 void	ft_execute(char *argv, char **envp);
-void	ft_execute_child(char *argv, char **envp);
-
-// PIPEX
-void	ft_execute_child1(int *fd, char **argv, char **envp);
-void	ft_execute_child2(int *fd, char **argv, char **envp);
+int     ft_execute_child(char *argv, char **envp);
 
 //SPLIT ADAPT
 char	**ft_split_adapt(char const *s, char c);
