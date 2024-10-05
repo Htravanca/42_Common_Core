@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test_split.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hepereir <hepereir@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: hepereir <hepereir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 13:43:32 by hepereir          #+#    #+#             */
-/*   Updated: 2024/09/22 13:43:33 by hepereir         ###   ########.fr       */
+/*   Updated: 2024/10/05 17:52:30 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 
 int	main(void)
 {
-	char	*string = "awk '{ if (length($0) > max) max = length($0) } END { print max }'";
+	//char	*string = "awk '{ if (length($0) > max) max = length($0) } END { print max }'";
+	char	*string = "grep -E a$";
+	
 	char	**cmds;
 	int		i = 0;
 

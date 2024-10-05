@@ -6,7 +6,7 @@
 /*   By: hepereir <hepereir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 16:43:40 by hepereir          #+#    #+#             */
-/*   Updated: 2024/10/05 17:17:02 by hepereir         ###   ########.fr       */
+/*   Updated: 2024/10/05 17:31:01 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	ft_execute_child(char *argv, char **envp, int *fd, int prev_fd)
 	int	pid;
 
 	pid = ft_handle_error(fork(), "Fork error");
-	if (pid == 0) // Child process
+	if (pid == 0)
 	{
 		if (prev_fd != -1) // If it's not the first command, redirect input
 		{
