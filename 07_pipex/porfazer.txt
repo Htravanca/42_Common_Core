@@ -4,8 +4,6 @@ ok mudar o return values do Exit para os codes corretos
 ok ./pipex_bonus file1 "head -n 5" "grep test" "cut -d ' ' -f 1" file2
 ok o split ja conta bem as palavras agora falta por o escrever bem
 
-No pipex por a protecao caso o waitpid nao resulte
-
 ok 
 valgrind --trace-children=yes --leak-check=full --show-leak-kinds=all --track-fds=yes ./pipex file1.txt "pwd" "wc -l" "    " file2.txt
 valgrind --trace-children=yes --leak-check=full --show-leak-kinds=all --track-fds=yes ./pipex infile "pwd" "wc -l" file2.txt
@@ -18,9 +16,6 @@ OK PATH=' ' ./pipex infile "ls" "wc -l" outfile
 OK unset PATH
 /bin/valgrind
 
-
-
-./pipex infile "cat" "grep name" "grep -E a$" "wc -l" outfile10
 
 The next test will use the following command:
 ../pipex/pipex "/dev/urandom" "cat" "head -1" "outs/test-xx.txt"

@@ -65,3 +65,20 @@
 		j++;
 	}
 } */
+
+/* static void	ft_wait(void)
+{
+	int	status;
+
+	waitpid(-1, &status, 0);
+	if (WEXITSTATUS(status) != 0)
+		exit(WEXITSTATUS(status));
+} */
+
+	/* waitpid(-1, &status, 0);
+	fprintf(stderr, "error:%d\n", WEXITSTATUS(status));
+	if (WEXITSTATUS(status) != 0)
+	{
+		waitpid(-1, NULL, 0);
+		exit(WEXITSTATUS(status));
+	}  */

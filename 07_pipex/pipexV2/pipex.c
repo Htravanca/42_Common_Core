@@ -6,7 +6,7 @@
 /*   By: hepereir <hepereir@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 16:43:40 by hepereir          #+#    #+#             */
-/*   Updated: 2024/10/04 23:49:10 by hepereir         ###   ########.fr       */
+/*   Updated: 2024/10/05 13:10:54 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,18 +52,26 @@ int	ft_execute_child(char *argv, char **envp)
 		close(fd[1]);
 		dup2(fd[0], STDIN_FILENO);
 		close(fd[0]);
-		return (pid);
 	}
-	return (0);
+	return (pid);
 }
 
-static void	ft_wait(void)
+static void	ft_wait(int i)
 {
 	int	status;
+	int	statusf;
+	int	pid;
 
-	waitpid(-1, &status, 0);
-	if (WEXITSTATUS(status) != 0)
-		exit(WEXITSTATUS(status));
+	statusf = 0;
+	while ((i - 2) >= 0)
+	{
+		// pid = waitpid(-1, &status, 0);
+		waitpid(-1, &status, 0);
+		if (WEXITSTATUS(status) != 0)
+			statusf = WEXITSTATUS(status);
+		i--;
+	}
+	exit(statusf);
 }
 
 static void	ft_loop_process(int argc, char **argv, char **envp)
@@ -85,7 +93,7 @@ static void	ft_loop_process(int argc, char **argv, char **envp)
 	pid[i - 2] = ft_handle_error(fork(), "Fork error");
 	if (pid[i - 2] == 0)
 		ft_execute(argv[argc - 2], envp);
-	ft_wait();
+	ft_wait(i);
 }
 
 int	main(int argc, char **argv, char **envp)
