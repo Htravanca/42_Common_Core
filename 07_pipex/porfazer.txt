@@ -16,6 +16,7 @@ OK PATH=' ' ./pipex infile "ls" "wc -l" outfile
 OK unset PATH
 /bin/valgrind
 
+./pipex "$input" "cat" "grep name" "grep -E a$" "wc -l" "$output_b"
 
 The next test will use the following command:
 ../pipex/pipex "/dev/urandom" "cat" "head -1" "outs/test-xx.txt"
