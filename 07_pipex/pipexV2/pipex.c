@@ -6,7 +6,7 @@
 /*   By: hepereir <hepereir@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 16:43:40 by hepereir          #+#    #+#             */
-/*   Updated: 2024/10/05 22:27:18 by hepereir         ###   ########.fr       */
+/*   Updated: 2024/10/06 13:19:36 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	ft_execute_child(char *argv, char **envp, int *fd, int prev_fd)
 	return (pid);
 }
 
-static void	ft_wait(int i)
+/* static void	ft_wait(int i)
 {
 	int	status;
 	int	statusf;
@@ -72,7 +72,32 @@ static void	ft_wait(int i)
 		i--;
 	}
 	exit(statusf);
-} 
+} */ 
+
+static void ft_wait(int i)
+{
+    int status;
+    int statusf = 0;
+
+    while ((i - 2) >= 0)
+    {
+        waitpid(-1, &status, 0);
+        // Check if the process exited normally
+        if (WIFEXITED(status))
+        {
+            int exit_status = WEXITSTATUS(status);
+            // Only record an error if the exit status is not 0 or 1 (allowing grep to indicate no match)
+            if (exit_status != 0 && exit_status != 1)
+            {
+                statusf = exit_status; // Capture the actual error status
+            }
+        }
+        i--;
+    }
+
+    exit(statusf); // Exit with the recorded status
+}
+
 
 static void	ft_loop_process(int argc, char **argv, char **envp)
 {
@@ -117,11 +142,11 @@ int	main(int argc, char **argv, char **envp)
 	if (argc >= 5)
 	{
 		rfd = ft_handle_error(open(argv[1], O_RDONLY, 0777),
-				"Error opening file1");
+				"Error opening infile");
 		dup2(rfd, STDIN_FILENO);
 		close(rfd);
 		wfd = ft_handle_error(open(argv[argc - 1], O_WRONLY | O_CREAT | O_TRUNC,
-					0644), "Error opening file2");
+					0644), "Error opening outfile");
 		close(wfd);
 		ft_loop_process(argc, argv, envp);
 	}

@@ -16,16 +16,24 @@ OK PATH=' ' ./pipex infile "ls" "wc -l" outfile
 OK unset PATH
 /bin/valgrind
 
-./pipex "$input" "cat" "grep name" "grep -E a$" "wc -l" "$output_b"
-
-The next test will use the following command:
-../pipex/pipex "/dev/urandom" "cat" "head -1" "outs/test-xx.txt"
-# 31: The program does not timeout                                          [TO]
 
 some excellent code, handling aspas well (minishell level skills). 
 Just a couple of edge cases that resulted in FDs left open and a parallelism issue 
 too many open FDs (only in mandatory - bonus is working) when: infile doesn't exist infile/outfile has insufficient permissions
 parallelism doesn't seem to be working in bonus (but it does in mandatory): sleep 5 sleep 5 sleep 5 -> sleeps for 15, should sleep for 5
+
+Erro tester ./
+./pipex "$input" "cat" "grep name" "grep -E a$" "wc -l" "$output_b"
+
+Erro caso o Grep nao encontre bem o que procura
+➜  pipexV2 git:(main) ✗ < infile cat | grep foo | wc -l > file2.txt
+➜  pipexV2 git:(main) ✗ echo $?
+0
+➜  pipexV2 git:(main) ✗ ./pipex infile "cat" "grep foo" "wc -l" file2.txt
+➜  pipexV2 git:(main) ✗ echo $?
+1
+
+error opening files return 0?
 
 -------------Parte mandatoria-----------------------------------
 TESTE 1
