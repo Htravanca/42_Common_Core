@@ -6,7 +6,7 @@
 #    By: hepereir <hepereir@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/15 16:47:13 by hepereir          #+#    #+#              #
-#    Updated: 2024/10/06 14:49:04 by hepereir         ###   ########.fr        #
+#    Updated: 2024/10/06 20:30:50 by hepereir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ CFLAGS			= -Wall -Wextra -Werror
 		@${CC} ${CFLAGS} -c $< -o $@
 
 all: $(NAME)
+bonus: $(NAME)
 
 $(LIBFT):
 	@make -s -C ./libft
