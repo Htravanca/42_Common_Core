@@ -6,7 +6,7 @@
 /*   By: hepereir <hepereir@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 16:43:40 by hepereir          #+#    #+#             */
-/*   Updated: 2024/10/06 15:24:33 by hepereir         ###   ########.fr       */
+/*   Updated: 2024/10/07 20:24:18 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static void	ft_execute_child(char *argv, char **envp, int *fd, int *prev_fd)
 {
 	int	pid;
 
-	pid = ft_handle_error(fork(), "Fork error");
+	pid = ft_handle_error(fork(), "Fork error", 1);
 	if (pid == 0)
 	{
 		if (*prev_fd != -1)
@@ -76,13 +76,13 @@ static void	ft_loop_process(int argc, char **argv, char **envp)
 	prev_fd = -1;
 	while (i < (argc - 2))
 	{
-		ft_handle_error(pipe(fd), "Pipe Error");
+		ft_handle_error(pipe(fd), "Pipe Error", 1);
 		ft_execute_child(argv[i], envp, fd, &prev_fd);
 		i++;
 	}
 	wfd = ft_handle_error(open(argv[argc - 1], O_WRONLY | O_CREAT | O_TRUNC,
-				0644), "Error opening outfile");
-	pid = ft_handle_error(fork(), "Fork error");
+				0644), "Error opening outfile", 1);
+	pid = ft_handle_error(fork(), "Fork error", 1);
 	if (pid == 0)
 	{
 		ft_execute_last(wfd, prev_fd);
@@ -101,11 +101,11 @@ int	main(int argc, char **argv, char **envp)
 	if (argc >= 5)
 	{
 		rfd = ft_handle_error(open(argv[1], O_RDONLY, 0777),
-				"Error opening infile");
+				"Error opening infile", 0);
 		dup2(rfd, STDIN_FILENO);
 		close(rfd);
 		wfd = ft_handle_error(open(argv[argc - 1], O_WRONLY | O_CREAT | O_TRUNC,
-					0644), "Error opening outfile");
+					0644), "Error opening outfile", 1);
 		close(wfd);
 		ft_loop_process(argc, argv, envp);
 	}

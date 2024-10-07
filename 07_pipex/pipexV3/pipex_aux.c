@@ -6,7 +6,7 @@
 /*   By: hepereir <hepereir@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 16:43:47 by hepereir          #+#    #+#             */
-/*   Updated: 2024/10/06 13:40:22 by hepereir         ###   ########.fr       */
+/*   Updated: 2024/10/07 20:29:55 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,12 +77,12 @@ char	*ft_path(char **cmdsarr, char **envp)
 	return (pfinal);
 }
 
-int	ft_handle_error(int val, const char *msg)
+int	ft_handle_error(int val, const char *msg, int ret_val)
 {
 	if (val < 0)
 	{
 		perror(msg);
-		exit(1);
+		exit(ret_val);
 	}
 	return (val);
 }

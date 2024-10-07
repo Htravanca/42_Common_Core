@@ -6,7 +6,7 @@
 /*   By: hepereir <hepereir@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 16:43:52 by hepereir          #+#    #+#             */
-/*   Updated: 2024/10/06 14:49:59 by hepereir         ###   ########.fr       */
+/*   Updated: 2024/10/07 20:25:39 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 void	ft_free_arr(char **var);
 // static char	*ft_find_path(char **options, char *cmd);
 char	*ft_path(char **cmdsarr, char **envp);
-int		ft_handle_error(int val, const char *msg);
+int		ft_handle_error(int val, const char *msg, int ret_val);
 void	ft_split_result(char **cmdsarr);
 
 // PIPEX AUX 2
