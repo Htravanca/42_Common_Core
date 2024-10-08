@@ -6,7 +6,7 @@
 /*   By: hepereir <hepereir@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/06 14:43:27 by hepereir          #+#    #+#             */
-/*   Updated: 2024/10/06 14:50:09 by hepereir         ###   ########.fr       */
+/*   Updated: 2024/10/08 22:54:16 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,31 @@ void	ft_wait(int i)
 		i--;
 	}
 	exit(statusf);
+}
+
+void	ft_open_files(int argc, char **argv)
+{
+	int	rfd;
+	int	wfd;
+
+	rfd = open(argv[1], O_RDONLY, 0777);
+	wfd = open(argv[argc - 1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	if (rfd == -1 || wfd == -1)
+	{
+		close(wfd);
+		close(rfd);
+		if (rfd == -1)
+		{
+			perror("Error opening infile");
+			exit(0);
+		}
+		if (wfd == -1)
+		{
+			perror("Error opening outfile");
+			exit(1);
+		}
+	}
+	dup2(rfd, STDIN_FILENO);
+	close(rfd);
+	close(wfd);
 }
