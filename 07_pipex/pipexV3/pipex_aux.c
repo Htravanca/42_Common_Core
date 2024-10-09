@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_aux.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hepereir <hepereir@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: hepereir <hepereir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 16:43:47 by hepereir          #+#    #+#             */
-/*   Updated: 2024/10/07 20:29:55 by hepereir         ###   ########.fr       */
+/*   Updated: 2024/10/09 19:16:50 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void	ft_split_result(char **cmdsarr)
 	if (!cmdsarr || !cmdsarr[0])
 	{
 		ft_free_arr(cmdsarr);
-		perror("Error while spliting the comands");
+		perror("Command not found");
 		exit(127);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: hepereir <hepereir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 16:43:40 by hepereir          #+#    #+#             */
-/*   Updated: 2024/10/09 18:35:16 by hepereir         ###   ########.fr       */
+/*   Updated: 2024/10/09 19:00:58 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void	ft_execute(char *argv, char **envp)
 	exit(1);
 }
 
-static int	ft_execute_child(char *argv, char **envp, int *fd, int *prev_fd)
+static void	ft_execute_child(char *argv, char **envp, int *fd, int *prev_fd)
 {
 	int	pid;
 
@@ -54,7 +54,6 @@ static int	ft_execute_child(char *argv, char **envp, int *fd, int *prev_fd)
 	if (*prev_fd != -1)
 		close(*prev_fd);
 	*prev_fd = fd[0];
-	return (pid);
 }
 
 static void	ft_execute_last(int wfd, int prev_fd)
@@ -67,7 +66,7 @@ static void	ft_execute_last(int wfd, int prev_fd)
 
 static void	ft_loop_process(int argc, char **argv, char **envp)
 {
-	int	pid[10000];
+	int	pid;
 	int	i;
 	int	prev_fd;
 	int	fd[2];
@@ -78,16 +77,13 @@ static void	ft_loop_process(int argc, char **argv, char **envp)
 	while (i < (argc - 2))
 	{
 		ft_handle_error(pipe(fd), "Pipe Error", 1);
-		pid[i - 2] = ft_execute_child(argv[i], envp, fd, &prev_fd);
-		fprintf(stderr, "pid[%d]:%d\n", i -2 , pid[i - 2]);
+		ft_execute_child(argv[i], envp, fd, &prev_fd);
 		i++;
 	}
 	wfd = ft_handle_error(open(argv[argc - 1], O_WRONLY | O_CREAT | O_TRUNC,
 				0644), "Error opening outfile", 1);
-	pid[i - 2] = ft_handle_error(fork(), "Fork error", 1);
-	fprintf(stderr, "pid[%d]:%d\n", i -2 , pid[i - 2]);
-	sleep(1);
-	if (pid[i] == 0)
+	pid = ft_handle_error(fork(), "Fork error", 1);
+	if (pid == 0)
 	{
 		ft_execute_last(wfd, prev_fd);
 		ft_execute(argv[argc - 2], envp);

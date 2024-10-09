@@ -6,7 +6,7 @@
 /*   By: hepereir <hepereir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/06 14:43:27 by hepereir          #+#    #+#             */
-/*   Updated: 2024/10/09 18:35:02 by hepereir         ###   ########.fr       */
+/*   Updated: 2024/10/09 19:20:55 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,18 +29,17 @@ void	ft_wait(int i)
 {
 	int	status;
 	int	statusf;
-	int	exit_status;
+	int	pid_bf;
+	int	pid_now;
 
 	statusf = 0;
+	pid_bf = 0;
 	while ((i - 2) >= 0)
 	{
-		waitpid(-1, &status, 0);
-		if (WIFEXITED(status))
-		{
-			exit_status = WEXITSTATUS(status);
-			if (exit_status != 0 && exit_status != 1)
-				statusf = exit_status;
-		}
+		pid_now = waitpid(-1, &status, 0);
+		if (WIFEXITED(status) && pid_now > pid_bf)
+			statusf = WEXITSTATUS(status);
+		pid_bf = pid_now;
 		i--;
 	}
 	exit(statusf);
