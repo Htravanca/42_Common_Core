@@ -45,6 +45,9 @@ Very good explanation unfortunately you are not handling absolute paths like /us
 And careful when you do env -i and try with an absolute path aswell 
 Therefore very good work and explanation and keep up the good work :)
 
+PATH=' '
+unset PATH
+env -I
 
 
 -------------Parte mandatoria-----------------------------------

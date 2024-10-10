@@ -169,3 +169,32 @@
 		j++;
 	}
 } */
+
+/* char	*ft_path(char **cmdsarr, char **envp, char *path)
+{
+	char	**options;
+	char	*pfinal;
+	int		i;
+
+	i = 0;
+	pfinal = NULL;
+	while (*envp && envp[i] && !ft_strnstr(envp[i], "PATH", 4))
+		i++;
+	if (i == 0 || envp[i] == NULL || !ft_strnstr(envp[i], "/usr/bin",
+			ft_strlen(envp[i])))
+	{
+		if (ft_check_path(path))
+			options = ft_abs_path(path);
+		else
+			options = ft_options();
+	}
+	else
+	{
+		options = ft_split(envp[i] + 5, ':');
+		if (!options)
+			return (NULL);
+	}
+	pfinal = ft_find_path(options, cmdsarr[0]);
+	ft_free_arr(options);
+	return (pfinal);
+} */

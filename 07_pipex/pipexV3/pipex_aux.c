@@ -6,7 +6,7 @@
 /*   By: hepereir <hepereir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 16:43:47 by hepereir          #+#    #+#             */
-/*   Updated: 2024/10/10 13:16:09 by hepereir         ###   ########.fr       */
+/*   Updated: 2024/10/10 15:41:43 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static char	*ft_find_path(char **options, char *cmd)
 
 int ft_check_path(char *path)
 {
-	if(access(path, F_OK) == 0)
+	if(access(path, X_OK) == 0)
 		return (1);
 	return (0);
 }
@@ -68,52 +68,32 @@ char	*ft_path(char **cmdsarr, char **envp, char *path)
 
 	i = 0;
 	pfinal = NULL;
+	options = NULL;
 	while (*envp && envp[i] && !ft_strnstr(envp[i], "PATH", 4))
 		i++;
+	fprintf(stderr, "i:%d\n", i);
+	fprintf(stderr, "PATH:%s\n",envp[i]);
 	if (ft_check_path(path))
 		return (path);
-	else if (i == 0 || envp[i] == NULL || !ft_strnstr(envp[i], "/usr/bin",
-			ft_strlen(envp[i])))
+	else if (i == 0)// || envp[i] == NULL) || !ft_strnstr(envp[i], "/usr/bin", ft_strlen(envp[i])))
 		options = ft_options();
-	else
+	else if (ft_strnstr(envp[i], "/usr/bin", ft_strlen(envp[i])))
 	{
+		fprintf(stderr, "Entrei aqui\n");
 		options = ft_split(envp[i] + 5, ':');
 		if (!options)
 			return (NULL);
 	}
-	pfinal = ft_find_path(options, cmdsarr[0]);
-	ft_free_arr(options);
+	//LEAKS no find paths!!!!
+	fprintf(stderr, "options:%s\n", options[0]);
+	if (options != NULL)
+	{
+		pfinal = ft_find_path(options, cmdsarr[0]);
+		ft_free_arr(options);
+		fprintf(stderr, "Final:%s\n", pfinal);
+	}
 	return (pfinal);
 }
-
-/* char	*ft_path(char **cmdsarr, char **envp, char *path)
-{
-	char	**options;
-	char	*pfinal;
-	int		i;
-
-	i = 0;
-	pfinal = NULL;
-	while (*envp && envp[i] && !ft_strnstr(envp[i], "PATH", 4))
-		i++;
-	if (i == 0 || envp[i] == NULL || !ft_strnstr(envp[i], "/usr/bin",
-			ft_strlen(envp[i])))
-	{
-		if (ft_check_path(path))
-			options = ft_abs_path(path);
-		else
-			options = ft_options();
-	}
-	else
-	{
-		options = ft_split(envp[i] + 5, ':');
-		if (!options)
-			return (NULL);
-	}
-	pfinal = ft_find_path(options, cmdsarr[0]);
-	ft_free_arr(options);
-	return (pfinal);
-} */
 
 int	ft_handle_error(int val, const char *msg, int ret_val)
 {
