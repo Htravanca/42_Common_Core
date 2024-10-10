@@ -41,6 +41,12 @@ error openignoutfile -> exit 1
 
 error in first comand -> exit 0
 
+Very good explanation unfortunately you are not handling absolute paths like /usr/bin/cat 
+And careful when you do env -i and try with an absolute path aswell 
+Therefore very good work and explanation and keep up the good work :)
+
+
+
 -------------Parte mandatoria-----------------------------------
 TESTE 1
 ./pipex /dev/stdin cat ls /dev/stdout
