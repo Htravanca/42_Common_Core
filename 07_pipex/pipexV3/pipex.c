@@ -6,7 +6,7 @@
 /*   By: hepereir <hepereir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 16:43:40 by hepereir          #+#    #+#             */
-/*   Updated: 2024/10/10 12:54:10 by hepereir         ###   ########.fr       */
+/*   Updated: 2024/10/10 17:03:16 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ static void	ft_execute(char *argv, char **envp)
 	cmdsarr = ft_split_adapt(argv, ' ');
 	ft_split_result(cmdsarr);
 	path = ft_path(cmdsarr, envp, argv);
+	fprintf(stderr, "Execute Path:%s\n", path);
 	if (!path)
 	{
 		perror("Command not found");

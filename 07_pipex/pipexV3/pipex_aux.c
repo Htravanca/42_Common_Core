@@ -6,7 +6,7 @@
 /*   By: hepereir <hepereir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 16:43:47 by hepereir          #+#    #+#             */
-/*   Updated: 2024/10/10 15:41:43 by hepereir         ###   ########.fr       */
+/*   Updated: 2024/10/10 17:12:16 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int ft_check_path(char *path)
 	return (0);
 }
 
-char	*ft_path(char **cmdsarr, char **envp, char *path)
+/* char	*ft_path(char **cmdsarr, char **envp, char *path)
 {
 	char	**options;
 	char	*pfinal;
@@ -76,15 +76,16 @@ char	*ft_path(char **cmdsarr, char **envp, char *path)
 	if (ft_check_path(path))
 		return (path);
 	else if (i == 0)// || envp[i] == NULL) || !ft_strnstr(envp[i], "/usr/bin", ft_strlen(envp[i])))
-		options = ft_options();
-	else if (ft_strnstr(envp[i], "/usr/bin", ft_strlen(envp[i])))
+			options = ft_options();
+	else if (envp[i] && ft_strnstr(envp[i], "/usr/bin", ft_strlen(envp[i])))
 	{
-		fprintf(stderr, "Entrei aqui\n");
+		fprintf(stderr, "Entrei normal\n");
 		options = ft_split(envp[i] + 5, ':');
 		if (!options)
 			return (NULL);
 	}
 	//LEAKS no find paths!!!!
+	fprintf(stderr, "PATH:%s\n",envp[i]);
 	fprintf(stderr, "options:%s\n", options[0]);
 	if (options != NULL)
 	{
@@ -93,7 +94,56 @@ char	*ft_path(char **cmdsarr, char **envp, char *path)
 		fprintf(stderr, "Final:%s\n", pfinal);
 	}
 	return (pfinal);
+} */
+
+char	*ft_path(char **cmdsarr, char **envp, char *path)
+{
+	char	**options;
+	char	*pfinal;
+	int		i;
+
+	i = 0;
+	pfinal = NULL;
+	options = NULL;
+
+	// Find the PATH variable
+	while (envp && envp[i] && !ft_strnstr(envp[i], "PATH", 4))
+		i++;
+
+	// Ensure PATH was found
+	if (envp[i] == NULL)
+		return (NULL);
+
+	fprintf(stderr, "i:%d\n", i);
+	fprintf(stderr, "PATH:%s\n", envp[i]);
+
+	// Check if path is already valid
+	if (ft_check_path(path))
+		return (path);
+
+	// Handle the PATH variable options
+	if (i == 0)
+		options = ft_options();
+	else if (envp[i] && ft_strnstr(envp[i], "/usr/bin", ft_strlen(envp[i])))
+	{
+		fprintf(stderr, "Entered normal case\n");
+		options = ft_split(envp[i] + 5, ':');
+		if (!options)
+			return (NULL);
+	}
+
+	// Check options and find the correct path
+	if (options != NULL && options[0] != NULL)
+	{
+		fprintf(stderr, "options[0]: %s\n", options[0]);
+		pfinal = ft_find_path(options, cmdsarr[0]);
+		ft_free_arr(options);
+		fprintf(stderr, "Final:%s\n", pfinal);
+	}
+
+	return (pfinal);
 }
+
 
 int	ft_handle_error(int val, const char *msg, int ret_val)
 {
