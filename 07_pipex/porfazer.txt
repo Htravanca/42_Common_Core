@@ -51,6 +51,8 @@ env -I
 
 Quando dou PATH='' se der o primeiro comando com absolute path ele deteta e faz tudo-.....
 
+
+
 -------------Parte mandatoria-----------------------------------
 TESTE 1
 ./pipex /dev/stdin cat ls /dev/stdout

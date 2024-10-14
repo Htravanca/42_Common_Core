@@ -6,7 +6,7 @@
 /*   By: hepereir <hepereir@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/06 14:43:27 by hepereir          #+#    #+#             */
-/*   Updated: 2024/10/14 20:43:56 by hepereir         ###   ########.fr       */
+/*   Updated: 2024/10/14 21:36:55 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	ft_open_files(int argc, char **argv)
 		if (rfd == -1)
 		{
 			perror("Error opening infile");
-			exit(0);
+			exit(1);
 		}
 		if (wfd == -1)
 		{
