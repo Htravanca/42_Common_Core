@@ -198,3 +198,41 @@
 	ft_free_arr(options);
 	return (pfinal);
 } */
+
+
+
+/* char	*ft_path(char **cmdsarr, char **envp, char *path)
+{
+	char	**options;
+	char	*pfinal;
+	int		i;
+
+	i = 0;
+	pfinal = NULL;
+	options = NULL;
+	while (*envp && envp[i] && !ft_strnstr(envp[i], "PATH", 4))
+		i++;
+	fprintf(stderr, "i:%d\n", i);
+	fprintf(stderr, "PATH:%s\n",envp[i]);
+	if (ft_check_path(path))
+		return (path);
+	else if (i == 0)// || envp[i] == NULL) || !ft_strnstr(envp[i], "/usr/bin", ft_strlen(envp[i])))
+			options = ft_options();
+	else if (envp[i] && ft_strnstr(envp[i], "/usr/bin", ft_strlen(envp[i])))
+	{
+		fprintf(stderr, "Entrei normal\n");
+		options = ft_split(envp[i] + 5, ':');
+		if (!options)
+			return (NULL);
+	}
+	//LEAKS no find paths!!!!
+	fprintf(stderr, "PATH:%s\n",envp[i]);
+	fprintf(stderr, "options:%s\n", options[0]);
+	if (options != NULL)
+	{
+		pfinal = ft_find_path(options, cmdsarr[0]);
+		ft_free_arr(options);
+		fprintf(stderr, "Final:%s\n", pfinal);
+	}
+	return (pfinal);
+} */
