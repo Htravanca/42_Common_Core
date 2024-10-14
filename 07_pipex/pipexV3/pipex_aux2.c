@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_aux2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hepereir <hepereir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hepereir <hepereir@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/06 14:43:27 by hepereir          #+#    #+#             */
-/*   Updated: 2024/10/09 19:20:55 by hepereir         ###   ########.fr       */
+/*   Updated: 2024/10/14 20:43:56 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,4 +70,14 @@ void	ft_open_files(int argc, char **argv)
 	dup2(rfd, STDIN_FILENO);
 	close(rfd);
 	close(wfd);
+}
+
+void	ft_split_result(char **cmdsarr)
+{
+	if (!cmdsarr || !cmdsarr[0])
+	{
+		ft_free_arr(cmdsarr);
+		perror("Command not found");
+		exit(127);
+	}
 }
