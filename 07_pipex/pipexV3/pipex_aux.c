@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_aux.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hepereir <hepereir@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: hepereir <hepereir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 16:43:47 by hepereir          #+#    #+#             */
-/*   Updated: 2024/10/14 20:44:42 by hepereir         ###   ########.fr       */
+/*   Updated: 2024/10/17 11:32:56 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,10 @@ char	*ft_path(char **cmdsarr, char **envp, char *path)
 	i = 0;
 	pfinal = NULL;
 	options = NULL;
-	while (envp && envp[i] && !ft_strnstr(envp[i], "PATH", 4))
-		i++;
 	if (ft_check_path(path))
 		return (path);
+	while (envp && envp[i] && !ft_strnstr(envp[i], "PATH", 4))
+		i++;
 	if (i == 0)
 		options = ft_options();
 	else if (envp[i] && ft_strnstr(envp[i], "/usr/bin", ft_strlen(envp[i])))
