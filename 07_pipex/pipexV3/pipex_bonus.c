@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.c                                            :+:      :+:    :+:   */
+/*   pipex_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hepereir <hepereir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 16:43:40 by hepereir          #+#    #+#             */
-/*   Updated: 2024/10/17 11:58:11 by hepereir         ###   ########.fr       */
+/*   Updated: 2024/10/17 12:09:00 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "pipex_bonus.h"
 
 static void	ft_execute(char *argv, char **envp)
 {
@@ -95,12 +95,12 @@ static void	ft_loop_process(int argc, char **argv, char **envp)
 
 int	main(int argc, char **argv, char **envp)
 {
-	if (argc == 5)
+	if (argc >= 5)
 	{
 		ft_open_files(argc, argv);
 		ft_loop_process(argc, argv, envp);
 	}
 	else
-		perror("Error ARGS,correct usage: ./pipex file1 cmd1 cmd2 file2");
+		perror("Error ARGS,correct usage: ./pipex file1 cmd1 cmdn... file2");
 	return (0);
 }

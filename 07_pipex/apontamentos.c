@@ -236,3 +236,52 @@
 	}
 	return (pfinal);
 } */
+
+
+/* NAME			= pipex
+LIBFT			= libft/libft.a
+
+SRC = pipex.c pipex_aux.c pipex_aux2.c split_adapt.c split_adapt2.c
+OBJ = $(SRC:.c=.o)
+SRC_B = pipex_bonus.c pipex_aux_bonus.c pipex_aux2_bonus.c split_adapt_bonus.c split_adapt2_bonus.c
+OBJ_B = $(SRC_B:.c=.o)
+
+CC				= cc
+RM				= rm -f
+CFLAGS			= -Wall -Wextra -Werror
+
+%.o: %.c
+		@${CC} ${CFLAGS} -c $< -o $@
+
+all: $(NAME)
+
+bonus: $(NAME)_bonus
+
+#bonus: $(OBJ_B) $(LIBFT)
+#		@${CC} ${CFLAGS} $(OBJ_B) $(LIBFT) -o $(NAME)
+#		@echo "$(NAME) (bonus) created"
+
+$(NAME):	$(OBJ) $(LIBFT)
+		@${CC} ${CFLAGS} ${OBJ} $(LIBFT) -o $(NAME)
+		@echo "$(NAME) created"
+
+$(NAME)_bonus: $(OBJ_B) $(LIBFT)
+		@${CC} ${CFLAGS} $(OBJ_B) $(LIBFT) -o $(NAME)
+		@echo "$(NAME) (bonus) created"
+
+$(LIBFT):
+	@make -s -C ./libft
+
+clean:
+	@$(RM) $(OBJ) $(OBJ_B)
+	@make clean -s -C ./libft
+	@echo "$(NAME) cleaned"
+
+
+fclean:			clean
+					@$(RM) $(NAME)
+					@make fclean -s -C ./libft
+
+re: fclean all
+
+.PHONY: all clean fclean re */
