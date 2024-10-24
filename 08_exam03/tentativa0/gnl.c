@@ -3,6 +3,9 @@
 #include <stdarg.h>
 #include <limits.h>
 
+#ifndef BUFFER_SIZE
+# define BUFFER_SIZE 3
+#endif
 
 char	*ft_strdup(char *src)
 {

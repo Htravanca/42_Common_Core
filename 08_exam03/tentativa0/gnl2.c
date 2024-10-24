@@ -52,5 +52,5 @@ char *get_next_line(int fd)
     line[i] = '\0';
     if (i == 0)
         return (NULL);
-    return (ft_strdup(line))
+    return (ft_strdup(line));
 }

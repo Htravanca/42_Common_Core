@@ -51,6 +51,9 @@ env -I
 
 Quando dou PATH='' se der o primeiro comando com absolute path ele deteta e faz tudo-.....
 
+ATENCAO 
+se existir um executavel na pasta tipo "ls"
+o programa vai ver se da para executar e da erro.
 
 
 -------------Parte mandatoria-----------------------------------
