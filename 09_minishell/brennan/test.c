@@ -10,12 +10,14 @@
 int		ft_cd(char **args);
 int		ft_exit(char **args);
 int	ft_pwd(char **args); // Updated to take char ** argument
+int	ft_echo(char **args);
 
 /*
   List of builtin commands, followed by their corresponding functions.
  */
 char	*builtin_str[] = {"cd",
 						"pwd",
+            "echo",
 						/*"env",
 						"export",
 						"echo",
@@ -24,7 +26,8 @@ char	*builtin_str[] = {"cd",
 
 int		(*builtin_func[])(char **) = {&ft_cd,
 									&ft_pwd,
-										// &ft_pwd matches the function signature of builtin_func
+                  &ft_echo,
+									// &ft_pwd matches the function signature of builtin_func
 									/*&env,
 									&export,
 									&echo,
@@ -35,6 +38,29 @@ int	lsh_num_builtins(void)
 {
 	return (sizeof(builtin_str) / sizeof(char *));
 }
+
+/* #include <stdio.h>
+
+extern char **environ;  // Access to the environment variables
+
+int ft_env(char **args)
+{
+    if (args[1])  // `env` takes no arguments in a basic shell implementation
+    {
+        fprintf(stderr, "env: too many arguments\n");
+        return 1;
+    }
+
+    // Iterate through `environ`, which is a NULL-terminated array of strings
+    for (int i = 0; environ[i]; i++)
+    {
+        printf("%s\n", environ[i]);
+    }
+
+    return 0;
+} */
+
+
 
 int	ft_cd(char **args)
 {
@@ -64,6 +90,31 @@ int	ft_exit(char **args)
 	return (0);
 }
 
+int	ft_echo(char **args)
+{
+	int	newline;
+	int	i;
+
+	newline = 1;
+	i = 1;
+  printf("aqui\n");
+	if (args[i] && strcmp(args[i], "-n") == 0)
+	{
+		newline = 0;
+		i++;
+	}
+	while (args[i])
+	{
+		printf("%s", args[i]);
+		if (args[i + 1])
+			printf(" ");
+		i++;
+	}
+	if (newline)
+		printf("\n");
+	return (0);
+}
+
 #define BUFFER_PWD 4096
 
 int	ft_pwd(char **args) // Now accepts char **args
@@ -72,7 +123,7 @@ int	ft_pwd(char **args) // Now accepts char **args
 
 	char buffer[BUFFER_PWD];
 
-  printf("aqui\n");
+	printf("aqui\n");
 	if (getcwd(buffer, BUFFER_PWD) != NULL)
 	{
 		printf("%s\n", buffer);

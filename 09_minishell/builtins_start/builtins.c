@@ -30,7 +30,7 @@ int	ft_pwd(char **args)
 {
 	char	buffer[BUFFER_PWD];
 
-	(void)args; // Ignore args since it's not used take this out
+	(void)args; // Ignore args since it's not used -- take this out
 	if (getcwd(buffer, BUFFER_PWD) != NULL)
 	{
 		printf("%s\n", buffer);
@@ -41,4 +41,30 @@ int	ft_pwd(char **args)
 		perror("pwd");
 		return (-1);
 	}
+}
+
+
+// ECHO BUILTINS
+int	ft_echo(char **args)
+{
+	int	newline;
+	int	i;
+
+	newline = 1;
+	i = 1;
+	if (args[i] && ft_strcmp(args[i], "-n") == 0)
+	{
+		newline = 0;
+		i++;
+	}
+	while (args[i])
+	{
+		printf("%s", args[i]);
+		if (args[i + 1])
+			printf(" ");
+		i++;
+	}
+	if (newline)
+		printf("\n");
+	return (0);
 }
