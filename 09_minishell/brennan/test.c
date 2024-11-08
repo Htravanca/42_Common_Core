@@ -1,7 +1,7 @@
-#include <fcntl.h>
+#include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <sys/wait.h>
+#include <string.h> // For strtok and strcmp
 #include <unistd.h>
 
 /*
@@ -9,7 +9,7 @@
  */
 int		ft_cd(char **args);
 int		ft_exit(char **args);
-int   ft_pwd(void);
+int	ft_pwd(char **args); // Updated to take char ** argument
 
 /*
   List of builtin commands, followed by their corresponding functions.
@@ -24,6 +24,7 @@ char	*builtin_str[] = {"cd",
 
 int		(*builtin_func[])(char **) = {&ft_cd,
 									&ft_pwd,
+										// &ft_pwd matches the function signature of builtin_func
 									/*&env,
 									&export,
 									&echo,
@@ -65,20 +66,23 @@ int	ft_exit(char **args)
 
 #define BUFFER_PWD 4096
 
-int	ft_pwd(void)
+int	ft_pwd(char **args) // Now accepts char **args
 {
-	char	buffer[BUFFER_PWD];
+	(void)args; // Ignore args since it's not used
 
+	char buffer[BUFFER_PWD];
+
+  printf("aqui\n");
 	if (getcwd(buffer, BUFFER_PWD) != NULL)
-  {
+	{
 		printf("%s\n", buffer);
-    return (0);
-  }
+		return (0);
+	}
 	else
-  {
+	{
 		perror("pwd");
-    return (-1);
-  }
+		return (-1);
+	}
 }
 
 char	*lsh_read_line(void)
@@ -86,12 +90,12 @@ char	*lsh_read_line(void)
 	char	*line;
 
 	line = NULL;
-	ssize_t bufsize = 0; // have getline allocate a buffer for us
+	size_t bufsize = 0; // Updated to size_t for getline
 	if (getline(&line, &bufsize, stdin) == -1)
 	{
 		if (feof(stdin))
 		{
-			exit(EXIT_SUCCESS); // We recieved an EOF
+			exit(EXIT_SUCCESS); // We received an EOF
 		}
 		else
 		{
@@ -107,12 +111,10 @@ char	*lsh_read_line(void)
 
 char	**lsh_split_line(char *line)
 {
-	int		bufsize;
 	char	**tokens;
 	char	*token;
 
-	bufsize = LSH_TOK_BUFSIZE, position;
-	bufsize = LSH_TOK_BUFSIZE, position = 0;
+	int bufsize = LSH_TOK_BUFSIZE, position = 0; // Declared position variable
 	tokens = malloc(bufsize * sizeof(char *));
 	if (!tokens)
 	{

@@ -24,4 +24,21 @@ int	ft_cd(char **args)
 }
 
 // PWD BUILTINS
+#define BUFFER_PWD 4096
 
+int	ft_pwd(char **args)
+{
+	char	buffer[BUFFER_PWD];
+
+	(void)args; // Ignore args since it's not used take this out
+	if (getcwd(buffer, BUFFER_PWD) != NULL)
+	{
+		printf("%s\n", buffer);
+		return (0);
+	}
+	else
+	{
+		perror("pwd");
+		return (-1);
+	}
+}
