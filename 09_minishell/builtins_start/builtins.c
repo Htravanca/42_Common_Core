@@ -26,11 +26,10 @@ int	ft_cd(char **args)
 // PWD BUILTINS
 #define BUFFER_PWD 4096
 
-int	ft_pwd(char **args)
+int	ft_pwd(void)
 {
 	char	buffer[BUFFER_PWD];
 
-	(void)args; // Ignore args since it's not used -- take this out
 	if (getcwd(buffer, BUFFER_PWD) != NULL)
 	{
 		printf("%s\n", buffer);
@@ -42,7 +41,6 @@ int	ft_pwd(char **args)
 		return (-1);
 	}
 }
-
 
 // ECHO BUILTINS
 int	ft_echo(char **args)
@@ -66,5 +64,21 @@ int	ft_echo(char **args)
 	}
 	if (newline)
 		printf("\n");
+	return (0);
+}
+
+// ENV Builtins
+int	ft_env(char **env)
+{
+	int i;
+
+	i = 0;
+	if (env == NULL)
+		return (-1);
+	while (env[i] != NULL)
+	{
+		printf("%s\n", env[i]);
+		i++;
+	}
 	return (0);
 }
