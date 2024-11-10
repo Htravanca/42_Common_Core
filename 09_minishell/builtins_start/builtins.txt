@@ -68,17 +68,58 @@ int	ft_echo(char **args)
 }
 
 // ENV Builtins
-int	ft_env(char **env)
+int	ft_env(char **envc)
 {
 	int i;
 
 	i = 0;
-	if (env == NULL)
+	if (envc == NULL)
 		return (-1);
-	while (env[i] != NULL)
+	while (envc[i] != NULL)
 	{
-		printf("%s\n", env[i]);
+		printf("%s\n", envc[i]);
 		i++;
 	}
 	return (0);
+}
+
+//COPY ENV TO INTERNAL ARRAY
+void	ft_free_envc(int i, char **envc)
+{
+	i--;
+	while (i >= 0)
+	{
+		free(envc[i]);
+		i--;
+	}
+	free (envc);
+}
+
+char	**ft_env_cpy(char **env)
+{
+	int		i;
+	char	**envc;
+
+	envc = NULL;
+	i = 0;
+	if (env == NULL)
+		return (NULL);
+	while (env[i] != NULL)
+		i++;
+	envc = (char **)malloc(sizeof(char *) * (i + 1));
+	if (envc == NULL)
+		return (NULL);
+	i = 0;
+	while (env[i] != NULL)
+	{
+		envc[i] = ft_strdup(env[i]);
+		if (envc[i] == NULL)
+		{
+			ft_free_envc(i, envc);
+			return (NULL);
+		}
+		i++;
+	}
+	envc[i] = NULL;
+	return (envc);
 }
