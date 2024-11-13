@@ -36,9 +36,13 @@ int	ft_pwd(void)
 	}
 }
 
-void	ft_free_envc(int i, char **envc)
+void	ft_free_envc(char **envc)
 {
-	i--;
+	int i;
+
+	i = 0;
+	while (envc[i] != NULL)
+		i++;
 	while (i >= 0)
 	{
 		free(envc[i]);
@@ -67,13 +71,48 @@ char	**ft_env_cpy(char **env)
 		envc[i] = ft_strdup(env[i]);
 		if (envc[i] == NULL)
 		{
-			ft_free_envc(i, envc);
+			ft_free_envc(envc);
 			return (NULL);
 		}
 		i++;
 	}
 	envc[i] = NULL;
 	return (envc);
+}
+
+char **ft_unset_env(char **envc, int j)
+{
+	int		i;
+	int		aux;
+	char	**new_envc;
+
+	new_envc = NULL;
+	i = 0;
+	aux = 0;
+	while (envc[i] != NULL)
+		i++;
+	new_envc = (char **)malloc(sizeof(char *) * (i));
+	if (new_envc == NULL)
+		return (NULL);
+	i = 0;
+	while (envc[i] != NULL)
+	{
+		if (i != j)
+		{
+			new_envc[aux] = ft_strdup(envc[i]);
+			if (new_envc[aux] == NULL)
+			{
+				ft_free_envc(new_envc);
+				ft_free_envc(envc);
+				return (NULL);
+			}
+			aux++;
+		}
+		i++;
+	}
+	new_envc[aux] = NULL;
+	ft_free_envc(envc);
+	return (new_envc);
 }
 
 char **ft_unset(char **args, char **envc)
@@ -87,11 +126,12 @@ char **ft_unset(char **args, char **envc)
 		j = 0;
 		while (envc && envc[j] && !ft_strnstr(envc[j], args[i], ft_strlen(args[i])))
 			j++;
-		printf("%s\n",envc[j]);
 		if (envc[j])
 		{
-			
+			envc = ft_unset_env(envc, j);
 		}
+		if (envc == NULL)
+			return (NULL);
 		i++;
 	}
 	return (envc);
@@ -106,8 +146,13 @@ int	main(int argc, char **argv, char **env)
 	envc = ft_env_cpy(env);
 	//ft_env(envc);
 
+	printf("\n\n\n\n");
 	char **split;
-	split = ft_split("unset PATH USER PWD", ' ');
+	split = ft_split("unset USER PWD", ' ');
 	envc = ft_unset(split, envc);
+	ft_env(envc);
+
 	// ft_pwd();
+	ft_free_envc(split);
+	ft_free_envc(envc);
 }
