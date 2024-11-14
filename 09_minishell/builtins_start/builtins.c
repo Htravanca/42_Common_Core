@@ -68,31 +68,38 @@ int	ft_echo(char **args)
 }
 
 // ENV Builtins
-int	ft_env(char **envc)
+int	ft_env(char **env)
 {
-	int i;
+	int	i;
 
 	i = 0;
-	if (envc == NULL)
+	if (env == NULL)
 		return (-1);
-	while (envc[i] != NULL)
+	while (env[i] != NULL)
 	{
-		printf("%s\n", envc[i]);
+		if (ft_strnstr(env[i], "=", ft_strlen(env[i])))
+			printf("%s\n", env[i]);
 		i++;
 	}
 	return (0);
 }
 
 //COPY ENV TO INTERNAL ARRAY
-void	ft_free_envc(int i, char **envc)
+void	ft_free_envc(char **envc)
 {
-	i--;
+	int	i;
+
+	i = 0;
+	if (envc == NULL)
+		return ;
+	while (envc[i] != NULL)
+		i++;
 	while (i >= 0)
 	{
 		free(envc[i]);
 		i--;
 	}
-	free (envc);
+	free(envc);
 }
 
 char	**ft_env_cpy(char **env)
@@ -115,7 +122,7 @@ char	**ft_env_cpy(char **env)
 		envc[i] = ft_strdup(env[i]);
 		if (envc[i] == NULL)
 		{
-			ft_free_envc(i, envc);
+			ft_free_envc(envc);
 			return (NULL);
 		}
 		i++;
@@ -123,3 +130,61 @@ char	**ft_env_cpy(char **env)
 	envc[i] = NULL;
 	return (envc);
 }
+
+
+//UNSET AO ENVC
+char	**ft_unset_env(char **envc, int j)
+{
+	int		i;
+	int		aux;
+	char	**new_envc;
+
+	new_envc = NULL;
+	i = 0;
+	aux = 0;
+	while (envc[i] != NULL)
+		i++;
+	new_envc = (char **)malloc(sizeof(char *) * (i));
+	if (new_envc == NULL)
+		return (NULL);
+	i = 0;
+	while (envc[i] != NULL)
+	{
+		if (i != j)
+		{
+			if ((new_envc[aux] = ft_strdup(envc[i])) == NULL)
+				return (ft_free_envc(envc), ft_free_envc(new_envc), NULL);
+			aux++;
+		}
+		i++;
+	}
+	new_envc[aux] = NULL;
+	return (ft_free_envc(envc), new_envc);
+}
+
+char	**ft_unset(char **args, char **envc)
+{
+	int	i;
+	int	j;
+
+	i = 1;
+	if (args == NULL)
+		return (envc);
+	while (args[i] != NULL)
+	{
+		j = 0;
+		while (envc && envc[j] && !ft_strnstr(envc[j], args[i],
+				ft_strlen(args[i])))
+			j++;
+		if (envc[j])
+		{
+			envc = ft_unset_env(envc, j);
+			if (envc == NULL)
+				return (NULL);
+		}
+		i++;
+	}
+	return (envc);
+}
+
+
