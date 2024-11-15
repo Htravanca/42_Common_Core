@@ -142,9 +142,13 @@ char **ft_sep_export(char **split_arg, char *arg)
 	int j;
 
 	j = 0;
-	while (arg[j] != '=')
+	while (arg[j] && arg[j] != '=')
 		j++;
-	split_arg[0] = (char *)malloc(sizeof(char *) * (j + 1));
+	if(arg[j] == '=')
+	{
+		split_arg[0] = (char *)malloc(sizeof(char *) * (j + 1));
+		
+	}
 
 }
 

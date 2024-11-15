@@ -1,5 +1,7 @@
 
 // CD BUILTINS
+// Expected input args[0]=cd; args[1]=Relative or absolute path; args[2]=NULL
+// Return 0 Ok; -1 Error
 int	ft_cd(char **args)
 {
 	int	i;
@@ -24,6 +26,8 @@ int	ft_cd(char **args)
 }
 
 // PWD BUILTINS
+// Expected input void
+// Return 0 Ok; -1 Error
 #define BUFFER_PWD 4096
 
 int	ft_pwd(void)
@@ -43,6 +47,8 @@ int	ft_pwd(void)
 }
 
 // ECHO BUILTINS
+// Expected input args[0]=echo; args[1]=-n (opcional); args[n]="something"; args[last]=NULL;
+// Return 0 Ok; -1 Error
 int	ft_echo(char **args)
 {
 	int	newline;
@@ -68,6 +74,8 @@ int	ft_echo(char **args)
 }
 
 // ENV Builtins
+// Expected input ENV_COPY (internal copy of env vars)
+// Return 0 Ok; -1 Error
 int	ft_env(char **env)
 {
 	int	i;
@@ -85,6 +93,8 @@ int	ft_env(char **env)
 }
 
 //COPY ENV TO INTERNAL ARRAY
+// Expected input ENV(environment varibles)
+// Return env_copy Ok; NULL Error
 void	ft_free_envc(char **envc)
 {
 	int	i;
@@ -133,6 +143,8 @@ char	**ft_env_cpy(char **env)
 
 
 //UNSET AO ENVC
+// Expected input args[0]=unset; args[n]="PATH"; args[n]="etc"; args[last]=NULL;
+// Return new env_copy with unset vars; NULL ERROR
 char	**ft_unset_env(char **envc, int j)
 {
 	int		i;
