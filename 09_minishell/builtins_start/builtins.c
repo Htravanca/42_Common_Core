@@ -2,6 +2,7 @@
 // CD BUILTINS
 // Expected input args[0]=cd; args[1]=Relative or absolute path; args[2]=NULL
 // Return 0 Ok; -1 Error
+// Falta atualizar os ENV com o novo PWD e o OLD_PWD <--------------------------------------------
 int	ft_cd(char **args)
 {
 	int	i;
@@ -93,7 +94,7 @@ int	ft_env(char **env)
 }
 
 //COPY ENV TO INTERNAL ARRAY
-// Expected input ENV(environment varibles)
+// Expected input ENV(environment varibles) <--------------------------------------------
 // Return env_copy Ok; NULL Error
 void	ft_free_envc(char **envc)
 {
@@ -198,5 +199,55 @@ char	**ft_unset(char **args, char **envc)
 	}
 	return (envc);
 }
+
+
+//EXPORT ainda por acabar
+
+char **ft_sep_export(char **split_arg, char *arg)
+{
+	int j;
+
+	j = 0;
+	while (arg[j] && arg[j] != '=')
+		j++;
+	printf("%c\t%d\n",arg[j], j);
+	if(arg[j] == '=')
+	{
+		split_arg[0] = (char *)malloc(sizeof(char *) * (j + 1));
+		j = 0;
+		while (arg[j] && arg[j] != '=')
+		{
+			split_arg[0][j] = arg[j];
+			j++;
+		}
+		split_arg[0][j] = '\0';
+		printf("split_arg[0]:%s",split_arg[0]);
+	}
+	else
+	{
+
+	}
+
+}
+
+char **ft_export(char **args, char **envc)
+{
+	int i;
+	char **split_arg;
+
+	i = 1;
+	//split_arg = (char *)malloc(sizeof(char *) * 3);
+	while (args[i] != NULL)
+	{
+		//split do arg da varivel antes e depois do primeiro '='
+		split_arg = ft_sep_export(split_arg, args[i]);
+		//ver ser o nome da VAR valido
+
+		i++;
+	}
+	
+	
+}
+
 
 
