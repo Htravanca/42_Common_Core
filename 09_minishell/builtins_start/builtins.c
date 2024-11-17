@@ -26,26 +26,7 @@ int	ft_cd(char **args)
 	return (-1);
 }
 
-// PWD BUILTINS
-// Expected input void
-// Return 0 Ok; -1 Error
-#define BUFFER_PWD 4096
 
-int	ft_pwd(void)
-{
-	char	buffer[BUFFER_PWD];
-
-	if (getcwd(buffer, BUFFER_PWD) != NULL)
-	{
-		printf("%s\n", buffer);
-		return (0);
-	}
-	else
-	{
-		perror("pwd");
-		return (-1);
-	}
-}
 
 // ECHO BUILTINS
 // Expected input args[0]=echo; args[1]=-n (opcional); args[n]="something"; args[last]=NULL;
@@ -74,24 +55,6 @@ int	ft_echo(char **args)
 	return (0);
 }
 
-// ENV Builtins
-// Expected input ENV_COPY (internal copy of env vars)
-// Return 0 Ok; -1 Error
-int	ft_env(char **env)
-{
-	int	i;
-
-	i = 0;
-	if (env == NULL)
-		return (-1);
-	while (env[i] != NULL)
-	{
-		if (ft_strnstr(env[i], "=", ft_strlen(env[i])))
-			printf("%s\n", env[i]);
-		i++;
-	}
-	return (0);
-}
 
 //COPY ENV TO INTERNAL ARRAY
 // Expected input ENV(environment varibles) <--------------------------------------------
