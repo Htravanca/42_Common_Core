@@ -10,8 +10,20 @@ int	main(int argc, char **argv, char **env)
 	(void)argc;
 	(void)argv;
 	env_new = ft_env_cpy(env, env_new);
-	//print_env_list(env_new);
+
 	ft_env(env_new);
+	printf("\n\n\n");
+
+	char **split;
+	split = ft_split("cd ..", ' ');
+	ft_pwd();
+	ft_cd(split, env_new);
+	ft_pwd();
+	printf("\n\n\n");
+
+
+	ft_env(env_new);
+	
 
 	//ft_free_envc(envc);
 	ft_lstclear_env(&env_new);

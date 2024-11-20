@@ -13,6 +13,7 @@
         "pipex.h": "c",
         "ft_printf.h": "c",
         "unistd.h": "c",
-        "libft.h": "c"
+        "libft.h": "c",
+        "minishell.h": "c"
     }
 }

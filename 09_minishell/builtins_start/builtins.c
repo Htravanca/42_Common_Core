@@ -59,7 +59,7 @@ int	ft_echo(char **args)
 //COPY ENV TO INTERNAL ARRAY
 // Expected input ENV(environment varibles) <--------------------------------------------
 // Return env_copy Ok; NULL Error
-void	ft_free_envc(char **envc)
+/* void	ft_free_envc(char **envc)
 {
 	int	i;
 
@@ -103,7 +103,7 @@ char	**ft_env_cpy(char **env)
 	}
 	envc[i] = NULL;
 	return (envc);
-}
+}*/
 
 
 //UNSET AO ENVC

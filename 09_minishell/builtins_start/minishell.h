@@ -31,4 +31,7 @@ int					ft_env(envc *env);
 // PWD
 int					ft_pwd(void);
 
+// CD
+int					ft_cd(char **args, envc *env);
+
 #endif

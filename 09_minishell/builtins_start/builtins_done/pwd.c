@@ -1,6 +1,6 @@
-#include "minishell.h"
-#define BUFFER_PWD 4096
+#include "../minishell.h"
 
+#define BUFFER_PWD 4096
 
 // PWD BUILTINS
 // Expected input void
@@ -20,3 +20,4 @@ int	ft_pwd(void)
 		return (-1);
 	}
 }
+

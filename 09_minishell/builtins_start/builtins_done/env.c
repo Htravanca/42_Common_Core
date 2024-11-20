@@ -1,4 +1,4 @@
-#include "minishell.h"
+#include "../minishell.h"
 
 // ENV Builtins
 // input envc (linked list copy of env)
