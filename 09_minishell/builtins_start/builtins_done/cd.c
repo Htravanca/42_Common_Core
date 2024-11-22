@@ -7,7 +7,7 @@
 char	*ft_get_cwd(void)
 {
 	char	buffer[BUFFER_PWD];
-	char *pwd;
+	char	*pwd;
 
 	if (getcwd(buffer, BUFFER_PWD) != NULL)
 	{
@@ -32,19 +32,19 @@ void	ft_change_pwd(envc *env)
 	old = NULL;
 	while (temp)
 	{
-		if (ft_strncmp(temp->var, "OLDPWD", ft_strlen(temp->var)) == 0)
+		if (ft_strcmp(temp->var, "OLDPWD") == 0)
 			if (temp->value)
-					free(temp->value);
-		if (ft_strncmp(temp->var, "PWD", ft_strlen(temp->var)) == 0)
+				free(temp->value);
+		if (ft_strcmp(temp->var, "PWD") == 0)
 			old = temp->value;
 		temp = temp->next;
 	}
 	temp = env;
 	while (temp)
 	{
-		if (ft_strncmp(temp->var, "OLDPWD", ft_strlen(temp->var)) == 0)
+		if (ft_strcmp(temp->var, "OLDPWD") == 0)
 			temp->value = old;
-		if (ft_strncmp(temp->var, "PWD", ft_strlen(temp->var)) == 0)
+		if (ft_strcmp(temp->var, "PWD") == 0)
 			temp->value = ft_get_cwd();
 		temp = temp->next;
 	}

@@ -25,13 +25,19 @@ envc				*ft_env_cpy(char **env, envc *env_new);
 void				ft_lstclear_env(envc **env_new);
 void				print_env_list(envc *env);
 
+// CD
+int					ft_cd(char **args, envc *env);
+
+// ECHO
+int					ft_echo(char **args);
+
 // env
 int					ft_env(envc *env);
 
 // PWD
 int					ft_pwd(void);
 
-// CD
-int					ft_cd(char **args, envc *env);
+// UNSET
+int					ft_unset(char **args, envc **env);
 
 #endif

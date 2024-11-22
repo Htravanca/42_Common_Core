@@ -26,29 +26,21 @@ int	main(int argc, char **argv, char **env)
 	env_new = NULL;
 	(void)argc;
 	(void)argv;
-	//(void)env;
-	env_new = ft_env_cpy(env, env_new);
+	(void)env;
+	//env_new = ft_env_cpy(env, env_new);
 
-	ft_env(env_new);
-	printf("\n\n\n");
+	//ft_env(env_new);
+	//printf("\n\n\n");
 
 	char **split;
-	split = ft_split("cd ..", ' ');
-	printf("OLD:");
-	ft_pwd();
-	printf("\n");
-	ft_cd(split, env_new);
-	printf("NEW:");
-	ft_pwd();
-	printf("\n");
-	printf("\n\n\n");
+	//split = ft_split("unset PATH USER SYSTEMD_EXEC_PID LaaANG", ' ');
+	split = ft_split("echo -n -n -n -n asd as", ' ');
+	//ft_unset(split, &env_new);
+	//printf("\n\n\n");
+	//ft_env(env_new);
+	ft_echo(split);
 
-
-	ft_env(env_new);
-	
-
-	//ft_free_envc(envc);
-	ft_lstclear_env(&env_new);
+	//ft_lstclear_env(&env_new);
 	ft_free_split(split);
 }
 
@@ -66,3 +58,12 @@ printf("\n\n");
 	printf("\n\n");
 	// ft_pwd();
 	ft_free_envc(split); */
+
+/* 	printf("OLD:");
+	ft_pwd();
+	printf("\n");
+	ft_cd(split, env_new);
+	printf("NEW:");
+	ft_pwd();
+	printf("\n");
+	printf("\n\n\n"); */
