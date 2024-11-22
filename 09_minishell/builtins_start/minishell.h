@@ -15,9 +15,6 @@ typedef struct env_copy
 }					envc;
 
 // NEW ENV
-char				*ft_env_var(char *env);
-char				*ft_env_value(char *env);
-envc				*ft_lstnew_env(char *env);
 void				ft_lstadd_back_env(envc **env_new, char *env);
 envc				*ft_env_cpy(char **env, envc *env_new);
 

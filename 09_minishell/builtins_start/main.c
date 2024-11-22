@@ -34,7 +34,7 @@ int	main(int argc, char **argv, char **env)
 
 	char **split;
 	//split = ft_split("unset PATH USER SYSTEMD_EXEC_PID LaaANG", ' ');
-	split = ft_split("echo -n -n -n -n asd as", ' ');
+	split = ft_split("echo -n -n -n asd as", ' ');
 	//ft_unset(split, &env_new);
 	//printf("\n\n\n");
 	//ft_env(env_new);
@@ -43,27 +43,3 @@ int	main(int argc, char **argv, char **env)
 	//ft_lstclear_env(&env_new);
 	ft_free_split(split);
 }
-
-/* cd ~
-printf("\n\n");
-	char **split;
-	split = ft_split("export VA123__R=lala", ' ');
-	//printf("aqui\n");
-	//envc = ft_unset(split, envc); //por tar aqui a passa um NULL tenho leaks.
-	//printf("aqui\n");
-	ft_export(split, envc);
-	
-	//ft_env(envc);
-	
-	printf("\n\n");
-	// ft_pwd();
-	ft_free_envc(split); */
-
-/* 	printf("OLD:");
-	ft_pwd();
-	printf("\n");
-	ft_cd(split, env_new);
-	printf("NEW:");
-	ft_pwd();
-	printf("\n");
-	printf("\n\n\n"); */

@@ -1,10 +1,10 @@
 #include "minishell.h"
 
-//RETURN a string with VAR
-char *ft_env_var(char *env)
+// RETURN a string with VAR
+static char	*ft_env_var(char *env)
 {
-	int i;
-	char *var;
+	int		i;
+	char	*var;
 
 	i = 0;
 	while (env[i] && env[i] != '=')
@@ -22,18 +22,18 @@ char *ft_env_var(char *env)
 	return (var);
 }
 
-//RETURN a string with VAR
-char *ft_env_value(char *env)
+// RETURN a string with VAR
+static char	*ft_env_value(char *env)
 {
-	int i;
-	int j;
-	char *var;
+	int		i;
+	int		j;
+	char	*var;
 
 	i = 0;
 	j = 0;
 	while (env[i] && env[i] != '=')
 		i++;
-	i++; //aaaaa
+	i++; // aaaaa
 	while (env[j])
 		j++;
 	var = (char *)malloc(sizeof(char) * (j - i + 1));
@@ -50,8 +50,8 @@ char *ft_env_value(char *env)
 	return (var);
 }
 
-//Create a new node of list
-envc	*ft_lstnew_env(char *env)
+// Create a new node of list
+static envc	*ft_lstnew_env(char *env)
 {
 	envc	*new;
 
@@ -65,7 +65,7 @@ envc	*ft_lstnew_env(char *env)
 	return (new);
 }
 
-//Add the new node to the back of the list
+// Add the new node to the back of the list
 void	ft_lstadd_back_env(envc **env_new, char *env)
 {
 	envc	*temp;
@@ -85,10 +85,10 @@ void	ft_lstadd_back_env(envc **env_new, char *env)
 	temp->next = new;
 }
 
-//copy the env variables to an internal list of env
-envc *ft_env_cpy(char **env, envc *env_new)
+// copy the env variables to an internal list of env
+envc	*ft_env_cpy(char **env, envc *env_new)
 {
-	int		i;
+	int	i;
 
 	i = 0;
 	if (env == NULL)
@@ -101,8 +101,7 @@ envc *ft_env_cpy(char **env, envc *env_new)
 	return (env_new);
 }
 
-
-//EXAMPLE of use:
+// EXAMPLE of use:
 /* int	main(int argc, char **argv, char **env)
 {
 	envc *env_new;
