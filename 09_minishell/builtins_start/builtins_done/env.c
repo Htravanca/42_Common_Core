@@ -10,7 +10,7 @@ int	ft_env(envc *env)
 	while (env)
 	{
 		if (env->visible == 1)
-			printf("%s%s\n", env->var, env->value);
+			printf("%s=%s\n", env->var, env->value);
 		env = env->next;
 	}
 	return (0);

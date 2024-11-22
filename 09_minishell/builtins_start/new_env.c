@@ -33,6 +33,7 @@ char *ft_env_value(char *env)
 	j = 0;
 	while (env[i] && env[i] != '=')
 		i++;
+	i++; //aaaaa
 	while (env[j])
 		j++;
 	var = (char *)malloc(sizeof(char) * (j - i + 1));
@@ -58,7 +59,7 @@ envc	*ft_lstnew_env(char *env)
 	if (!new)
 		return (NULL);
 	new->var = ft_env_var(env);
-	new->value = ft_env_value(env);//not done yet
+	new->value = ft_env_value(env);
 	new->visible = 1;
 	new->next = NULL;
 	return (new);

@@ -9,7 +9,8 @@ void	ft_lstclear_env(envc **env_new)
 	{
 		temp = (*env_new)->next;
 		free((*env_new)->var);
-		free((*env_new)->value);
+		if ((*env_new)->value)
+			free((*env_new)->value);
 		free(*env_new);
 		*env_new = temp;
 	}
