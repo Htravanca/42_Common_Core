@@ -55,7 +55,7 @@ static envc	*ft_lstnew_env(char *env)
 {
 	envc	*new;
 
-	new = malloc(sizeof(envc));
+	new = malloc(sizeof(envc)); //USAR QUI o CALLOC
 	if (!new)
 		return (NULL);
 	new->var = ft_env_var(env);
