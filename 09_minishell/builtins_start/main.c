@@ -26,20 +26,20 @@ int	main(int argc, char **argv, char **env)
 	env_new = NULL;
 	(void)argc;
 	(void)argv;
-	(void)env;
-	//env_new = ft_env_cpy(env, env_new);
+	env_new = ft_env_cpy(env, env_new);
 
 	//ft_env(env_new);
 	//printf("\n\n\n");
 
 	char **split;
 	//split = ft_split("unset PATH USER SYSTEMD_EXEC_PID LaaANG", ' ');
-	split = ft_split("echo -n -n -n asd as", ' ');
+	split = ft_split("export VAR1 PATH=olha_aqui_eu VAR10= VAR=value2 VAR123=value3 _VAR=value4 =value $VAR *VAR=value ?VAR", ' ');
 	//ft_unset(split, &env_new);
 	//printf("\n\n\n");
-	//ft_env(env_new);
-	ft_echo(split);
+	ft_export(split, &env_new);
+	print_env_list(env_new);
+	ft_env(env_new);
 
-	//ft_lstclear_env(&env_new);
+	ft_lstclear_env(&env_new);
 	ft_free_split(split);
 }

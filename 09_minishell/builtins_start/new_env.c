@@ -33,7 +33,7 @@ static char	*ft_env_value(char *env)
 	j = 0;
 	while (env[i] && env[i] != '=')
 		i++;
-	i++; // aaaaa
+	i++;
 	while (env[j])
 		j++;
 	var = (char *)malloc(sizeof(char) * (j - i + 1));

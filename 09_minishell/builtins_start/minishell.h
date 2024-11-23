@@ -31,6 +31,11 @@ int					ft_echo(char **args);
 // env
 int					ft_env(envc *env);
 
+// EXPORT
+int 				ft_export(char **args, envc **env);
+// EXPORT 2
+char 				**ft_sep_args(char *args);
+
 // PWD
 int					ft_pwd(void);
 
