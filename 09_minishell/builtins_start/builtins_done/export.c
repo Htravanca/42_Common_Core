@@ -3,6 +3,8 @@
 // UNSET to ENVC
 // Expected input args[0]=export; args[n]="PATH"; args[n]="etc"; args[last]=NULL;
 // Return 0 OK; -1 ERROR
+
+//check if the arg is valid or not; -1 Error; 1 ok
 int	ft_export_valid(char **arg_sep)
 {
 	int	i;
@@ -22,6 +24,7 @@ int	ft_export_valid(char **arg_sep)
 	return (valid);
 }
 
+//updates the value of the var in the list
 void	ft_find_lstenv(char **arg_sep, envc *temp)
 {
 	printf("encontrei na lista\n");
@@ -41,6 +44,7 @@ void	ft_find_lstenv(char **arg_sep, envc *temp)
 	}
 }
 
+//make the var not visible to env cmd
 void	ft_lstenv_visible(char **arg_sep, envc **env)
 {
 	envc	*temp;
@@ -54,6 +58,7 @@ void	ft_lstenv_visible(char **arg_sep, envc **env)
 	}
 }
 
+//checks if the var is in the list or not
 int	ft_export_arg(char **arg_sep, char *args, envc **env)
 {
 	envc	*temp;
@@ -79,6 +84,7 @@ int	ft_export_arg(char **arg_sep, char *args, envc **env)
 	return (1);
 }
 
+// fre the alloc memory of the arg_sep
 static void	ft_free_sep(char **arg_sep)
 {
 	int	i;
@@ -108,8 +114,7 @@ int	ft_export(char **args, envc **env)
 		return (-1);
 	while (args[i])
 	{
-		arg_sep = ft_sep_args(args[i]);  
-			// separate VAR=adasd into [0]=VAR [1]="=" [2]=adasd [3]=NULL
+		arg_sep = ft_sep_args(args[i]); // separate VAR=adasd into [0]=VAR [1]="=" [2]=adasd [3]=NULL
 		valid = ft_export_valid(arg_sep); // validates it
 		if (valid == -1)
 		{
