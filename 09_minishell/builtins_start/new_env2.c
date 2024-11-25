@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-//free to all the list
+// free to all the list
 void	ft_lstclear_env(envc **env_new)
 {
 	envc	*temp;
@@ -16,14 +16,14 @@ void	ft_lstclear_env(envc **env_new)
 	}
 }
 
-//just to print the list of env
+// just to print the list of env
 // debug only
 void	print_env_list(envc *env)
 {
 	while (env)
 	{
-		printf("var: %s, value: %s, visible: %d\n",
-			env->var, env->value, env->visible);
+		printf("var: %s, value: %s, visible: %d\n", env->var, env->value,
+			env->visible);
 		env = env->next;
 	}
 }

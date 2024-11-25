@@ -22,32 +22,25 @@ static char	*ft_env_var(char *env)
 	return (var);
 }
 
-// RETURN a string with VAR
+// RETURN a string with VALUE
 static char	*ft_env_value(char *env)
 {
 	int		i;
-	int		j;
-	char	*var;
+	int		value_len;
+	char	*value;
 
 	i = 0;
-	j = 0;
 	while (env[i] && env[i] != '=')
 		i++;
-	i++;
-	while (env[j])
-		j++;
-	var = (char *)malloc(sizeof(char) * (j - i + 1));
-	if (!var)
+	if (!env[i] || env[i + 1] == '\0')
+		return (ft_strdup(""));
+	value_len = ft_strlen(env) - (i + 1);
+	value = (char *)malloc(sizeof(char) * (value_len + 1));
+	if (!value)
 		return (NULL);
-	j = 0;
-	while (env[i])
-	{
-		var[j] = env[i];
-		i++;
-		j++;
-	}
-	var[j] = '\0';
-	return (var);
+	i++;
+	ft_strlcpy(value, &env[i], value_len + 1);
+	return (value);
 }
 
 // Create a new node of list
@@ -55,7 +48,7 @@ static envc	*ft_lstnew_env(char *env)
 {
 	envc	*new;
 
-	new = malloc(sizeof(envc)); //USAR QUI o CALLOC
+	new = malloc(sizeof(envc)); // USAR QUI o CALLOC
 	if (!new)
 		return (NULL);
 	new->var = ft_env_var(env);
