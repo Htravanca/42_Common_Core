@@ -9,8 +9,10 @@ int	ft_env(envc *env)
 		return (-1);
 	while (env)
 	{
-		if (env->visible == 1)
+		if (env->visible == 1 && env->value != NULL)
 			printf("%s=%s\n", env->var, env->value);
+		if (env->visible == 1 && env->value == NULL)
+			printf("%s=\n", env->var);
 		env = env->next;
 	}
 	return (0);

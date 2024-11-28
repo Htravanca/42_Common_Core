@@ -33,8 +33,8 @@ int					ft_env(envc *env);
 
 // EXPORT
 int 				ft_export(char **args, envc **env);
-// EXPORT 2
 char 				**ft_sep_args(char *args);
+void				ft_print_env_sorted(envc *head);
 
 // PWD
 int					ft_pwd(void);

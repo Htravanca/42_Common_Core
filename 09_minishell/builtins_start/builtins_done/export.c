@@ -8,39 +8,36 @@
 int	ft_export_valid(char **arg_sep)
 {
 	int	i;
-	int	valid;
 
 	i = 0;
-	valid = -1;
-	if (ft_isalpha(arg_sep[0][0]) || arg_sep[0][0] == '_')
-		valid = 1;
+	if (!arg_sep || !arg_sep[0])
+		return (-1);
+	if (!ft_isalpha(arg_sep[0][0]) && arg_sep[0][0] != '_')
+		return (-1);
 	while (arg_sep[0][i])
 	{
 		if (!(ft_isalpha(arg_sep[0][i]) || ft_isdigit(arg_sep[0][i])
 				|| arg_sep[0][i] == '_'))
-			valid = -1;
+			return (-1);
 		i++;
 	}
-	return (valid);
+	return (1);
 }
 
 //updates the value of the var in the list
 void	ft_find_lstenv(char **arg_sep, envc *temp)
 {
 	printf("encontrei na lista\n");
-	free(temp->value);
 	if (arg_sep[1])
 	{
+		printf("entrei aqui\n");
+		if (temp->value)
+			free(temp->value);
 		if (arg_sep[2])
 			temp->value = ft_strdup(arg_sep[2]);
 		else
 			temp->value = NULL;
 		temp->visible = 1;
-	}
-	else
-	{
-		temp->value = NULL;
-		temp->visible = 0;
 	}
 }
 
@@ -102,6 +99,8 @@ static void	ft_free_sep(char **arg_sep)
 	free(arg_sep);
 }
 
+// Expected input args[0]=export; args[n]="PATH=lalala"; args[n]="etc"; args[last]=NULL;
+// Return 0 OK; -1 ERROR
 int	ft_export(char **args, envc **env)
 {
 	int		i;
@@ -110,15 +109,20 @@ int	ft_export(char **args, envc **env)
 	int		k;
 
 	i = 1;
-	if (!args || !args[1])
+	if (!args)
 		return (-1);
+	if(!args[1])
+	{
+		printf("Entrei na funcao certa\n");
+		ft_print_env_sorted(*env);
+	}
 	while (args[i])
 	{
 		arg_sep = ft_sep_args(args[i]); // separate VAR=adasd into [0]=VAR [1]="=" [2]=adasd [3]=NULL
 		valid = ft_export_valid(arg_sep); // validates it
 		if (valid == -1)
 		{
-			printf("------------------>DEU MERDA\n");
+			printf("export: '%s': not a valid identifier\n", args[i]);
 			ft_free_sep(arg_sep);
 			i++;
 			continue ; //->ver se e necessario incremetar o i++ no while
