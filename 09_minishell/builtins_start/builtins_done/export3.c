@@ -104,7 +104,28 @@ void ft_print_env_sorted(envc *head)
     }
 }
 
-void ft_print_env_sorted(envc *head)
+envc *ft_duplicate_env_list(envc *head)
 {
+    envc *new;
+    envc *new_head;
+    envc *temp;
 
+    new_head = NULL;
+    while (head)
+    {
+        new = (envc *)malloc(sizeof(envc));
+        if (!new)
+            return (NULL);
+        new->var = ft_strdup(head->var);
+        new->value = ft_strdup(head->value);
+        new->visible = head->visible;
+        new->next = NULL;
+
+        if (!new_head)
+            new_head = new;
+        
+
+        head=head->next;
+    }
+    return (new_head);
 }
