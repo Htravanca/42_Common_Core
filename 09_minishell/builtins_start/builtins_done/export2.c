@@ -86,7 +86,6 @@ char	**ft_sep_args(char *args)
 	int		words;
 
 	words = ft_count_word(args);
-	printf("Words:%d\n", words); //<-------------------------------
 	rt = (char **)malloc((words + 1) * sizeof(char *));
 	if (!rt)
 		return (NULL);

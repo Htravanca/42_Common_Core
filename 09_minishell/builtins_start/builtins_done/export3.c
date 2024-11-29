@@ -1,131 +1,101 @@
 #include "../minishell.h"
 
+// Prints de VARS in alphabetical order.
+// creates (dupliate) a new list
+// orders it
+// prints it
+// free
 // Function to duplicate the linked list
-envc *duplicate_env_list(envc *head)
+envc	*ft_duplicate_env_list(envc *head)
 {
-    envc *new_head = NULL;
-    envc *current = head;
-    envc *new_node = NULL;
-    envc *last = NULL;
+	envc	*new;
+	envc	*new_head;
+	envc	*temp;
 
-    while (current)
-    {
-        // Allocate memory for a new node
-        new_node = (envc *)malloc(sizeof(envc));
-        if (!new_node)
-            return NULL;  // Return NULL if memory allocation fails
-
-        // Duplicate the values
-        new_node->var = strdup(current->var);
-        new_node->value = current->value ? strdup(current->value) : NULL;
-        new_node->visible = current->visible;
-        new_node->next = NULL;
-
-        // If the new list is empty, initialize it with the first node
-        if (!new_head)
-        {
-            new_head = new_node;
-            last = new_head;
-        }
-        else
-        {
-            last->next = new_node;
-            last = new_node;
-        }
-
-        current = current->next;
-    }
-
-    return new_head;
+	new_head = NULL;
+	while (head)
+	{
+		new = (envc *)malloc(sizeof(envc));
+		if (!new)
+			return (NULL);
+		new->var = ft_strdup(head->var);
+		new->value = ft_strdup(head->value);
+		new->visible = head->visible;
+		new->next = NULL;
+		if (!new_head)
+			new_head = new;
+		else
+			temp->next = new;
+		temp = new;
+		head = head->next;
+	}
+	return (new_head);
 }
 
 // Helper function to swap two envc nodes
-void swap_nodes(envc *a, envc *b)
+void	swap_nodes(envc *a, envc *b)
 {
-    char *temp_var = a->var;
-    char *temp_value = a->value;
-    int temp_visible = a->visible;
+	char	*temp_var;
+	char	*temp_value;
+	int		temp_visible;
 
-    a->var = b->var;
-    a->value = b->value;
-    a->visible = b->visible;
-
-    b->var = temp_var;
-    b->value = temp_value;
-    b->visible = temp_visible;
+	temp_var = a->var;
+	temp_value = a->value;
+	temp_visible = a->visible;
+	a->var = b->var;
+	a->value = b->value;
+	a->visible = b->visible;
+	b->var = temp_var;
+	b->value = temp_value;
+	b->visible = temp_visible;
 }
 
 // Function to manually sort the list using selection sort
-void sort_env_list(envc *head)
+void	sort_env_list(envc *head)
 {
-    envc *current, *min_node;
-    envc *ptr;
+	envc	*current;
+	envc	*min_node;
+	envc	*ptr;
 
-    if (!head)
-        return;
-
-    current = head;
-    while (current)
-    {
-        min_node = current;
-        ptr = current->next;
-
-        while (ptr)
-        {
-            if (ft_strcmp(ptr->var, min_node->var) < 0)
-                min_node = ptr;
-            ptr = ptr->next;
-        }
-
-        // Swap the current node with the smallest node found
-        if (min_node != current)
-            swap_nodes(current, min_node);
-
-        current = current->next;
-    }
+	if (!head)
+		return ;
+	current = head;
+	while (current)
+	{
+		min_node = current;
+		ptr = current->next;
+		while (ptr)
+		{
+			if (ft_strcmp(ptr->var, min_node->var) < 0)
+				min_node = ptr;
+			ptr = ptr->next;
+		}
+		if (min_node != current)
+			// Swap the current node with the smallest node found
+			swap_nodes(current, min_node);
+		current = current->next;
+	}
 }
 
 // Function to print the sorted environment variables
-void ft_print_env_sorted(envc *head)
+void	ft_print_env_sorted(envc *head)
 {
-    sort_env_list(head); // Sort the linked list
+	envc	*new;
+	envc	*temp;
 
-    envc *current = head;
-    while (current)
-    {
-        if (current->visible) // Only print visible variables
-        {
-            printf("declare -x %s", current->var);
-            if (current->value)
-                printf("=\"%s\"", current->value);
-            printf("\n");
-        }
-        current = current->next;
-    }
-}
-
-envc *ft_duplicate_env_list(envc *head)
-{
-    envc *new;
-    envc *new_head;
-    envc *temp;
-
-    new_head = NULL;
-    while (head)
-    {
-        new = (envc *)malloc(sizeof(envc));
-        if (!new)
-            return (NULL);
-        new->var = ft_strdup(head->var);
-        new->value = ft_strdup(head->value);
-        new->visible = head->visible;
-        new->next = NULL;
-
-        if (!new_head)
-            new_head = new;
-        
-
-        head=head->next;
-    }
-    return (new_head);
+	new = ft_duplicate_env_list(head);
+	sort_env_list(new);
+	temp = new;
+	while (temp)
+	{
+		if (temp->visible) // Only print visible variables
+		{
+			printf("declare -x %s", temp->var);
+			if (temp->value)
+				printf("=\"%s\"", temp->value);
+			printf("\n");
+		}
+		temp = temp->next;
+	}
+	ft_lstclear_env(&new);
 }

@@ -72,7 +72,7 @@ int	main(int argc, char **argv, char **env)
 	ft_free_split(split);
 	print_env_list(env_new);
 
-	printf("\n--- TEST 5: Handling empty input ---NOT DONE YET---\n");
+	printf("\n--- TEST 5: Handling empty input ---\n");
 	split = ft_split("export", ' ');
 	ft_export(split, &env_new);
 	ft_free_split(split);
