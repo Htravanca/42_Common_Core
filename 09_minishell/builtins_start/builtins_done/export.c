@@ -80,24 +80,6 @@ int	ft_export_arg(char **arg_sep, char *args, envc **env)
 	return (1);
 }
 
-// fre the alloc memory of the arg_sep
-static void	ft_free_sep(char **arg_sep)
-{
-	int	i;
-
-	i = 0;
-	if (arg_sep == NULL)
-		return ;
-	while (arg_sep[i] != NULL)
-		i++;
-	while (i >= 0)
-	{
-		free(arg_sep[i]);
-		i--;
-	}
-	free(arg_sep);
-}
-
 // Expected input args[0]=export; args[n]="PATH=lalala"; args[n]="etc"; 
 //		args[last]=NULL;
 // Return 0 OK; -1 ERROR

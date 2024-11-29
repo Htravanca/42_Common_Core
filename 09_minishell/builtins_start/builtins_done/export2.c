@@ -98,3 +98,21 @@ char	**ft_sep_args(char *args)
 		rt[2] = ft_word_value(args);
 	return (rt);
 }
+
+// free the alloc memory of the arg_sep
+void	ft_free_sep(char **arg_sep)
+{
+	int	i;
+
+	i = 0;
+	if (arg_sep == NULL)
+		return ;
+	while (arg_sep[i] != NULL)
+		i++;
+	while (i >= 0)
+	{
+		free(arg_sep[i]);
+		i--;
+	}
+	free(arg_sep);
+}
