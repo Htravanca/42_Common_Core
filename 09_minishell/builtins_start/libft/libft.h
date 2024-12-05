@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hepereir <hepereir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hepereir <hepereir@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 18:08:58 by hepereir          #+#    #+#             */
-/*   Updated: 2024/11/22 16:01:55 by hepereir         ###   ########.fr       */
+/*   Updated: 2024/12/05 15:29:03 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,7 @@ void				ft_lstiter(t_list *lst, void (*f)(void *));
 t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
 						void (*del)(void *));
 int					ft_strcmp(const char *s1, const char *s2);
+char				*ft_strcat(char *dest, const char *src);
+char				*ft_strcpy(char *dest, const char *src);
 
 #endif

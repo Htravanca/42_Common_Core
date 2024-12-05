@@ -17,6 +17,23 @@ void	ft_free_split(char **split)
 	free(split);
 }
 
+int	main(int argc, char **argv, char **env)
+{
+	envc	*env_new = NULL;
+	t_token *token = NULL;
+
+	(void)argc;
+	(void)argv;
+
+	// Step 1: Copy the system environment variables into a custom linked list
+	env_new = ft_env_cpy(env, env_new);
+
+	ft_runcmd(token, env_new);
+
+	printf("\n--- TEST 10: Clean-up (Free all memory) ---\n");
+	ft_lstclear_env(&env_new);
+	print_env_list(env_new); // Should print nothing
+}
 
 /* int	main(int argc, char **argv, char **env)
 {
@@ -36,7 +53,7 @@ void	ft_free_split(char **split)
 	ft_lstclear_env(&env_new);
 	ft_free_split(split);
 } */
-
+/* 
 int	main(int argc, char **argv, char **env)
 {
 	envc	*env_new = NULL;
@@ -107,4 +124,4 @@ int	main(int argc, char **argv, char **env)
 	printf("\n--- TEST 10: Clean-up (Free all memory) ---\n");
 	ft_lstclear_env(&env_new);
 	print_env_list(env_new); // Should print nothing
-}
+} */

@@ -14,6 +14,13 @@ typedef struct env_copy
 	struct env_copy	*next;
 }					envc;
 
+typedef struct s_token
+{
+	char			**token;
+	short			type;
+	struct s_token	*next;
+}					t_token;
+
 // NEW ENV
 void				ft_lstadd_back_env(envc **env_new, char *env);
 envc				*ft_env_cpy(char **env, envc *env_new);
@@ -32,8 +39,8 @@ int					ft_echo(char **args);
 int					ft_env(envc *env);
 
 // EXPORT
-int 				ft_export(char **args, envc **env);
-char 				**ft_sep_args(char *args);
+int					ft_export(char **args, envc **env);
+char				**ft_sep_args(char *args);
 void				ft_free_sep(char **arg_sep);
 void				ft_print_env_sorted(envc *head);
 
@@ -42,5 +49,11 @@ int					ft_pwd(void);
 
 // UNSET
 int					ft_unset(char **args, envc **env);
+
+void				ft_runcmd(t_token *cmd, envc *head);
+
+// ENV TO ARRAY
+char				**ft_convert_array(envc *head);
+void				ft_free_env_arr(char **env);
 
 #endif
