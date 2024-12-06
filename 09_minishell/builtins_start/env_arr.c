@@ -1,8 +1,8 @@
 #include "minishell.h"
 
-static char	**ft_convert_array_aux(envc *head, char **rt)
+static char	**ft_convert_array_aux(t_envc *head, char **rt)
 {
-	envc	*temp;
+	t_envc	*temp;
 	int		len;
 	int		i;
 
@@ -29,9 +29,9 @@ static char	**ft_convert_array_aux(envc *head, char **rt)
 	return (rt);
 }
 
-char	**ft_convert_array(envc *head)
+char	**ft_convert_array(t_envc *head)
 {
-	envc	*temp;
+	t_envc	*temp;
 	int		size;
 	char	**rt;
 

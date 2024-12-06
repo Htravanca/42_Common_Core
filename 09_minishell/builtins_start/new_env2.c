@@ -1,9 +1,9 @@
 #include "minishell.h"
 
 // free to all the list
-void	ft_lstclear_env(envc **env_new)
+void	ft_lstclear_env(t_envc **env_new)
 {
-	envc	*temp;
+	t_envc	*temp;
 
 	while (*env_new)
 	{
@@ -18,7 +18,7 @@ void	ft_lstclear_env(envc **env_new)
 
 // just to print the list of env
 // debug only
-void	print_env_list(envc *env)
+void	print_env_list(t_envc *env)
 {
 	while (env)
 	{

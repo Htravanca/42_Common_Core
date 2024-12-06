@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-// token = {"ls", "-l", NULL};
+
 
 /* static char	*ft_find_path(char **options, char *cmd)
 {
@@ -64,12 +64,12 @@ char	*ft_path(char **cmdsarr, char **envp, char *path)
 	return (pfinal);
 }
 
-
-static void	ft_execute(char *argv, char **envp)
+*/
+static void	ft_execute(char **token, char **envp)
 {
 	char	*path;
 
-	path = ft_path(argv, envp, argv);
+	path = ft_path(token, envp, token[0]);
 	if (!path)
 	{
 		perror("Command not found");
@@ -80,29 +80,18 @@ static void	ft_execute(char *argv, char **envp)
 	free(path);
 	exit(1);
 }
- */
 
 
-void	ft_runcmd(t_token *cmd, envc *head)
+
+void ft_runcmd2(t_token *cmd, char **env)
 {
-	char	**env;
-	int		i;
-
-	(void)cmd;
-	env = ft_convert_array(head);
-	i = 0;
-	while (env[i])
-	{
-		printf("%s\n", env[i]);
-		i++;
-	}
-	/* if (cmd->type == 1) //normal exec
+	if (cmd->type == 1) //normal exec
 	{
 		//fork
-		ft_execute(cmd->token, head);
+		ft_execute(cmd->token, env);
 		//waitpid
 	}
-	if (cmd->type == 2) //REDIR
+	/* if (cmd->type == 2) //REDIR
 	{
 	}
 	if (cmd->type == 3) // LIST
@@ -116,5 +105,20 @@ void	ft_runcmd(t_token *cmd, envc *head)
 	)
 	{
 	} */
+
+}
+
+void	ft_runcmd(t_token *cmd, t_envc *head)
+{
+	char	**env;
+	int		i;
+
+	env = ft_convert_array(head);
+	i = 0; while (env[i]){printf("%s\n", env[i]);i++;}
+	while (cmd)
+	{
+		ft_runcmd2(cmd, env);
+		cmd=cmd->next;
+	}
     ft_free_env_arr(env);
 }

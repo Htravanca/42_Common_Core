@@ -3,7 +3,7 @@
 // ENV Builtins
 // input envc (linked list copy of env)
 // output 0 ok; -1 error
-int	ft_env(envc *env)
+int	ft_env(t_envc *env)
 {
 	if (env == NULL)
 		return (-1);

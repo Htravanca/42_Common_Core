@@ -6,16 +6,16 @@
 // prints it
 // free
 // Function to duplicate the linked list
-envc	*ft_duplicate_env_list(envc *head)
+t_envc	*ft_duplicate_env_list(t_envc *head)
 {
-	envc	*new;
-	envc	*new_head;
-	envc	*temp;
+	t_envc	*new;
+	t_envc	*new_head;
+	t_envc	*temp;
 
 	new_head = NULL;
 	while (head)
 	{
-		new = (envc *)malloc(sizeof(envc));
+		new = (t_envc *)malloc(sizeof(t_envc));
 		if (!new)
 			return (NULL);
 		new->var = ft_strdup(head->var);
@@ -32,8 +32,8 @@ envc	*ft_duplicate_env_list(envc *head)
 	return (new_head);
 }
 
-// Helper function to swap two envc nodes
-void	swap_nodes(envc *a, envc *b)
+// Helper function to swap two t_envc nodes
+void	swap_nodes(t_envc *a, t_envc *b)
 {
 	char	*temp_var;
 	char	*temp_value;
@@ -51,11 +51,11 @@ void	swap_nodes(envc *a, envc *b)
 }
 
 // Function to manually sort the list using selection sort
-void	sort_env_list(envc *head)
+void	sort_env_list(t_envc *head)
 {
-	envc	*current;
-	envc	*min_node;
-	envc	*ptr;
+	t_envc	*current;
+	t_envc	*min_node;
+	t_envc	*ptr;
 
 	if (!head)
 		return ;
@@ -78,10 +78,10 @@ void	sort_env_list(envc *head)
 }
 
 // Function to print the sorted environment variables
-void	ft_print_env_sorted(envc *head)
+void	ft_print_env_sorted(t_envc *head)
 {
-	envc	*new;
-	envc	*temp;
+	t_envc	*new;
+	t_envc	*temp;
 
 	new = ft_duplicate_env_list(head);
 	sort_env_list(new);

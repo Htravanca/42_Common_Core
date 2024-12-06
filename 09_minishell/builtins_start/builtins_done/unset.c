@@ -1,12 +1,12 @@
 #include "../minishell.h"
 
-// UNSET AO ENVC
+// UNSET AO t_envc
 // Expected input args[0]=unset; args[n]="PATH"; args[n]="etc"; args[last]=NULL;
 // Return 0 OK; -1 ERROR
-void	ft_unset_env(envc **env, char *arg)
+void	ft_unset_env(t_envc **env, char *arg)
 {
-	envc	*temp;
-	envc	*prev;
+	t_envc	*temp;
+	t_envc	*prev;
 
 	temp = *env;
 	prev = NULL;
@@ -29,7 +29,7 @@ void	ft_unset_env(envc **env, char *arg)
 	}
 }
 
-int	ft_unset(char **args, envc **env)
+int	ft_unset(char **args, t_envc **env)
 {
 	int	i;
 

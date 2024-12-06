@@ -26,7 +26,7 @@ int	ft_export_valid(char **arg_sep)
 }
 
 // updates the value of the var in the list
-void	ft_find_lstenv(char **arg_sep, envc *temp)
+void	ft_find_lstenv(char **arg_sep, t_envc *temp)
 {
 	if (arg_sep[1])
 	{
@@ -41,9 +41,9 @@ void	ft_find_lstenv(char **arg_sep, envc *temp)
 }
 
 // make the var not visible to env cmd
-void	ft_lstenv_visible(char **arg_sep, envc **env)
+void	ft_lstenv_visible(char **arg_sep, t_envc **env)
 {
-	envc	*temp;
+	t_envc	*temp;
 
 	temp = *env;
 	while (temp)
@@ -55,9 +55,9 @@ void	ft_lstenv_visible(char **arg_sep, envc **env)
 }
 
 // checks if the var is in the list or not
-int	ft_export_arg(char **arg_sep, char *args, envc **env)
+int	ft_export_arg(char **arg_sep, char *args, t_envc **env)
 {
-	envc	*temp;
+	t_envc	*temp;
 	int		find;
 
 	temp = *env;
@@ -83,7 +83,7 @@ int	ft_export_arg(char **arg_sep, char *args, envc **env)
 // Expected input args[0]=export; args[n]="PATH=lalala"; args[n]="etc"; 
 //		args[last]=NULL;
 // Return 0 OK; -1 ERROR
-int	ft_export(char **args, envc **env)
+int	ft_export(char **args, t_envc **env)
 {
 	int		i;
 	char	**arg_sep;

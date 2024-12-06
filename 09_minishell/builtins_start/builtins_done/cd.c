@@ -23,9 +23,9 @@ char	*ft_get_cwd(void)
 	}
 }
 
-void	ft_change_pwd(envc *env)
+void	ft_change_pwd(t_envc *env)
 {
-	envc	*temp;
+	t_envc	*temp;
 	char	*old;
 
 	temp = env;
@@ -50,7 +50,7 @@ void	ft_change_pwd(envc *env)
 	}
 }
 
-int	ft_cd(char **args, envc *env)
+int	ft_cd(char **args, t_envc *env)
 {
 	int	i;
 

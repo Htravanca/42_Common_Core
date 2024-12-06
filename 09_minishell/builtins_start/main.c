@@ -19,7 +19,7 @@ void	ft_free_split(char **split)
 
 int	main(int argc, char **argv, char **env)
 {
-	envc	*env_new = NULL;
+	t_envc	*env_new = NULL;
 	t_token *token = NULL;
 
 	(void)argc;
