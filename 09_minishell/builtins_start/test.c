@@ -1,8 +1,6 @@
 #include "minishell.h"
 
-
-
-/* static char	*ft_find_path(char **options, char *cmd)
+static char	*ft_find_path(char **options, char *cmd)
 {
 	int		i;
 	char	*temp;
@@ -35,6 +33,19 @@ int	ft_check_path(char *path)
 	return (0);
 }
 
+char	**ft_options(void)
+{
+	char	**options;
+
+	options = (char **)malloc(3 * sizeof(char *));
+	if (!options)
+		exit(1);
+	options[0] = ft_strdup("/usr/bin");
+	options[1] = ft_strdup("/bin");
+	options[2] = NULL;
+	return (options);
+}
+
 char	*ft_path(char **cmdsarr, char **envp, char *path)
 {
 	char	**options;
@@ -59,37 +70,53 @@ char	*ft_path(char **cmdsarr, char **envp, char *path)
 	if (options != NULL && options[0] != NULL)
 	{
 		pfinal = ft_find_path(options, cmdsarr[0]);
-		ft_free_arr(options);
+		ft_free_env_arr(options);
 	}
 	return (pfinal);
 }
 
-*/
-static void	ft_execute(char **token, char **envp)
+static void	ft_execute(t_shell *shell, char **envp , t_envc *head)
 {
 	char	*path;
 
-	path = ft_path(token, envp, token[0]);
+	//path = ft_path(shell->token->token, envp, shell->token->token[0]);
+	path = NULL;
 	if (!path)
 	{
 		perror("Command not found");
+		//free everything in the program so far
+		(void)head;
 		exit(127);
 	}
-	execve(path, argv, envp);
+	execve(path, shell->token->token, envp);
 	perror("Error executing the cmd");
 	free(path);
 	exit(1);
 }
 
-
-
-void ft_runcmd2(t_token *cmd, char **env)
+int	ft_handle_error(int val, const char *msg)
 {
-	if (cmd->type == 1) //normal exec
+	if (val < 0)
 	{
-		//fork
-		ft_execute(cmd->token, env);
-		//waitpid
+		perror(msg);
+		exit(1);
+	}
+	return (val);
+}
+
+void ft_runcmd2(t_shell *shell, char **env, t_envc *head)
+{
+	int pid1;
+	int	status1;
+
+	if (shell->token->type == 1) //normal exec
+	{
+		pid1 = ft_handle_error(fork(), "Fork error");
+		if (pid1 == 0)
+			ft_execute(shell, env, head);
+		waitpid(pid1, &status1, 0);
+		if (WIFEXITED(status1))
+			shell->command_status = WEXITSTATUS(status1);
 	}
 	/* if (cmd->type == 2) //REDIR
 	{
@@ -108,17 +135,23 @@ void ft_runcmd2(t_token *cmd, char **env)
 
 }
 
-void	ft_runcmd(t_token *cmd, t_envc *head)
+void	ft_runcmd(t_shell *shell, t_envc *head)
 {
 	char	**env;
-	int		i;
+	t_token *current_token;
+	t_token *orginal;
 
 	env = ft_convert_array(head);
-	i = 0; while (env[i]){printf("%s\n", env[i]);i++;}
-	while (cmd)
+	current_token = shell->token;
+	orginal = shell->token;
+	shell->command_status = 0;
+	while (current_token)
 	{
-		ft_runcmd2(cmd, env);
-		cmd=cmd->next;
+		shell->token = current_token;
+		ft_runcmd2(shell, env, head);
+		current_token = current_token->next;
 	}
-    ft_free_env_arr(env);
+	shell->token = orginal;
+	printf("\n\ncommand status:%d", shell->command_status);
+	ft_free_env_arr(env);
 }

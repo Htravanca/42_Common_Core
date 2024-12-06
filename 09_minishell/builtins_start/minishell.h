@@ -3,7 +3,10 @@
 # define MINISHELL_H
 
 # include "libft/libft.h"
+# include <fcntl.h>
 # include <stdio.h>
+# include <stdlib.h>
+# include <sys/wait.h>
 # include <unistd.h>
 
 typedef struct s_envc
@@ -57,10 +60,13 @@ int					ft_pwd(void);
 // UNSET
 int					ft_unset(char **args, t_envc **env);
 
-void				ft_runcmd(t_token *cmd, t_envc *head);
+// RUN CMD
+void				ft_runcmd(t_shell *shell, t_envc *head);
 
 // ENV TO ARRAY
 char				**ft_convert_array(t_envc *head);
 void				ft_free_env_arr(char **env);
+
+void				free_shell(t_shell *shell);
 
 #endif
