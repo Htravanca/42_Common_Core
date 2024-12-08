@@ -107,7 +107,7 @@ int	ft_handle_error(int val, const char *msg)
 	return (val);
 }
 
-void ft_runcmd2(t_shell *shell, char **env, t_envc *head, t_token *token)
+int ft_runcmd2(t_shell *shell, char **env, t_envc *head, t_token *token)
 {
 	int pid1;
 	int	status1;
@@ -118,24 +118,33 @@ void ft_runcmd2(t_shell *shell, char **env, t_envc *head, t_token *token)
 		if (pid1 == 0)
 			ft_execute(shell, env, head, token);
 		waitpid(pid1, &status1, 0);
-		if (WIFEXITED(status1))
+		if (WEXITSTATUS(status1) != 0)
+		{
 			shell->command_status = WEXITSTATUS(status1);
-	}
-	/* if (cmd->type == 2) //REDIR
+			return (-1);
+		}
+	}/*
+	 if (token->type == 2) //REDIR
 	{
 	}
-	if (cmd->type == 3) // LIST
+	*/
+	if (token->type == 3) // LIST
 	{
+		pid1 = ft_handle_error(fork(), "Fork error");
+		if (pid1 == 0)
+			ft_execute(shell, env, head, token);
+		waitpid(pid1, &status1, 0);
+		shell->command_status = WEXITSTATUS(status1);
 	}
-	if (cmd->type == 4 //PIPE
+	/*if (token->type == 4 //PIPE
 	)
 	{
 	}
-	if (cmd->type == 5 //BACK
+	if (token->type == 5 //BACK
 	)
 	{
 	} */
-
+	return (0);
 }
 
 void	ft_runcmd(t_shell *shell, t_envc *head)
@@ -148,7 +157,8 @@ void	ft_runcmd(t_shell *shell, t_envc *head)
 	temp = shell->token;
 	while (temp)
 	{
-		ft_runcmd2(shell, env, head, temp);
+		if (ft_runcmd2(shell, env, head, temp) == -1)
+			break ;
 		temp = temp->next;
 	}
 	printf("\n\ncommand status:%d", shell->command_status);
