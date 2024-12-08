@@ -11,14 +11,19 @@ void	free_string_array(char **array)
 }
 
 // Free a token structure
-void	free_token(t_token *token)
+void free_token(t_token *token)
 {
-	if (!token)
-		return ;
-	free_string_array(token->next->token);
-	free_string_array(token->token); // Free the array of strings
-	free(token);                     // Free the token structure itself
+    t_token *next_token;
+
+    while (token)
+    {
+        next_token = token->next;  // Save reference to the next token
+        free_string_array(token->token); // Free the array of strings
+        free(token);                     // Free the current token
+        token = next_token;              // Move to the next token
+    }
 }
+
 
 // Free a shell structure
 void	free_shell(t_shell *shell)

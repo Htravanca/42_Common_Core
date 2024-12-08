@@ -84,13 +84,17 @@ static void	ft_execute(t_shell *shell, char **envp , t_envc *head)
 	if (!path)
 	{
 		perror("Command not found");
-		//free everything in the program so far
-		(void)head;
+		ft_lstclear_env(&head); //free everything in the program so far
+		ft_free_env_arr(envp);
+		free_shell(shell);
 		exit(127);
 	}
 	execve(path, shell->token->token, envp);
 	perror("Error executing the cmd");
 	free(path);
+	ft_lstclear_env(&head); //free everything in the program so far
+	ft_free_env_arr(envp);
+	free_shell(shell);
 	exit(1);
 }
 
