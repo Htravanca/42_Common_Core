@@ -75,21 +75,20 @@ char	*ft_path(char **cmdsarr, char **envp, char *path)
 	return (pfinal);
 }
 
-static void	ft_execute(t_shell *shell, char **envp , t_envc *head)
+static void	ft_execute(t_shell *shell, char **envp , t_envc *head, t_token *token)
 {
 	char	*path;
 
-	//path = ft_path(shell->token->token, envp, shell->token->token[0]);
-	path = NULL;
+	path = ft_path(token->token, envp, token->token[0]);
 	if (!path)
 	{
-		perror("Command not found");
+		printf("%s: command not found\n",token->token[0]);
 		ft_lstclear_env(&head); //free everything in the program so far
 		ft_free_env_arr(envp);
 		free_shell(shell);
 		exit(127);
 	}
-	execve(path, shell->token->token, envp);
+	execve(path, token->token, envp);
 	perror("Error executing the cmd");
 	free(path);
 	ft_lstclear_env(&head); //free everything in the program so far
@@ -108,16 +107,16 @@ int	ft_handle_error(int val, const char *msg)
 	return (val);
 }
 
-void ft_runcmd2(t_shell *shell, char **env, t_envc *head)
+void ft_runcmd2(t_shell *shell, char **env, t_envc *head, t_token *token)
 {
 	int pid1;
 	int	status1;
 
-	if (shell->token->type == 1) //normal exec
+	if (token->type == 1) //normal exec
 	{
 		pid1 = ft_handle_error(fork(), "Fork error");
 		if (pid1 == 0)
-			ft_execute(shell, env, head);
+			ft_execute(shell, env, head, token);
 		waitpid(pid1, &status1, 0);
 		if (WIFEXITED(status1))
 			shell->command_status = WEXITSTATUS(status1);
@@ -142,20 +141,16 @@ void ft_runcmd2(t_shell *shell, char **env, t_envc *head)
 void	ft_runcmd(t_shell *shell, t_envc *head)
 {
 	char	**env;
-	t_token *current_token;
-	t_token *orginal;
+	t_token *temp;
 
 	env = ft_convert_array(head);
-	current_token = shell->token;
-	orginal = shell->token;
 	shell->command_status = 0;
-	while (current_token)
+	temp = shell->token;
+	while (temp)
 	{
-		shell->token = current_token;
-		ft_runcmd2(shell, env, head);
-		current_token = current_token->next;
+		ft_runcmd2(shell, env, head, temp);
+		temp = temp->next;
 	}
-	shell->token = orginal;
 	printf("\n\ncommand status:%d", shell->command_status);
 	ft_free_env_arr(env);
 }
