@@ -14,6 +14,8 @@
         "ft_printf.h": "c",
         "unistd.h": "c",
         "libft.h": "c",
-        "minishell.h": "c"
+        "minishell.h": "c",
+        "philo.h": "c",
+        "history.h": "c"
     }
 }
