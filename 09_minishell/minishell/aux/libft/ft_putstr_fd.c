@@ -1,21 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hepereir <hepereir@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: hepereir <hepereir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/31 17:35:32 by hepereir          #+#    #+#             */
-/*   Updated: 2025/02/03 19:45:07 by hepereir         ###   ########.fr       */
+/*   Created: 2024/04/09 18:07:19 by hepereir          #+#    #+#             */
+/*   Updated: 2025/01/30 17:08:40 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "libft.h"
 
-
-
-int	main(int argc, char **argv)
+void	ft_putstr_fd(char *s, int fd)
 {
-    
-    ft_init_data(argc, argv);
+	size_t	j;
+
+	j = 0;
+	while (s[j])
+	{
+		write(fd, &s[j], 1);
+		j++;
+	}
 }
