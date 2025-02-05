@@ -6,7 +6,7 @@
 /*   By: hepereir <hepereir@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 16:43:52 by hepereir          #+#    #+#             */
-/*   Updated: 2025/02/03 21:44:08 by hepereir         ###   ########.fr       */
+/*   Updated: 2025/02/05 21:57:47 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,18 +26,22 @@ typedef struct s_data
 	int				num_meals;
 	int				someone_died;
 	long long		start_time;
-	pthread_mutex_t	*forks;
-	pthread_mutex_t	print_lock;
+	pthread_mutex_t	dead_lock;
+	pthread_mutex_t	meal_lock;
+	pthread_mutex_t	write_lock;
+	t_philos		*philos;
 }					t_data;
 
-typedef struct s_philosopher
+typedef struct s_philos
 {
 	int				id;
 	pthread_t		thread;
 	long long		last_meal_time;
 	int				meals_eaten;
-	struct s_data	*data;
-}					t_philosopher;
+	pthread_mutex_t	*write_lock;
+	pthread_mutex_t	*dead_lock;
+	pthread_mutex_t	*meal_lock;
+}					t_philos;
 
 // DEBUG
 void				print_data(void);
@@ -46,7 +50,7 @@ void				print_data(void);
 t_data				*get_data(void);
 int					ft_init_data(int argc, char **argv);
 
-//UTILS
-void	free_bf_exit(void);
+// UTILS
+void				free_bf_exit(void);
 
 #endif

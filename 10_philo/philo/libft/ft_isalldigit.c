@@ -1,21 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.c                                            :+:      :+:    :+:   */
+/*   ft_isalldigit.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hepereir <hepereir@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/31 17:35:32 by hepereir          #+#    #+#             */
-/*   Updated: 2025/02/05 20:16:56 by hepereir         ###   ########.fr       */
+/*   Created: 2024/04/09 18:06:26 by hepereir          #+#    #+#             */
+/*   Updated: 2025/02/05 20:29:02 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "libft.h"
 
-int	main(int argc, char **argv)
+int	ft_isalldigit(char *s)
 {
-    if (argc < 5 || argc > 6 || ft_init_data(argc, argv) == -1)
-        return (1);
-    print_data();
-    return (0);
-} 
+	int	i;
+
+	i = 0;
+	while (s[i])
+	{
+		if (ft_isdigit(s[i]) == 0)
+			return (-1);
+		i++;
+	}
+	return (0);
+}
