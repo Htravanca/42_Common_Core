@@ -5,7 +5,7 @@ CFLAGS = -Wall -Wextra -Werror
 
 LIBFT = libft/libft.a
 
-SRC = philo.c init_data.c utils.c
+SRC = philo.c init_data.c init_philos.c utils.c
 
 OBJ = $(SRC:.c=.o)
 
@@ -40,12 +40,6 @@ fclean: clean
 	@echo "${RED}$(NAME) deleted successfully.${RESET}"
 
 re: fclean all
-
-run: all
-	@./$(NAME)
-
-r:
-	make re && clear && ./minishell
 
 va: $(NAME)
 	@valgrind --leak-check=full --track-fds=yes --show-leak-kinds=all ./$(NAME)
