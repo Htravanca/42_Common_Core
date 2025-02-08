@@ -6,7 +6,7 @@
 /*   By: hepereir <hepereir@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 20:34:10 by hepereir          #+#    #+#             */
-/*   Updated: 2025/02/08 14:32:58 by hepereir         ###   ########.fr       */
+/*   Updated: 2025/02/08 20:09:09 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static int	ft_validate_data(int argc, char **argv)
 		return (printf("\033[1;31mError in time to eat.\033[0m\n"), -1);
 	if (get_data()->time_to_sleep <= 0 || ft_isalldigit(argv[4]) == -1)
 		return (printf("\033[1;31mError in time to sleep.\033[0m\n"), -1);
-	if (argc == 6 && (get_data()->num_meals < 0
+	if (argc == 6 && (get_data()->num_meals <= 0
 			|| ft_isalldigit(argv[5]) == -1))
 		return (printf("\033[1;31mError in number of meals.\033[0m\n"), -1);
 	return (0);

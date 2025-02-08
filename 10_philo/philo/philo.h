@@ -6,7 +6,7 @@
 /*   By: hepereir <hepereir@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 16:43:52 by hepereir          #+#    #+#             */
-/*   Updated: 2025/02/08 14:30:00 by hepereir         ###   ########.fr       */
+/*   Updated: 2025/02/08 22:23:49 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,9 @@ typedef struct s_data
 	int				time_to_sleep;
 	int				num_meals;
 	bool			someone_died;
-	pthread_mutex_t	dead_lock;
-	pthread_mutex_t	meal_lock;
-	pthread_mutex_t	write_lock;
+	pthread_mutex_t	dead_lock;	//used to write in someone_died
+	pthread_mutex_t	meal_lock;	//check if a philo is dead
+	pthread_mutex_t	write_lock;	//used to write to console
 	t_philos		*philos;
 }					t_data;
 
@@ -70,5 +70,7 @@ void				init_threads(pthread_mutex_t *forks);
 
 // UTILS
 size_t				get_current_time(void);
+void				precise_usleep(size_t milliseconds);
+void				print_msg(char *msg, t_philos *philo);
 
 #endif
