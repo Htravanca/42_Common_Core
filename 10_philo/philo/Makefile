@@ -5,7 +5,7 @@ CFLAGS = -Wall -Wextra -Werror
 
 LIBFT = libft/libft.a
 
-SRC = philo.c init_data.c init_philos.c utils.c
+SRC = philo.c init_data.c init_philos.c init_threads.c utils.c
 
 OBJ = $(SRC:.c=.o)
 

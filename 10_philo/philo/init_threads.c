@@ -1,27 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.c                                            :+:      :+:    :+:   */
+/*   init_threads.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hepereir <hepereir@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 17:35:32 by hepereir          #+#    #+#             */
-/*   Updated: 2025/02/08 14:04:19 by hepereir         ###   ########.fr       */
+/*   Updated: 2025/02/08 14:09:04 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	main(int argc, char **argv)
+void	init_threads(pthread_mutex_t *forks)
 {
-	t_philos        philos[PHILO_MAX];
-	pthread_mutex_t forks[PHILO_MAX];
-
-	if (ft_init_data(argc, argv, philos) == -1)
-		return (-1);
-	init_philos(forks);
-	init_threads(forks);
-	print_data();
-
-	return (0);
+    (void)forks;
 }

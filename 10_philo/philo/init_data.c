@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   init_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hepereir <hepereir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hepereir <hepereir@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 20:34:10 by hepereir          #+#    #+#             */
-/*   Updated: 2025/02/06 14:43:35 by hepereir         ###   ########.fr       */
+/*   Updated: 2025/02/08 14:04:38 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-//function to acess data struct
+// function to acess data struct
 t_data	*get_data(void)
 {
 	static t_data	data;
@@ -34,7 +34,8 @@ void	print_data(void)
 // validates de data passed to struct data
 static int	ft_validate_data(int argc, char **argv)
 {
-	if (get_data()->num_philos <= 0 || get_data()->num_philos > PHILO_MAX || ft_isalldigit(argv[1]) == -1)
+	if (get_data()->num_philos <= 0 || get_data()->num_philos > PHILO_MAX
+		|| ft_isalldigit(argv[1]) == -1)
 		return (printf("\033[1;31mError in number of philos.\033[0m\n"), -1);
 	if (get_data()->time_to_die <= 0 || ft_isalldigit(argv[2]) == -1)
 		return (printf("\033[1;31mError in time to die.\033[0m\n"), -1);
@@ -42,7 +43,8 @@ static int	ft_validate_data(int argc, char **argv)
 		return (printf("\033[1;31mError in time to eat.\033[0m\n"), -1);
 	if (get_data()->time_to_sleep <= 0 || ft_isalldigit(argv[4]) == -1)
 		return (printf("\033[1;31mError in time to sleep.\033[0m\n"), -1);
-	if (argc == 6 && (get_data()->num_meals < 0 || ft_isalldigit(argv[5]) == -1))
+	if (argc == 6 && (get_data()->num_meals < 0 || ft_isalldigit(argv[5]) ==
+			-1))
 		return (printf("\033[1;31mError in number of meals.\033[0m\n"), -1);
 	return (0);
 }
@@ -61,7 +63,7 @@ int	ft_init_data(int argc, char **argv, t_philos *philos)
 		else
 			get_data()->num_meals = -1;
 		get_data()->philos = philos;
-		get_data()->someone_died = 0;
+		get_data()->someone_died = false;
 		return (ft_validate_data(argc, argv));
 	}
 	else
