@@ -6,7 +6,7 @@
 /*   By: hepereir <hepereir@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 16:43:52 by hepereir          #+#    #+#             */
-/*   Updated: 2025/02/08 14:07:29 by hepereir         ###   ########.fr       */
+/*   Updated: 2025/02/08 14:30:00 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,16 @@
 
 typedef struct s_philos
 {
-	int 			id;				// init
+	int				id;				// init
 	pthread_t		thread;
-	int 			meals_eaten;	// init
-	int 			num_meals;		// init
-	bool 			*someone_died;	// init
-	size_t 			start_time;		// init
-	size_t 			last_meal_time;	// init
-	int 			time_to_die;	// init
-	int 			time_to_eat;	// init
-	int 			time_to_sleep;	// init
+	int				meals_eaten;	// init
+	int				num_meals;		// init
+	bool			*someone_died;	// init
+	size_t			start_time;		// init
+	size_t			last_meal_time;	// init
+	int				time_to_die;	// init
+	int				time_to_eat;	// init
+	int				time_to_sleep;	// init
 	pthread_mutex_t	*write_lock;	// init
 	pthread_mutex_t	*dead_lock;		// init
 	pthread_mutex_t	*meal_lock;		// init

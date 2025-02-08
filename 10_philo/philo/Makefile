@@ -41,10 +41,4 @@ fclean: clean
 
 re: fclean all
 
-va: $(NAME)
-	@valgrind --leak-check=full --track-fds=yes --show-leak-kinds=all ./$(NAME)
-
-v: all
-	@valgrind ./$(NAME)
-
 .PHONY: all, clean, fclean, re, run, va, v

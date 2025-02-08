@@ -6,12 +6,13 @@
 /*   By: hepereir <hepereir@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 20:34:10 by hepereir          #+#    #+#             */
-/*   Updated: 2025/02/08 14:04:30 by hepereir         ###   ########.fr       */
+/*   Updated: 2025/02/08 14:32:37 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
+//initializes the struct philos with start values
 static void	init_philos_aux(pthread_mutex_t *forks)
 {
 	int	i;
@@ -40,15 +41,16 @@ static void	init_philos_aux(pthread_mutex_t *forks)
 	}
 }
 
+// initializes how many forks as there are philos
 void	init_philos(pthread_mutex_t *forks)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	pthread_mutex_init(&get_data()->write_lock, NULL);
 	pthread_mutex_init(&get_data()->dead_lock, NULL);
 	pthread_mutex_init(&get_data()->meal_lock, NULL);
-	while (i < get_data()->num_philos)// initializes how many forks as there are philos
+	while (i < get_data()->num_philos)
 	{
 		pthread_mutex_init(&forks[i], NULL);
 		i++;

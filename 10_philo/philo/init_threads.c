@@ -6,7 +6,7 @@
 /*   By: hepereir <hepereir@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 17:35:32 by hepereir          #+#    #+#             */
-/*   Updated: 2025/02/08 14:09:04 by hepereir         ###   ########.fr       */
+/*   Updated: 2025/02/08 14:33:39 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,5 @@
 
 void	init_threads(pthread_mutex_t *forks)
 {
-    (void)forks;
+	(void)forks;
 }
