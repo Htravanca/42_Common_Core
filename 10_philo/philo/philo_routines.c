@@ -6,7 +6,7 @@
 /*   By: hepereir <hepereir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 20:58:53 by hepereir          #+#    #+#             */
-/*   Updated: 2025/02/13 16:35:43 by hepereir         ###   ########.fr       */
+/*   Updated: 2025/02/13 17:28:51 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	dream(t_philos *philo)
 }
 
 //eat routine, mutex lock fork R and L, sleep time_to_eat
-void	eat(t_philos *philo)
+int		eat(t_philos *philo)
 {
 	pthread_mutex_lock(philo->r_fork);
 	print_msg("has taken a fork", philo);
@@ -32,7 +32,7 @@ void	eat(t_philos *philo)
 	{
 		precise_usleep(get_data()->time_to_die);
 		pthread_mutex_unlock(philo->r_fork);
-		return ;
+		return (-1);
 	}
 	print_msg("has taken a fork", philo);
 	//philo->eating = 1;
@@ -45,4 +45,5 @@ void	eat(t_philos *philo)
 	//philo->eating = 0;
 	pthread_mutex_unlock(philo->l_fork);
 	pthread_mutex_unlock(philo->r_fork);
+	return (0);
 }

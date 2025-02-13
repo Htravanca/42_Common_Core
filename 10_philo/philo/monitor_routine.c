@@ -6,7 +6,7 @@
 /*   By: hepereir <hepereir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 16:06:03 by hepereir          #+#    #+#             */
-/*   Updated: 2025/02/13 16:35:07 by hepereir         ###   ########.fr       */
+/*   Updated: 2025/02/13 17:40:06 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	check_if_dead(t_philos *philo)
 		{
 			print_msg("died", &philo[i]);
 			pthread_mutex_lock(philo->dead_lock);
-			get_data()->someone_died = 1;
+			*philo->someone_died = true;
 			pthread_mutex_unlock(philo->dead_lock);
 			return (1);
 		}

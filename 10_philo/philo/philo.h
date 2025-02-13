@@ -6,7 +6,7 @@
 /*   By: hepereir <hepereir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 16:43:52 by hepereir          #+#    #+#             */
-/*   Updated: 2025/02/13 17:07:30 by hepereir         ###   ########.fr       */
+/*   Updated: 2025/02/13 17:29:20 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void				init_threads(pthread_mutex_t *forks);
 //PHILO ROUTINE
 void				think(t_philos *philo);
 void				dream(t_philos *philo);
-void				eat(t_philos *philo);
+int					eat(t_philos *philo);
 
 // MONITOR ROUTINE
 void				*monitor_routine(void *pointer);

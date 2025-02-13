@@ -6,7 +6,7 @@
 /*   By: hepereir <hepereir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 17:35:32 by hepereir          #+#    #+#             */
-/*   Updated: 2025/02/13 17:16:58 by hepereir         ###   ########.fr       */
+/*   Updated: 2025/02/13 17:29:05 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ void *table_routine(void *data)
 	philo = (t_philos *)data;
 	while (!dead_loop(philo))
 	{
-		eat(philo);
+		if (eat(philo) == -1)
+			break;
 		dream(philo);
 		think(philo);
 	}

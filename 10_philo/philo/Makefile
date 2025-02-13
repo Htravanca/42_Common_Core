@@ -1,7 +1,7 @@
 NAME = philo
 CC = cc -g
 RM = rm -f
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -O3 -pthread
 
 SRC = philo.c philo_routines.c init_data.c init_philos.c init_threads.c init_threads_aux.c monitor_routine.c utils.c utils_libft.c
 
