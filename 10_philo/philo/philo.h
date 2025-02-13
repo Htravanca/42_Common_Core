@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hepereir <hepereir@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: hepereir <hepereir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 16:43:52 by hepereir          #+#    #+#             */
-/*   Updated: 2025/02/08 22:23:49 by hepereir         ###   ########.fr       */
+/*   Updated: 2025/02/13 17:07:30 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_H
 # define PHILO_H
 
-# include "libft/libft.h"
 # include <pthread.h>
 # include <stdbool.h>
 # include <stdio.h>
@@ -28,10 +27,10 @@ typedef struct s_philos
 	pthread_t		thread;
 	int				meals_eaten;	// init
 	int				num_meals;		// init
-	bool			*someone_died;	// init
-	size_t			start_time;		// init
+	size_t			*start_time;	// init
 	size_t			last_meal_time;	// init
-	int				time_to_die;	// init
+	//int				time_to_die;	// init
+	bool			*someone_died;
 	int				time_to_eat;	// init
 	int				time_to_sleep;	// init
 	pthread_mutex_t	*write_lock;	// init
@@ -44,13 +43,14 @@ typedef struct s_philos
 typedef struct s_data
 {
 	int				num_philos;
-	int				time_to_die;
+	size_t			time_to_die;
 	int				time_to_eat;
 	int				time_to_sleep;
 	int				num_meals;
+	size_t			start_time;
 	bool			someone_died;
 	pthread_mutex_t	dead_lock;	//used to write in someone_died
-	pthread_mutex_t	meal_lock;	//check if a philo is dead
+	pthread_mutex_t	meal_lock;	//used to wite in last_meal_time, then used in monitor to see if died
 	pthread_mutex_t	write_lock;	//used to write to console
 	t_philos		*philos;
 }					t_data;
@@ -65,12 +65,35 @@ int					ft_init_data(int argc, char **argv, t_philos *philos);
 // INIT PHILOS
 void				init_philos(pthread_mutex_t *forks);
 
+// INIT THREADS AUX
+int 				ft_initmonitorthread(pthread_mutex_t *forks, pthread_t *monitor);
+int					ft_initphilothread(pthread_mutex_t *forks);
+int					ft_joinmonitorthread(pthread_mutex_t *forks, pthread_t monitor);
+int					ft_joinphilothread(pthread_mutex_t *forks);
+
+
 // INIT THREADS
+int					dead_loop(t_philos *philo);
+void 				*table_routine(void *data);
 void				init_threads(pthread_mutex_t *forks);
 
+//PHILO ROUTINE
+void				think(t_philos *philo);
+void				dream(t_philos *philo);
+void				eat(t_philos *philo);
+
+// MONITOR ROUTINE
+void				*monitor_routine(void *pointer);
+
 // UTILS
-size_t				get_current_time(void);
+size_t				ft_current_timems(void);
 void				precise_usleep(size_t milliseconds);
 void				print_msg(char *msg, t_philos *philo);
+void				ft_freebfexit(pthread_mutex_t *forks);
+
+// UTILS LIBFT
+int					ft_isdigit(int c);
+int					ft_isalldigit(char *s);
+int					ft_atoi(const char *nptr);
 
 #endif

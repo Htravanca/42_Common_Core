@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hepereir <hepereir@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: hepereir <hepereir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 17:35:32 by hepereir          #+#    #+#             */
-/*   Updated: 2025/02/08 14:29:02 by hepereir         ###   ########.fr       */
+/*   Updated: 2025/02/13 12:54:19 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	main(int argc, char **argv)
 	if (ft_init_data(argc, argv, philos) == -1)
 		return (-1);
 	init_philos(forks);
-	init_threads(forks);
 	print_data();
+	init_threads(forks);
 	return (0);
 }

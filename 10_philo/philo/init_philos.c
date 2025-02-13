@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_philos.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hepereir <hepereir@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: hepereir <hepereir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 20:34:10 by hepereir          #+#    #+#             */
-/*   Updated: 2025/02/08 14:32:37 by hepereir         ###   ########.fr       */
+/*   Updated: 2025/02/13 17:17:46 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,8 @@ static void	init_philos_aux(pthread_mutex_t *forks)
 		get_data()->philos[i].meals_eaten = 0;
 		get_data()->philos[i].num_meals = get_data()->num_meals;
 		get_data()->philos[i].someone_died = &get_data()->someone_died;
-		get_data()->philos[i].start_time = get_current_time();
-		get_data()->philos[i].last_meal_time = get_current_time();
-		get_data()->philos[i].time_to_die = get_data()->time_to_die;
+		get_data()->philos[i].start_time = &get_data()->start_time;
+		get_data()->philos[i].last_meal_time = ft_current_timems();
 		get_data()->philos[i].time_to_eat = get_data()->time_to_eat;
 		get_data()->philos[i].time_to_sleep = get_data()->time_to_sleep;
 		get_data()->philos[i].write_lock = &get_data()->write_lock;

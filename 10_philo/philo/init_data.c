@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hepereir <hepereir@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: hepereir <hepereir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 20:34:10 by hepereir          #+#    #+#             */
-/*   Updated: 2025/02/08 20:09:09 by hepereir         ###   ########.fr       */
+/*   Updated: 2025/02/13 16:36:09 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_data	*get_data(void)
 void	print_data(void)
 {
 	printf("Num philos:\t%d\n", get_data()->num_philos);
-	printf("Time die:\t%d\n", get_data()->time_to_die);
+	printf("Time die:\t%zu\n", get_data()->time_to_die);
 	printf("Time eat:\t%d\n", get_data()->time_to_eat);
 	printf("Time sleep:\t%d\n", get_data()->time_to_sleep);
 	printf("Num meals:\t%d\n", get_data()->num_meals);

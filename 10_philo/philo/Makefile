@@ -3,9 +3,7 @@ CC = cc -g
 RM = rm -f
 CFLAGS = -Wall -Wextra -Werror
 
-LIBFT = libft/libft.a
-
-SRC = philo.c init_data.c init_philos.c init_threads.c utils.c
+SRC = philo.c philo_routines.c init_data.c init_philos.c init_threads.c init_threads_aux.c monitor_routine.c utils.c utils_libft.c
 
 OBJ = $(SRC:.c=.o)
 
@@ -16,12 +14,8 @@ RESET = \033[0m
 
 all: $(NAME)
 
-$(LIBFT):
-	@echo "${YELLOW}Compiling libft...${RESET}"
-	@make -s -C ./libft
-
-$(NAME): $(OBJ) $(LIBFT)
-	@${CC} ${CFLAGS} ${OBJ} $(LIBFT) -o $(NAME)
+$(NAME): $(OBJ)
+	@${CC} ${CFLAGS} ${OBJ} -o $(NAME)
 	@echo "${GREEN}$(NAME) created successfully.${RESET}"
 
 %.o: %.c
@@ -31,12 +25,10 @@ $(NAME): $(OBJ) $(LIBFT)
 clean:
 	@echo "${RED}Cleaning object files...${RESET}"
 	@$(RM) $(OBJ)
-	@make clean -s -C ./libft
 
 fclean: clean
 	@echo "${RED}Deleting executable and libraries...${RESET}"
 	@$(RM) $(NAME)
-	@$(RM) $(LIBFT)
 	@echo "${RED}$(NAME) deleted successfully.${RESET}"
 
 re: fclean all
