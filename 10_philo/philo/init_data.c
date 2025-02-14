@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hepereir <hepereir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hepereir <hepereir@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 20:34:10 by hepereir          #+#    #+#             */
-/*   Updated: 2025/02/13 16:36:09 by hepereir         ###   ########.fr       */
+/*   Updated: 2025/02/14 22:20:59 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	ft_init_data(int argc, char **argv, t_philos *philos)
 		else
 			get_data()->num_meals = -1;
 		get_data()->philos = philos;
-		get_data()->someone_died = false;
+		get_data()->someone_died = 0;
 		return (ft_validate_data(argc, argv));
 	}
 	else

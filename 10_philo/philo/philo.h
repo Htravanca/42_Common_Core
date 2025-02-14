@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hepereir <hepereir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hepereir <hepereir@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 16:43:52 by hepereir          #+#    #+#             */
-/*   Updated: 2025/02/13 17:29:20 by hepereir         ###   ########.fr       */
+/*   Updated: 2025/02/14 22:47:10 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ typedef struct s_philos
 	int				num_meals;		// init
 	size_t			*start_time;	// init
 	size_t			last_meal_time;	// init
-	//int				time_to_die;	// init
-	bool			*someone_died;
+	int				eating;			// init
+	int				*someone_died;
 	int				time_to_eat;	// init
 	int				time_to_sleep;	// init
 	pthread_mutex_t	*write_lock;	// init
@@ -48,7 +48,7 @@ typedef struct s_data
 	int				time_to_sleep;
 	int				num_meals;
 	size_t			start_time;
-	bool			someone_died;
+	int			someone_died;
 	pthread_mutex_t	dead_lock;	//used to write in someone_died
 	pthread_mutex_t	meal_lock;	//used to wite in last_meal_time, then used in monitor to see if died
 	pthread_mutex_t	write_lock;	//used to write to console

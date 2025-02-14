@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   monitor_routine.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hepereir <hepereir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hepereir <hepereir@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 16:06:03 by hepereir          #+#    #+#             */
-/*   Updated: 2025/02/13 17:40:06 by hepereir         ###   ########.fr       */
+/*   Updated: 2025/02/14 22:48:10 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 int	philosopher_dead(t_philos *philo)
 {
 	pthread_mutex_lock(philo->meal_lock);
-	if (ft_current_timems() - philo->last_meal_time >= get_data()->time_to_die)//&& philo->eating == 0)
+	if (ft_current_timems() - philo->last_meal_time >= get_data()->time_to_die && philo->eating == 0)
 	{
 		pthread_mutex_unlock(philo->meal_lock);
 		return (-1);
@@ -38,7 +38,7 @@ int	check_if_dead(t_philos *philo)
 		{
 			print_msg("died", &philo[i]);
 			pthread_mutex_lock(philo->dead_lock);
-			*philo->someone_died = true;
+			*philo->someone_died = 1;
 			pthread_mutex_unlock(philo->dead_lock);
 			return (1);
 		}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_routines.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hepereir <hepereir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hepereir <hepereir@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 20:58:53 by hepereir          #+#    #+#             */
-/*   Updated: 2025/02/13 17:28:51 by hepereir         ###   ########.fr       */
+/*   Updated: 2025/02/14 22:46:40 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,14 @@ int		eat(t_philos *philo)
 		return (-1);
 	}
 	print_msg("has taken a fork", philo);
-	//philo->eating = 1;
+	philo->eating = 1;
 	print_msg("is eating", philo);
 	pthread_mutex_lock(philo->meal_lock);
 	philo->last_meal_time = ft_current_timems();
 	philo->meals_eaten++;
 	pthread_mutex_unlock(philo->meal_lock);
 	precise_usleep(philo->time_to_eat);
-	//philo->eating = 0;
+	philo->eating = 0;
 	pthread_mutex_unlock(philo->l_fork);
 	pthread_mutex_unlock(philo->r_fork);
 	return (0);
