@@ -6,7 +6,7 @@
 /*   By: hepereir <hepereir@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 17:35:32 by hepereir          #+#    #+#             */
-/*   Updated: 2025/02/14 22:02:41 by hepereir         ###   ########.fr       */
+/*   Updated: 2025/02/14 23:08:40 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ void print_msg(char *msg, t_philos *philo)
 	
 	pthread_mutex_lock(philo->write_lock);
 	time = ft_current_timems() - *philo->start_time;
-	printf("%zu %d %s\n",time, philo->id, msg);
+	if (!dead_loop(philo))
+		printf("%zu %d %s\n",time, philo->id, msg);
 	pthread_mutex_unlock(philo->write_lock);
 }
 
