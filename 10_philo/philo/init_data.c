@@ -6,7 +6,7 @@
 /*   By: hepereir <hepereir@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 20:34:10 by hepereir          #+#    #+#             */
-/*   Updated: 2025/02/14 22:20:59 by hepereir         ###   ########.fr       */
+/*   Updated: 2025/02/17 21:33:18 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ static int	ft_validate_data(int argc, char **argv)
 		return (printf("\033[1;31mError in time to eat.\033[0m\n"), -1);
 	if (get_data()->time_to_sleep <= 0 || ft_isalldigit(argv[4]) == -1)
 		return (printf("\033[1;31mError in time to sleep.\033[0m\n"), -1);
-	if (argc == 6 && (get_data()->num_meals <= 0
-			|| ft_isalldigit(argv[5]) == -1))
+	if (argc == 6 && (get_data()->num_meals <= 0 || ft_isalldigit(argv[5])
+			== -1))
 		return (printf("\033[1;31mError in number of meals.\033[0m\n"), -1);
 	return (0);
 }
@@ -63,7 +63,7 @@ int	ft_init_data(int argc, char **argv, t_philos *philos)
 		else
 			get_data()->num_meals = -1;
 		get_data()->philos = philos;
-		get_data()->someone_died = 0;
+		get_data()->someone_died = false;
 		return (ft_validate_data(argc, argv));
 	}
 	else

@@ -6,7 +6,7 @@
 /*   By: hepereir <hepereir@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 16:43:52 by hepereir          #+#    #+#             */
-/*   Updated: 2025/02/14 22:47:10 by hepereir         ###   ########.fr       */
+/*   Updated: 2025/02/17 22:49:12 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,21 +23,18 @@
 
 typedef struct s_philos
 {
-	int				id;				// init
+	int				id;
 	pthread_t		thread;
-	int				meals_eaten;	// init
-	int				num_meals;		// init
-	size_t			*start_time;	// init
-	size_t			last_meal_time;	// init
-	int				eating;			// init
-	int				*someone_died;
-	int				time_to_eat;	// init
-	int				time_to_sleep;	// init
-	pthread_mutex_t	*write_lock;	// init
-	pthread_mutex_t	*dead_lock;		// init
-	pthread_mutex_t	*meal_lock;		// init
-	pthread_mutex_t	*r_fork;		// init
-	pthread_mutex_t	*l_fork;		// init
+	int				meals_eaten;
+	int				num_meals;
+	size_t			last_meal_time;
+	int				eating;
+	bool			*someone_died;
+	pthread_mutex_t	*dead_lock;
+	pthread_mutex_t	*meal_lock;
+	pthread_mutex_t	*write_lock;
+	pthread_mutex_t	*r_fork;
+	pthread_mutex_t	*l_fork;
 }					t_philos;
 
 typedef struct s_data
@@ -48,10 +45,10 @@ typedef struct s_data
 	int				time_to_sleep;
 	int				num_meals;
 	size_t			start_time;
-	int			someone_died;
-	pthread_mutex_t	dead_lock;	//used to write in someone_died
-	pthread_mutex_t	meal_lock;	//used to wite in last_meal_time, then used in monitor to see if died
-	pthread_mutex_t	write_lock;	//used to write to console
+	bool			someone_died;
+	pthread_mutex_t	dead_lock;
+	pthread_mutex_t	meal_lock;
+	pthread_mutex_t	write_lock;
 	t_philos		*philos;
 }					t_data;
 
@@ -66,18 +63,19 @@ int					ft_init_data(int argc, char **argv, t_philos *philos);
 void				init_philos(pthread_mutex_t *forks);
 
 // INIT THREADS AUX
-int 				ft_initmonitorthread(pthread_mutex_t *forks, pthread_t *monitor);
+int					ft_initmonitorthread(pthread_mutex_t *forks,
+						pthread_t *monitor);
 int					ft_initphilothread(pthread_mutex_t *forks);
-int					ft_joinmonitorthread(pthread_mutex_t *forks, pthread_t monitor);
+int					ft_joinmonitorthread(pthread_mutex_t *forks,
+						pthread_t monitor);
 int					ft_joinphilothread(pthread_mutex_t *forks);
-
 
 // INIT THREADS
 int					dead_loop(t_philos *philo);
-void 				*table_routine(void *data);
+void				*table_routine(void *data);
 void				init_threads(pthread_mutex_t *forks);
 
-//PHILO ROUTINE
+// PHILO ROUTINE
 void				think(t_philos *philo);
 void				dream(t_philos *philo);
 int					eat(t_philos *philo);

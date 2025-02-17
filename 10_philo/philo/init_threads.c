@@ -6,26 +6,26 @@
 /*   By: hepereir <hepereir@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 17:35:32 by hepereir          #+#    #+#             */
-/*   Updated: 2025/02/14 22:27:35 by hepereir         ###   ########.fr       */
+/*   Updated: 2025/02/17 22:48:24 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-//ft  to stop philo threads when one die
+// ft  to stop philo threads when one die
 int	dead_loop(t_philos *philo)
 {
 	pthread_mutex_lock(philo->dead_lock);
-	if (*philo->someone_died == 1)
+	if (*philo->someone_died == true)
 		return (pthread_mutex_unlock(philo->dead_lock), 1);
 	pthread_mutex_unlock(philo->dead_lock);
 	return (0);
 }
 
-//routine of each thread philo
-void *table_routine(void *data)
+// routine of each thread philo
+void	*table_routine(void *data)
 {
-	t_philos *philo;
+	t_philos	*philo;
 
 	philo = (t_philos *)data;
 	if (philo->id % 2 == 0)
@@ -33,14 +33,14 @@ void *table_routine(void *data)
 	while (!dead_loop(philo))
 	{
 		if (eat(philo) == -1)
-			break;
+			break ;
 		dream(philo);
 		think(philo);
 	}
 	return (data);
 }
 
-//ft to manage the init of all threads
+// ft to manage the init of all threads
 void	init_threads(pthread_mutex_t *forks)
 {
 	pthread_t	monitor;

@@ -33,4 +33,7 @@ fclean: clean
 
 re: fclean all
 
+r:
+	make re && make clean && clear
+
 .PHONY: all, clean, fclean, re, run, va, v

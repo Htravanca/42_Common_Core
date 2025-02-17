@@ -6,18 +6,18 @@
 /*   By: hepereir <hepereir@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 16:06:03 by hepereir          #+#    #+#             */
-/*   Updated: 2025/02/14 22:48:10 by hepereir         ###   ########.fr       */
+/*   Updated: 2025/02/17 22:48:43 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-
 // Checks if the philosopher is dead
 int	philosopher_dead(t_philos *philo)
 {
 	pthread_mutex_lock(philo->meal_lock);
-	if (ft_current_timems() - philo->last_meal_time >= get_data()->time_to_die && philo->eating == 0)
+	if (ft_current_timems() - philo->last_meal_time >= get_data()->time_to_die
+		&& philo->eating == 0)
 	{
 		pthread_mutex_unlock(philo->meal_lock);
 		return (-1);
@@ -38,7 +38,7 @@ int	check_if_dead(t_philos *philo)
 		{
 			print_msg("died", &philo[i]);
 			pthread_mutex_lock(philo->dead_lock);
-			*philo->someone_died = 1;
+			*philo->someone_died = true;
 			pthread_mutex_unlock(philo->dead_lock);
 			return (1);
 		}
@@ -50,8 +50,9 @@ int	check_if_dead(t_philos *philo)
 // Checks if all the philos ate the num_of_meals
 /* int	check_if_all_ate(t_philos *philos)
 {
-	int	i;
-	int	finished_eating;
+	int			i;
+	int			finished_eating;
+	t_philos	*philos;
 
 	i = 0;
 	finished_eating = 0;
@@ -74,14 +75,13 @@ int	check_if_dead(t_philos *philo)
 	}
 	return (0);
 } */
-
 void	*monitor_routine(void *pointer)
 {
 	t_philos	*philos;
 
 	philos = (t_philos *)pointer;
 	while (1)
-		if (check_if_dead(philos) == 1)// || check_if_all_ate(philos) == 1)
+		if (check_if_dead(philos) == 1) // || check_if_all_ate(philos) == 1)
 			break ;
 	return (pointer);
 }
