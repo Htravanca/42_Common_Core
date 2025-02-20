@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hepereir <hepereir@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: hepereir <hepereir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 17:35:32 by hepereir          #+#    #+#             */
-/*   Updated: 2025/02/17 22:45:40 by hepereir         ###   ########.fr       */
+/*   Updated: 2025/02/20 15:18:28 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,14 @@ size_t	ft_current_timems(void)
 	return (time.tv_sec * 1000 + time.tv_usec / 1000);
 }
 
-// precise usleep
-void	precise_usleep(size_t milliseconds)
+// precise usleep, each cycle sleep 0.2ms
+void	precise_sleep(size_t milliseconds)
 {
 	size_t	start;
 
 	start = ft_current_timems();
 	while (ft_current_timems() - start < milliseconds)
-		usleep(500);
+		usleep(200);
 	return ;
 }
 

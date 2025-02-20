@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_threads_aux.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hepereir <hepereir@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: hepereir <hepereir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 13:09:03 by hepereir          #+#    #+#             */
-/*   Updated: 2025/02/17 20:27:19 by hepereir         ###   ########.fr       */
+/*   Updated: 2025/02/20 15:29:15 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

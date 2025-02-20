@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   monitor_routine.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hepereir <hepereir@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: hepereir <hepereir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 16:06:03 by hepereir          #+#    #+#             */
-/*   Updated: 2025/02/17 22:48:43 by hepereir         ###   ########.fr       */
+/*   Updated: 2025/02/20 12:51:21 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

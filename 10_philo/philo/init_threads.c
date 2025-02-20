@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_threads.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hepereir <hepereir@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: hepereir <hepereir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 17:35:32 by hepereir          #+#    #+#             */
-/*   Updated: 2025/02/17 22:48:24 by hepereir         ###   ########.fr       */
+/*   Updated: 2025/02/20 15:18:35 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	*table_routine(void *data)
 
 	philo = (t_philos *)data;
 	if (philo->id % 2 == 0)
-		precise_usleep(1);
+		precise_sleep(1);
 	while (!dead_loop(philo))
 	{
 		if (eat(philo) == -1)
