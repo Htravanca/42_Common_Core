@@ -28,29 +28,27 @@ void	snooze(t_philos *philo)
 // eat routine, mutex lock fork R and L, sleep time_to_eat
 int	eat(t_philos *philo)
 {
-	(void) philo;
 	pthread_mutex_lock(philo->r_fork);
-	//ft_print_msg("has taken a fork", philo);
-	/* if (get_data()->num_philos == 1)
+	ft_print_msg("has taken a fork", philo);
+	if (get_data()->num_philos == 1)
 	{
 		ft_precise_sleep(get_data()->time_to_die, philo);
 		pthread_mutex_unlock(philo->l_fork);
 		return (-1);
-	} */
+	}
 	pthread_mutex_lock(philo->l_fork);
-	//ft_print_msg("has taken a fork", philo);
-	//pthread_mutex_lock(philo->meal_lock);
-	/* ft_print_msg("is eating", philo);
+	ft_print_msg("has taken a fork", philo);
+	pthread_mutex_lock(philo->meal_lock);
+	ft_print_msg("is eating", philo);
 	philo->eating = 1;
 	philo->last_meal_time = ft_current_timems();
-	philo->meals_eaten++; */
-	//pthread_mutex_unlock(philo->meal_lock);
+	philo->meals_eaten++;
+	pthread_mutex_unlock(philo->meal_lock);
 	ft_precise_sleep(get_data()->time_to_eat, philo);
-	//pthread_mutex_lock(philo->meal_lock);
-	//philo->eating = 0;
-	//pthread_mutex_unlock(philo->meal_lock);
+	pthread_mutex_lock(philo->meal_lock);
+	philo->eating = 0;
+	pthread_mutex_unlock(philo->meal_lock);
 	pthread_mutex_unlock(philo->r_fork);
 	pthread_mutex_unlock(philo->l_fork);
-	ft_precise_sleep(3, philo);
 	return (0);
 }

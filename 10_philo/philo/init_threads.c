@@ -43,9 +43,9 @@ void	*ft_table(void *data)
 // ft to manage the init of all threads
 void	ft_init_threads(pthread_mutex_t *forks)
 {
-	pthread_t	monitor;
+	//pthread_t	monitor;
 
-	monitor = 0;
+	//monitor = 0;
 	get_data()->start_time = ft_current_timems();
 	if (ft_initphilothread(forks) == -1)
 		return ;

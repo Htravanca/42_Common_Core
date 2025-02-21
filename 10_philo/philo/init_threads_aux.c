@@ -46,7 +46,7 @@ int	ft_initphilothread(pthread_mutex_t *forks)
 }
 
 // ft to join monitor routine, safe in case of fail
-/* int	ft_joinmonitorthread(pthread_mutex_t *forks, pthread_t monitor)
+int	ft_joinmonitorthread(pthread_mutex_t *forks, pthread_t monitor)
 {
 	if (pthread_join(monitor, NULL) != 0)
 	{
@@ -55,7 +55,7 @@ int	ft_initphilothread(pthread_mutex_t *forks)
 		return (-1);
 	}
 	return (0);
-} */
+}
 
 // ft to join philo routine, safe in case of fail
 int	ft_joinphilothread(pthread_mutex_t *forks)
