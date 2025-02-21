@@ -6,14 +6,14 @@
 /*   By: hepereir <hepereir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 20:34:10 by hepereir          #+#    #+#             */
-/*   Updated: 2025/02/20 15:29:41 by hepereir         ###   ########.fr       */
+/*   Updated: 2025/02/21 20:15:55 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
 // initializes the struct philos with start values
-static void	init_philos_aux(pthread_mutex_t *forks)
+static void	ft_initphilos_aux(pthread_mutex_t *forks)
 {
 	int	i;
 
@@ -39,7 +39,7 @@ static void	init_philos_aux(pthread_mutex_t *forks)
 }
 
 // initializes how many forks as there are philos
-void	init_philos(pthread_mutex_t *forks)
+void	ft_init_philos(pthread_mutex_t *forks)
 {
 	int	i;
 
@@ -52,5 +52,6 @@ void	init_philos(pthread_mutex_t *forks)
 		pthread_mutex_init(&forks[i], NULL);
 		i++;
 	}
-	init_philos_aux(forks);
+	get_data()->start_time = ft_current_timems();
+	ft_initphilos_aux(forks);
 }

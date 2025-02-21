@@ -6,7 +6,7 @@
 /*   By: hepereir <hepereir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 17:35:32 by hepereir          #+#    #+#             */
-/*   Updated: 2025/02/20 15:18:28 by hepereir         ###   ########.fr       */
+/*   Updated: 2025/02/21 18:08:43 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,24 +25,28 @@ size_t	ft_current_timems(void)
 }
 
 // precise usleep, each cycle sleep 0.2ms
-void	precise_sleep(size_t milliseconds)
+void	ft_precise_sleep(size_t milliseconds, t_philos *philo)
 {
 	size_t	start;
 
 	start = ft_current_timems();
 	while (ft_current_timems() - start < milliseconds)
+	{
 		usleep(200);
+		if (ft_dead_loop(philo) == -1)
+			break ;
+	}
 	return ;
 }
 
 // print a message in console
-void	print_msg(char *msg, t_philos *philo)
+void	ft_print_msg(char *msg, t_philos *philo)
 {
 	size_t	time;
 
 	pthread_mutex_lock(philo->write_lock);
 	time = ft_current_timems() - get_data()->start_time;
-	if (!dead_loop(philo))
+	if (!ft_dead_loop(philo))
 		printf("%zu %d %s\n", time, philo->id, msg);
 	pthread_mutex_unlock(philo->write_lock);
 }

@@ -6,7 +6,7 @@
 /*   By: hepereir <hepereir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 13:09:03 by hepereir          #+#    #+#             */
-/*   Updated: 2025/02/20 15:29:15 by hepereir         ###   ########.fr       */
+/*   Updated: 2025/02/21 20:01:52 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 // ft to init philo routine, safe in case of fail
 int	ft_initmonitorthread(pthread_mutex_t *forks, pthread_t *monitor)
 {
-	if (pthread_create(monitor, NULL, &monitor_routine,
+	if (pthread_create(monitor, NULL, &ft_monitor_routine,
 			get_data()->philos) != 0)
 	{
 		ft_freebfexit(forks);
@@ -33,7 +33,7 @@ int	ft_initphilothread(pthread_mutex_t *forks)
 	i = 0;
 	while (i < get_data()->num_philos)
 	{
-		if (pthread_create(&get_data()->philos[i].thread, NULL, &table_routine,
+		if (pthread_create(&get_data()->philos[i].thread, NULL, &ft_table,
 				&get_data()->philos[i]) != 0)
 		{
 			ft_freebfexit(forks);
@@ -46,7 +46,7 @@ int	ft_initphilothread(pthread_mutex_t *forks)
 }
 
 // ft to join monitor routine, safe in case of fail
-int	ft_joinmonitorthread(pthread_mutex_t *forks, pthread_t monitor)
+/* int	ft_joinmonitorthread(pthread_mutex_t *forks, pthread_t monitor)
 {
 	if (pthread_join(monitor, NULL) != 0)
 	{
@@ -55,7 +55,7 @@ int	ft_joinmonitorthread(pthread_mutex_t *forks, pthread_t monitor)
 		return (-1);
 	}
 	return (0);
-}
+} */
 
 // ft to join philo routine, safe in case of fail
 int	ft_joinphilothread(pthread_mutex_t *forks)

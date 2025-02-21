@@ -6,13 +6,13 @@
 /*   By: hepereir <hepereir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 15:25:09 by hepereir          #+#    #+#             */
-/*   Updated: 2025/02/13 15:26:33 by hepereir         ###   ########.fr       */
+/*   Updated: 2025/02/21 15:57:54 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	ft_isdigit(int c)
+static int	ft_isdigit(int c)
 {
 	if (c >= '0' && c <= '9')
 		return (1);

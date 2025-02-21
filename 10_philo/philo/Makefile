@@ -6,14 +6,14 @@
 #    By: hepereir <hepereir@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/31 17:35:32 by hepereir          #+#    #+#              #
-#    Updated: 2025/02/20 15:56:15 by hepereir         ###   ########.fr        #
+#    Updated: 2025/02/21 17:18:46 by hepereir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = philo
 RM = rm -f
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -O3 -pthread
+CFLAGS = -Wall -Wextra -Werror -O3 -pthread 
 
 SRC = philo.c philo_routines.c init_data.c init_philos.c init_threads.c init_threads_aux.c monitor_routine.c utils.c utils_libft.c
 

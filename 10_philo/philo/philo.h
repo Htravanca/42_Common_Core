@@ -6,7 +6,7 @@
 /*   By: hepereir <hepereir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 16:43:52 by hepereir          #+#    #+#             */
-/*   Updated: 2025/02/20 15:18:45 by hepereir         ###   ########.fr       */
+/*   Updated: 2025/02/21 18:08:05 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ t_data				*get_data(void);
 int					ft_init_data(int argc, char **argv, t_philos *philos);
 
 // INIT PHILOS
-void				init_philos(pthread_mutex_t *forks);
+void				ft_init_philos(pthread_mutex_t *forks);
 
 // INIT THREADS AUX
 int					ft_initmonitorthread(pthread_mutex_t *forks,
@@ -71,26 +71,25 @@ int					ft_joinmonitorthread(pthread_mutex_t *forks,
 int					ft_joinphilothread(pthread_mutex_t *forks);
 
 // INIT THREADS
-int					dead_loop(t_philos *philo);
-void				*table_routine(void *data);
-void				init_threads(pthread_mutex_t *forks);
+int					ft_dead_loop(t_philos *philo);
+void				*ft_table(void *data);
+void				ft_init_threads(pthread_mutex_t *forks);
 
 // PHILO ROUTINE
 void				think(t_philos *philo);
-void				dream(t_philos *philo);
+void				snooze(t_philos *philo);
 int					eat(t_philos *philo);
 
 // MONITOR ROUTINE
-void				*monitor_routine(void *pointer);
+void				*ft_monitor_routine(void *pointer);
 
 // UTILS
 size_t				ft_current_timems(void);
-void				precise_sleep(size_t milliseconds);
-void				print_msg(char *msg, t_philos *philo);
+void				ft_precise_sleep(size_t milliseconds, t_philos *philo);
+void				ft_print_msg(char *msg, t_philos *philo);
 void				ft_freebfexit(pthread_mutex_t *forks);
 
 // UTILS LIBFT
-int					ft_isdigit(int c);
 int					ft_isalldigit(char *s);
 int					ft_atoi(const char *nptr);
 

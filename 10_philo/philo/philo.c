@@ -6,7 +6,7 @@
 /*   By: hepereir <hepereir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 17:35:32 by hepereir          #+#    #+#             */
-/*   Updated: 2025/02/20 18:03:07 by hepereir         ###   ########.fr       */
+/*   Updated: 2025/02/21 19:26:49 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ int	main(int argc, char **argv)
 
 	if (ft_init_data(argc, argv, philos) == -1)
 		return (-1);
-	init_philos(forks);
-	//print_data();
-	init_threads(forks);
+	ft_init_philos(forks);
+	print_data();
+	ft_init_threads(forks);
 	return (0);
 }
