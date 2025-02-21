@@ -1,1 +1,74 @@
 valgring --tool=helgrind drd
+
+valgrind --tool=drd ./philo 4 1000 100 100
+valgrind --tool=helgrind --fair-sched=yes --history-level=full ./philo 4 1000 100 100
+
+
+your code is well-structured, but I see a few potential issues that could cause problems. Here are my observations:
+Possible Issues and Fixes
+1. Philosopher with id % 2 == 0 sleeping for only usleep(5);
+
+    Issue: The usleep(5); in ft_table() is way too short to have any meaningful effect (5 microseconds is almost negligible).
+    Fix: If you intended to stagger philosopher start times, use a larger value, like usleep(1000); (1ms) or ft_precise_sleep(500, philo);.
+
+2. Deadlock Risk in eat() Function
+
+    Issue: The eating function locks r_fork first and then l_fork. If all philosophers try to lock their right fork simultaneously, it can lead to deadlock.
+    Fix: A common solution is to ensure one philosopher locks l_fork first instead of r_fork, like:
+
+    if (philo->id % 2 == 0)
+    {
+        pthread_mutex_lock(philo->l_fork);
+        pthread_mutex_lock(philo->r_fork);
+    }
+    else
+    {
+        pthread_mutex_lock(philo->r_fork);
+        pthread_mutex_lock(philo->l_fork);
+    }
+
+3. Single Philosopher Can't Eat
+
+    Issue: If there's only one philosopher (num_philos == 1), the program will lock the right fork and then get stuck waiting for the left fork forever.
+    Fix: Add a check for num_philos == 1, make the philosopher pick up the fork, wait time_to_die, print a message, then exit.
+
+4. Missing Synchronization for someone_died Flag
+
+    Issue: someone_died is checked in ft_dead_loop() but modified elsewhere. Multiple threads accessing it without pthread_mutex_lock() could cause undefined behavior.
+    Fix: Always protect reads/writes to someone_died with pthread_mutex_lock(philo->dead_lock);.
+
+5. Monitor Thread is Commented Out
+
+    Issue: The monitor thread (ft_initmonitorthread() and ft_joinmonitorthread()) is commented out, meaning there's no proper mechanism to detect when a philosopher dies.
+    Fix: Uncomment the monitor thread functions and implement ft_monitor_routine().
+
+6. Potential Race Condition in ft_print_msg()
+
+    Issue: The function checks ft_dead_loop(philo) after locking write_lock, but if a philosopher dies right after the check, it may still print a message.
+    Fix: Instead of:
+
+    if (!ft_dead_loop(philo))
+
+    You should check before locking or handle it inside the lock.
+
+7. Unnecessary Sleep After Unlocking Forks
+
+    Issue: ft_precise_sleep(3, philo); is called after unlocking the forks.
+    Fix: This is unnecessary; just remove it.
+
+Suggestions
+
+    Ensure the Monitor Thread Works
+        It should continuously check whether a philosopher has exceeded time_to_die since their last meal and set someone_died = true.
+
+    Improve ft_precise_sleep() Efficiency
+        usleep(200); is relatively inefficient. Instead, check time every 50us or 100us.
+
+    Use printf() in a Safer Way
+        Printing inside threads can be a performance bottleneck. Consider buffering output to print fewer times.
+
+Final Thoughts
+
+Your implementation is close to working, but it needs better synchronization, a working monitor, and some safety measures to avoid deadlocks and starvation.
+
+Would you like me to help you implement the missing monitor thread? 🚀

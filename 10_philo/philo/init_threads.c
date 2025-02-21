@@ -6,7 +6,7 @@
 /*   By: hepereir <hepereir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 17:35:32 by hepereir          #+#    #+#             */
-/*   Updated: 2025/02/21 20:25:59 by hepereir         ###   ########.fr       */
+/*   Updated: 2025/02/21 21:05:31 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,8 @@ void	*ft_table(void *data)
 	t_philos	*philo;
 
 	philo = (t_philos *)data;
-	ft_precise_sleep(1000, philo);
 	if (philo->id % 2 == 0)
-		usleep(5);
-		//ft_precise_sleep(500, philo);
+		ft_precise_sleep(1, philo);
 	while (ft_dead_loop(philo) == 0)
 	{
 		if (eat(philo) == -1)
@@ -48,7 +46,7 @@ void	ft_init_threads(pthread_mutex_t *forks)
 	pthread_t	monitor;
 
 	monitor = 0;
-	//get_data()->start_time = ft_current_timems();
+	get_data()->start_time = ft_current_timems();
 	if (ft_initphilothread(forks) == -1)
 		return ;
 /* 	if (ft_initmonitorthread(forks, &monitor) == -1)

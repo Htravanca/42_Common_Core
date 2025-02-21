@@ -6,7 +6,7 @@
 /*   By: hepereir <hepereir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 20:34:10 by hepereir          #+#    #+#             */
-/*   Updated: 2025/02/21 20:15:55 by hepereir         ###   ########.fr       */
+/*   Updated: 2025/02/21 21:03:13 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,5 @@ void	ft_init_philos(pthread_mutex_t *forks)
 		pthread_mutex_init(&forks[i], NULL);
 		i++;
 	}
-	get_data()->start_time = ft_current_timems();
 	ft_initphilos_aux(forks);
 }
