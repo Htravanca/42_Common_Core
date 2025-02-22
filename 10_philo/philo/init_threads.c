@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_threads.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hepereir <hepereir@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: hepereir <hepereir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 17:35:32 by hepereir          #+#    #+#             */
-/*   Updated: 2025/02/22 00:20:37 by hepereir         ###   ########.fr       */
+/*   Updated: 2025/02/22 15:01:57 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@ int	ft_dead_loop(t_philos *philos)
 }
 
 //ft to handle 1 philo case
-void ft_one_philo(t_philos *philo)
+void	ft_one_philo(t_philos *philo)
 {
 	pthread_mutex_lock(philo->r_fork);
-    ft_print_msg("has taken a fork", philo);
-    ft_precise_sleep(get_data()->time_to_die, philo);
-    pthread_mutex_unlock(philo->r_fork);
+	ft_print_msg("has taken a fork", philo);
+	ft_precise_sleep(get_data()->time_to_die, philo);
+	pthread_mutex_unlock(philo->r_fork);
 }
 
 // routine of each thread philo
