@@ -6,7 +6,7 @@
 /*   By: hepereir <hepereir@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 20:58:53 by hepereir          #+#    #+#             */
-/*   Updated: 2025/02/22 00:19:45 by hepereir         ###   ########.fr       */
+/*   Updated: 2025/02/22 00:26:09 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ void	snooze(t_philos *philo)
 	ft_precise_sleep(get_data()->time_to_sleep, philo);
 }
 
-//ft to order the forks, fixed: Lock order violation
-void	ft_orderforks(pthread_mutex_t **first, pthread_mutex_t **second,
+// ft to order the forks, fixed: Lock order violation
+static void	ft_orderforks(pthread_mutex_t **first, pthread_mutex_t **second,
 		t_philos *philo)
 {
 	if (philo->r_fork < philo->l_fork)

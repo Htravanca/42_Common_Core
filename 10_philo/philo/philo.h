@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hepereir <hepereir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hepereir <hepereir@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 16:43:52 by hepereir          #+#    #+#             */
-/*   Updated: 2025/02/21 18:08:05 by hepereir         ###   ########.fr       */
+/*   Updated: 2025/02/22 00:33:01 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void				*ft_monitor_routine(void *pointer);
 // UTILS
 size_t				ft_current_timems(void);
 void				ft_precise_sleep(size_t milliseconds, t_philos *philo);
-void				ft_print_msg(char *msg, t_philos *philo);
+void				ft_print_msg(const char *msg, t_philos *philo);
 void				ft_freebfexit(pthread_mutex_t *forks);
 
 // UTILS LIBFT

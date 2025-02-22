@@ -6,7 +6,7 @@
 /*   By: hepereir <hepereir@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 17:35:32 by hepereir          #+#    #+#             */
-/*   Updated: 2025/02/21 23:42:54 by hepereir         ###   ########.fr       */
+/*   Updated: 2025/02/22 00:30:52 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,23 +24,25 @@ size_t	ft_current_timems(void)
 	return (time.tv_sec * 1000 + time.tv_usec / 1000);
 }
 
-// precise usleep, each cycle sleep 0.1ms
+// precise usleep, each cycle sleep 0.5ms
 void	ft_precise_sleep(size_t milliseconds, t_philos *philo)
 {
 	size_t	start;
+	size_t	end;
 
 	start = ft_current_timems();
-	while (ft_current_timems() - start < milliseconds)
+	end = start + milliseconds;
+	while (ft_current_timems() < end)
 	{
-		usleep(100);
 		if (ft_dead_loop(philo) == -1)
 			break ;
+		usleep(500);
 	}
 	return ;
 }
 
 // print a message in console
-void	ft_print_msg(char *msg, t_philos *philo)
+void	ft_print_msg(const char *msg, t_philos *philo)
 {
 	size_t	time;
 

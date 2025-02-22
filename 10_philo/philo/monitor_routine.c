@@ -6,7 +6,7 @@
 /*   By: hepereir <hepereir@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 16:06:03 by hepereir          #+#    #+#             */
-/*   Updated: 2025/02/21 23:30:02 by hepereir         ###   ########.fr       */
+/*   Updated: 2025/02/22 00:28:47 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,14 +57,14 @@ static int	ft_check_meals(t_philos *philo)
 	i = 0;
 	if (get_data()->num_meals == -1)
 		return (0);
+	pthread_mutex_lock(philo->meal_lock);
 	while (i < get_data()->num_philos)
 	{
-		pthread_mutex_lock(philo->meal_lock);
 		if (philo[i].meals_eaten > philo[i].num_meals)
 			philos_full++;
-		pthread_mutex_unlock(philo->meal_lock);
 		i++;
 	}
+	pthread_mutex_unlock(philo->meal_lock);
 	if (philos_full == get_data()->num_philos)
 	{
 		pthread_mutex_lock(philo->dead_lock);
