@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hepereir <hepereir@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: hepereir <hepereir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 17:35:32 by hepereir          #+#    #+#             */
-/*   Updated: 2025/02/22 00:30:52 by hepereir         ###   ########.fr       */
+/*   Updated: 2025/02/22 18:23:39 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,11 @@ void	ft_print_msg(const char *msg, t_philos *philo)
 {
 	size_t	time;
 
+	pthread_mutex_lock(philo->write_lock);
+	time = ft_current_timems() - get_data()->start_time;
 	if (!ft_dead_loop(philo))
-	{
-		pthread_mutex_lock(philo->write_lock);
-		time = ft_current_timems() - get_data()->start_time;
 		printf("%zu %d %s\n", time, philo->id, msg);
-		pthread_mutex_unlock(philo->write_lock);
-	}
+	pthread_mutex_unlock(philo->write_lock);
 }
 
 // free all stuff before exiting

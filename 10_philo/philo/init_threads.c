@@ -6,7 +6,7 @@
 /*   By: hepereir <hepereir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 17:35:32 by hepereir          #+#    #+#             */
-/*   Updated: 2025/02/22 15:01:57 by hepereir         ###   ########.fr       */
+/*   Updated: 2025/02/22 18:08:49 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,7 @@ void	*ft_table(void *data)
 		ft_precise_sleep(1, philo);
 	while (ft_dead_loop(philo) == 0)
 	{
-		if (eat(philo) == -1)
-			break ;
+		eat(philo);
 		snooze(philo);
 		think(philo);
 	}

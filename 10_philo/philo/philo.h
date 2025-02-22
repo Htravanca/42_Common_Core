@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hepereir <hepereir@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: hepereir <hepereir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 16:43:52 by hepereir          #+#    #+#             */
-/*   Updated: 2025/02/22 00:33:01 by hepereir         ###   ########.fr       */
+/*   Updated: 2025/02/22 18:23:04 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void				ft_init_threads(pthread_mutex_t *forks);
 // PHILO ROUTINE
 void				think(t_philos *philo);
 void				snooze(t_philos *philo);
-int					eat(t_philos *philo);
+void				eat(t_philos *philo);
 
 // MONITOR ROUTINE
 void				*ft_monitor_routine(void *pointer);
