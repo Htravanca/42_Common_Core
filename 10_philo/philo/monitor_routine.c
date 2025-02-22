@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   monitor_routine.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hepereir <hepereir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hepereir <hepereir@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 16:06:03 by hepereir          #+#    #+#             */
-/*   Updated: 2025/02/21 19:40:12 by hepereir         ###   ########.fr       */
+/*   Updated: 2025/02/21 23:30:02 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static int	ft_check_meals(t_philos *philo)
 	philos_full = 0;
 	i = 0;
 	if (get_data()->num_meals == -1)
-		return (0); */
+		return (0);
 	while (i < get_data()->num_philos)
 	{
 		pthread_mutex_lock(philo->meal_lock);

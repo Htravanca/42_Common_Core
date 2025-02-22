@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hepereir <hepereir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hepereir <hepereir@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 17:35:32 by hepereir          #+#    #+#             */
-/*   Updated: 2025/02/21 18:08:43 by hepereir         ###   ########.fr       */
+/*   Updated: 2025/02/21 23:42:54 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ size_t	ft_current_timems(void)
 	return (time.tv_sec * 1000 + time.tv_usec / 1000);
 }
 
-// precise usleep, each cycle sleep 0.2ms
+// precise usleep, each cycle sleep 0.1ms
 void	ft_precise_sleep(size_t milliseconds, t_philos *philo)
 {
 	size_t	start;
@@ -32,7 +32,7 @@ void	ft_precise_sleep(size_t milliseconds, t_philos *philo)
 	start = ft_current_timems();
 	while (ft_current_timems() - start < milliseconds)
 	{
-		usleep(200);
+		usleep(100);
 		if (ft_dead_loop(philo) == -1)
 			break ;
 	}
@@ -44,11 +44,13 @@ void	ft_print_msg(char *msg, t_philos *philo)
 {
 	size_t	time;
 
-	pthread_mutex_lock(philo->write_lock);
-	time = ft_current_timems() - get_data()->start_time;
 	if (!ft_dead_loop(philo))
+	{
+		pthread_mutex_lock(philo->write_lock);
+		time = ft_current_timems() - get_data()->start_time;
 		printf("%zu %d %s\n", time, philo->id, msg);
-	pthread_mutex_unlock(philo->write_lock);
+		pthread_mutex_unlock(philo->write_lock);
+	}
 }
 
 // free all stuff before exiting
