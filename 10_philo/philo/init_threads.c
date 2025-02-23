@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_threads.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hepereir <hepereir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hepereir <hepereir@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 17:35:32 by hepereir          #+#    #+#             */
-/*   Updated: 2025/02/22 18:08:49 by hepereir         ###   ########.fr       */
+/*   Updated: 2025/02/23 14:16:27 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ void	*ft_table(void *data)
 	t_philos	*philo;
 
 	philo = (t_philos *)data;
-	if (get_data()->num_philos == 1)
-		return (ft_one_philo(philo), data);
+/* 	if (get_data()->num_philos == 1)
+		return (ft_one_philo(philo), data); */
 	if (philo->id % 2 == 0)
 		ft_precise_sleep(1, philo);
 	while (ft_dead_loop(philo) == 0)
@@ -50,6 +50,20 @@ void	*ft_table(void *data)
 	return (data);
 }
 
+//update last_meal_time
+static void ft_update_lmt(void)
+{
+	int i;
+
+	i = 0;
+	while (i < get_data()->num_philos)
+	{
+		get_data()->philos[i].last_meal_time = get_data()->start_time;
+		i++;
+	}
+	return ;
+}
+
 // ft to manage the init of all threads
 void	ft_init_threads(pthread_mutex_t *forks)
 {
@@ -57,12 +71,13 @@ void	ft_init_threads(pthread_mutex_t *forks)
 
 	monitor = 0;
 	get_data()->start_time = ft_current_timems();
-	if (ft_initphilothread(forks) == -1)
-		return ;
+	ft_update_lmt();
 	if (ft_initmonitorthread(forks, &monitor) == -1)
 		return ;
-	if (ft_joinphilothread(forks) == -1)
+	if (ft_initphilothread(forks) == -1)
 		return ;
 	if (ft_joinmonitorthread(forks, monitor) == -1)
+		return ;
+	if (ft_joinphilothread(forks) == -1)
 		return ;
 }

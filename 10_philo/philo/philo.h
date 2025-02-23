@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hepereir <hepereir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hepereir <hepereir@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 16:43:52 by hepereir          #+#    #+#             */
-/*   Updated: 2025/02/22 18:23:04 by hepereir         ###   ########.fr       */
+/*   Updated: 2025/02/23 14:45:59 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ typedef struct s_philos
 	pthread_mutex_t	*write_lock;
 	pthread_mutex_t	*r_fork;
 	pthread_mutex_t	*l_fork;
+	int				r_fork_id;
+	int				l_fork_id;
 }					t_philos;
 
 typedef struct s_data
