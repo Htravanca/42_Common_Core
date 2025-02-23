@@ -6,7 +6,7 @@
 /*   By: hepereir <hepereir@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 17:35:32 by hepereir          #+#    #+#             */
-/*   Updated: 2025/02/23 14:16:27 by hepereir         ###   ########.fr       */
+/*   Updated: 2025/02/23 18:42:25 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,10 @@ void	*ft_table(void *data)
 	t_philos	*philo;
 
 	philo = (t_philos *)data;
-/* 	if (get_data()->num_philos == 1)
-		return (ft_one_philo(philo), data); */
+	if (get_data()->num_philos == 1)
+		return (ft_one_philo(philo), data);
 	if (philo->id % 2 == 0)
-		ft_precise_sleep(10, philo);
+		ft_precise_sleep(1, philo);
 	while (ft_dead_loop(philo) == 0)
 	{
 		eat(philo);

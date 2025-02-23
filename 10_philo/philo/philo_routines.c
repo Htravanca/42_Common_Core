@@ -6,7 +6,7 @@
 /*   By: hepereir <hepereir@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 20:58:53 by hepereir          #+#    #+#             */
-/*   Updated: 2025/02/23 18:10:14 by hepereir         ###   ########.fr       */
+/*   Updated: 2025/02/23 18:43:15 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ void	eat(t_philos *philo)
 	pthread_mutex_lock(philo->meal_lock);
 	ft_print_msg("is eating", philo);
 	philo->eating = 1;
-	philo->last_meal_time = ft_current_timems();
 	philo->meals_eaten++;
+	philo->last_meal_time = ft_current_timems();
 	pthread_mutex_unlock(philo->meal_lock);
 	ft_precise_sleep(get_data()->time_to_eat, philo);
 	pthread_mutex_lock(philo->meal_lock);
