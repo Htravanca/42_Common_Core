@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   monitor_routine.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hepereir <hepereir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hepereir <hepereir@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 16:06:03 by hepereir          #+#    #+#             */
-/*   Updated: 2025/02/22 18:22:32 by hepereir         ###   ########.fr       */
+/*   Updated: 2025/02/23 19:31:59 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@
 static int	ft_philo_dead(t_philos *philo)
 {
 	pthread_mutex_lock(philo->meal_lock);
-	if (ft_current_timems() - philo->last_meal_time >= get_data()->time_to_die
-		&& philo->eating == 0)
+	if (ft_current_timems() - philo->last_meal_time >= get_data()->time_to_die && philo->eating == 0)
 	{
 		pthread_mutex_unlock(philo->meal_lock);
 		return (-1);
@@ -83,7 +82,10 @@ void	*ft_monitor_routine(void *pointer)
 
 	philos = (t_philos *)pointer;
 	while (1)
+	{
 		if (ft_check_dead(philos) == -1 || ft_check_meals(philos) == -1)
 			break ;
+		usleep(1000);
+	}
 	return (pointer);
 }
