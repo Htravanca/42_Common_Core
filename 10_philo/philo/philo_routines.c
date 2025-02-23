@@ -44,6 +44,6 @@ void	eat(t_philos *philo)
 	pthread_mutex_unlock(philo->meal_lock);
 	pthread_mutex_unlock(philo->r_fork);
 	pthread_mutex_unlock(philo->l_fork);
-	ft_precise_sleep(2, philo);
+	ft_precise_sleep(1, philo);
 	return ;
 }

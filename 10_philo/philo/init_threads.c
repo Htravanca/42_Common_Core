@@ -40,7 +40,7 @@ void	*ft_table(void *data)
 /* 	if (get_data()->num_philos == 1)
 		return (ft_one_philo(philo), data); */
 	if (philo->id % 2 == 0)
-		ft_precise_sleep(1, philo);
+		ft_precise_sleep(10, philo);
 	while (ft_dead_loop(philo) == 0)
 	{
 		eat(philo);
