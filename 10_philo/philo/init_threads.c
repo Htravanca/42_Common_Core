@@ -6,7 +6,7 @@
 /*   By: hepereir <hepereir@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 17:35:32 by hepereir          #+#    #+#             */
-/*   Updated: 2025/02/23 19:24:39 by hepereir         ###   ########.fr       */
+/*   Updated: 2025/03/02 17:32:40 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	ft_dead_loop(t_philos *philos)
 	return (0);
 }
 
-//ft to handle 1 philo case
+// ft to handle 1 philo case
 void	ft_one_philo(t_philos *philo)
 {
 	pthread_mutex_lock(philo->r_fork);
@@ -50,10 +50,10 @@ void	*ft_table(void *data)
 	return (data);
 }
 
-//update last_meal_time
-static void ft_update_lmt(void)
+// update last_meal_time
+static void	ft_update_lmt(void)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < get_data()->num_philos)

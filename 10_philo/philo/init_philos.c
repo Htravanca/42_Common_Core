@@ -6,7 +6,7 @@
 /*   By: hepereir <hepereir@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 20:34:10 by hepereir          #+#    #+#             */
-/*   Updated: 2025/02/23 19:40:46 by hepereir         ###   ########.fr       */
+/*   Updated: 2025/03/02 17:34:58 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,20 @@ static void	ft_orderforks(pthread_mutex_t **first, pthread_mutex_t **second,
 	second_id = temp_id;
 }
 
+static void	ft_giveforks(pthread_mutex_t *forks, int i)
+{
+	if (i == 0)
+	{
+		get_data()->philos[i].r_fork = &forks[get_data()->num_philos - 1];
+		get_data()->philos[i].r_fork_id = get_data()->num_philos - 1;
+	}
+	else
+	{
+		get_data()->philos[i].r_fork = &forks[i - 1];
+		get_data()->philos[i].r_fork_id = i - 1;
+	}
+}
+
 // initializes the struct philos with start values
 static void	ft_initphilos_aux(pthread_mutex_t *forks)
 {
@@ -48,16 +62,7 @@ static void	ft_initphilos_aux(pthread_mutex_t *forks)
 		get_data()->philos[i].meal_lock = &get_data()->meal_lock;
 		get_data()->philos[i].l_fork = &forks[i];
 		get_data()->philos[i].l_fork_id = i;
-		if (i == 0)
-		{
-			get_data()->philos[i].r_fork = &forks[get_data()->num_philos - 1];
-			get_data()->philos[i].r_fork_id = get_data()->num_philos - 1;
-		}
-		else
-		{
-			get_data()->philos[i].r_fork = &forks[i - 1];
-			get_data()->philos[i].r_fork_id = i - 1;
-		}
+		ft_giveforks(forks, i);
 		ft_orderforks(&get_data()->philos[i].l_fork,
 			&get_data()->philos[i].r_fork, get_data()->philos[i].l_fork_id,
 			get_data()->philos[i].r_fork_id);
