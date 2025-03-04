@@ -6,7 +6,7 @@
 /*   By: hepereir <hepereir@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 17:35:32 by hepereir          #+#    #+#             */
-/*   Updated: 2025/03/02 17:32:40 by hepereir         ###   ########.fr       */
+/*   Updated: 2025/03/02 18:20:24 by hepereir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	*ft_table(void *data)
 	{
 		eat(philo);
 		snooze(philo);
+		
 		think(philo);
 	}
 	return (data);
