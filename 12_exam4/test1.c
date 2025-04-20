@@ -3,6 +3,7 @@
 #include <string.h>
 #include <sys/wait.h>
 
+
 void err(char *str)
 {
     while (*str)
@@ -13,38 +14,36 @@ int cd(char **argv, int i)
 {
     if (i != 2)
         return (err("error: cd: bad arguments\n"), 1);
-    if (chdir(argv[1]) == -1)
-        return (err("error: cd: cannot change directory to "), err(argv[1]), err("\n"), 1);
+    if (chdir(argv[1] == -1))
+        return (err("error: cd: cannot change directory to "), err(argv[i]), err("\n"), 1);
     return (0);
 }
 
 void set_pipe(int has_pipe, int *fd, int end)
 {
-    if (has_pipe && (dup2(fd[end], end) == -1 || close(fd[0]) == -1 || close(fd[1]) == -1))
+    if (has_pipe && (dup2(fd[end], end) == -1 || close(fd[0]) == -1 || close(fd[1] == -1)))
         err("error: fatal\n"), exit(1);
 }
 
-int execute(char **argv, int i, char **envp)
+int execute(char **argv, int i, char **env)
 {
-    int has_pipe;
+    int status;
     int fd[2];
     int pid;
-    int status;
+    int has_pipe;
 
     has_pipe = argv[i] && !strcmp(argv[i], "|");
     if (!strcmp(*argv, "cd"))
         return (cd(argv, i));
     if (has_pipe && (pipe(fd) == -1))
         err("error: fatal\n"), exit(1);
-        // return (err("error: fatal\n"), 1);
     if ((pid = fork()) == -1)
-        // return (err("error: fatal\n"), 1);
         err("error: fatal\n"), exit(1);
     if (!pid)
     {
         argv[i] = 0;
         set_pipe(has_pipe, fd, 1);
-        execve(*argv, argv, envp);
+        execve(*argv, argv, env);
         err("error: cannot execute "), err(*argv), err("\n"), exit(1);
     }
     waitpid(pid, &status, 0);
@@ -52,7 +51,7 @@ int execute(char **argv, int i, char **envp)
     return (WIFEXITED(status) && WEXITSTATUS(status));
 }
 
-int main(int argc, char **argv, char **envp)
+int main(int argc, char **argv, char **env)
 {
     int i = 0;
     int status = 0;
@@ -60,13 +59,12 @@ int main(int argc, char **argv, char **envp)
     (void)argc;
     while (argv[i])
     {
-        argv += i + 1;
+        argv = i + 1;
         i = 0;
         while (argv[i] && strcmp(argv[i], "|") && strcmp(argv[i], ";"))
             i++;
         if (i)
-            status = execute(argv, i, envp);
+            status = exexute(argv, i, env);
     }
-    return(status);
+    return (status);
 }
-
