@@ -1,6 +1,0 @@
-valgring --tool=helgrind drd
-
-valgrind --tool=drd ./philo 4 1000 100 100
-valgrind --tool=helgrind --fair-sched=yes --history-level=full ./philo 4 1000 100 100
-
--fsanitize=thread -g

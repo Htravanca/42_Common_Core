@@ -1,4 +1,0 @@
-cc -Wall -Wextra -Werror so_long.c parsing.c get_next_line/get_next_line.c get_next_line/get_next_line_utils.c map_checker.c map_checker2.c libft/ft_strdup.c libft/ft_strlen.c auxiliar_print.c game.c game2.c -Lminilibx-linux -lmlx_Linux -lX11 -lXext
-
-mudar erros para ingles
-
